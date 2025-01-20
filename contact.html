@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çocuk Hakları Platformu</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* Renk Paleti */
+:root {
+    --primary: #2563eb;
+    --secondary: #3b82f6;
+    --accent: #60a5fa;
+    --background: #f0f9ff;
+    --text: #1e3a8a;
+    --light: #ffffff;
+    --dark: #1e40af;
+}
+
+/* Genel Sayfa Stilleri */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background);
+    margin: 0;
+    padding: 0;
+    color: var(--text);
+}
+
+/* Hero Bölümü */
+.hero {
+    background: linear-gradient(rgba(37, 99, 235, 0.8), rgba(30, 58, 138, 0.9)),
+                url('https://source.unsplash.com/1600x900/?children') no-repeat center center/cover;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--light);
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    background-color: var(--accent);
+    padding: 15px 40px;
+    color: var(--light);
+    font-size: 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.cta-button:hover {
+    background-color: var(--dark);
+}
+
+/* İletişim Bölümü */
+.contact-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+.contact-info {
+    max-width: 400px;
+}
+
+.contact-info h2 {
+    font-size: 32px;
+    color: var(--primary);
+}
+
+.contact-info p {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.contact-info i {
+    color: var(--secondary);
+    margin-right: 10px;
+}
+
+/* İletişim Formu */
+.contact-form-container {
+    max-width: 450px;
+    background: var(--light);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--secondary);
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.submit-button {
+    background-color: var(--primary);
+    color: var(--light);
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 8px;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.submit-button:hover {
+    background-color: var(--dark);
+}
+
+/* Sosyal Medya */
+.social-media {
+    text-align: center;
+    padding: 50px 0;
+    background: var(--primary);
+    color: var(--light);
+}
+
+.social-media h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.social-media a {
+    color: var(--light);
+    margin: 0 15px;
+    font-size: 28px;
+    transition: 0.3s;
+}
+
+.social-media a:hover {
+    color: var(--accent);
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    .contact-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-form-container {
+        width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <button id="scrollToTop" class="scroll-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <div id="loader" class="loader">
+        <div class="loader-icon"></div>
+        <p>Çocuk Hakları İçin Yükleniyor...</p>
+    </div>
+
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-child"></i>
+                Çocuk Hakları
+            </a>
+            <ul class="nav-links">
+                <li><a href="/index.html">Ana Sayfa</a></li>
+                <li><a href="/about.html">Hakkımızda</a></li>
+                <li><a href="/rights.html">Haklar</a></li>
+                <li><a href="/campaigns.html">Kampanyalar</a></li>
+                <li><a href="/contact.html">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Geleceğimiz İçin Bir Adım At</h1>
+            <p>Çocuk haklarını korumak ve daha adil bir dünya için bize katıl.</p>
+            <a href="#contact-form" class="cta-button">Bize Ulaş</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-info">
+            <h2>İletişim Bilgilerimiz</h2>
+            <p><i class="fas fa-map-marker-alt"></i> Çocuk Hakları Derneği, İstanbul, Türkiye</p>
+            <p><i class="fas fa-phone-alt"></i> +90 123 456 78 90</p>
+            <p><i class="fas fa-envelope"></i> info@cocukhaklari.org</p>
+        </div>
+
+        <div class="contact-form-container" id="contact-form">
+            <h2>Bizimle İletişime Geçin</h2>
+            <form action="submit_form.php" method="POST">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Adınız:</label>
+                    <input type="text" id="name" name="name" placeholder="Adınızı girin" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> E-posta:</label>
+                    <input type="email" id="email" name="email" placeholder="E-posta adresinizi girin" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message"><i class="fas fa-comment-dots"></i> Mesajınız:</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Mesajınızı yazın" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-button"><i class="fas fa-paper-plane"></i> Gönder</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social-media">
+        <h2>Bizi Takip Edin</h2>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+    </section>
+
+
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>Çocuk Hakları Platformu</h4>
+                <p>Çocukların geleceği için çalışıyoruz.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Hızlı Bağlantılar</h4>
+                <ul>
+                    <li><a href="#home">Ana Sayfa</a></li>
+                    <li><a href="#about">Hakkımızda</a></li>
+                    <li><a href="#rights">Haklar</a></li>
+                    <li><a href="#campaigns">Kampanyalar</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>İletişim Bilgileri</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Ankara, Türkiye</li>
+                    <li><i class="fas fa-phone"></i> +90 (312) 123 45 67</li>
+                    <li><i class="fas fa-envelope"></i> info@cocukhaklari.org</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="/js/script.js"></script>
+</body>
+</html>
