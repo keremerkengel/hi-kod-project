@@ -3,177 +3,362 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Çocuk Hakları Platformu</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>İnsan ve Çocuk Hakları</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <style>
-        /* Renk Paleti */
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --accent: #60a5fa;
+            --background: #f0f9ff;
+            --text: #1e3a8a;
+            --light: #ffffff;
+            --dark: #1e40af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Video Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;  
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--light);
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            animation: fadeInUp 1s forwards;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            animation: fadeInUp 1s 0.3s forwards;
+        }
+/* Genel Stiller */
 :root {
-    --primary: #2563eb;
-    --secondary: #3b82f6;
-    --accent: #60a5fa;
-    --background: #f0f9ff;
-    --text: #1e3a8a;
-    --light: #ffffff;
-    --dark: #1e40af;
+    --primary: #1D4ED8;
+    --secondary: #3B82F6;
+    --accent: #60A5FA;
+    --background: #F9FAFB;
+    --text: #1F2937;
+    --light: #FFFFFF;
+    --dark: #111827;
+    --shadow: rgba(0, 0, 0, 0.1);
 }
 
-/* Genel Sayfa Stilleri */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: var(--background);
+    color: var(--text);
     margin: 0;
     padding: 0;
-    color: var(--text);
 }
 
-/* Hero Bölümü */
-.hero {
-    background: linear-gradient(rgba(37, 99, 235, 0.8), rgba(30, 58, 138, 0.9)),
-                url('https://source.unsplash.com/1600x900/?children') no-repeat center center/cover;
-    height: 450px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* İletişim Başlığı */
+.contact-header {
     text-align: center;
-    color: var(--light);
-    padding: 20px;
+    padding: 80px 20px;
 }
 
-.hero-content h1 {
-    font-size: 50px;
-    font-weight: bold;
+.contact-header h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--dark);
     margin-bottom: 20px;
 }
 
-.hero-content p {
-    font-size: 20px;
-    margin-bottom: 30px;
-}
-
-.cta-button {
-    background-color: var(--accent);
-    padding: 15px 40px;
-    color: var(--light);
-    font-size: 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.cta-button:hover {
-    background-color: var(--dark);
-}
-
-/* İletişim Bölümü */
-.contact-section {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 60px 20px;
-}
-
-.contact-info {
-    max-width: 400px;
-}
-
-.contact-info h2 {
-    font-size: 32px;
-    color: var(--primary);
-}
-
-.contact-info p {
-    font-size: 18px;
-    margin-bottom: 15px;
-}
-
-.contact-info i {
-    color: var(--secondary);
-    margin-right: 10px;
+.contact-header p {
+    font-size: 1.5rem;
+    max-width: 700px;
+    margin: 0 auto;
+    color: var(--text);
 }
 
 /* İletişim Formu */
-.contact-form-container {
-    max-width: 450px;
+.contact-form {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 50px;
     background: var(--light);
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px var(--shadow);
+    transition: transform 0.3s ease;
 }
 
-.form-group {
-    margin-bottom: 20px;
+.contact-form:hover {
+    transform: translateY(-5px);
 }
 
-.form-group label {
-    font-weight: bold;
-    display: block;
+.contact-form h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.contact-form .form-group {
+    margin-bottom: 25px;
+}
+
+.contact-form label {
+    font-weight: 600;
+    font-size: 1.2rem;
     margin-bottom: 8px;
+    display: block;
     color: var(--text);
 }
 
-.form-group input,
-.form-group textarea {
+.contact-form input,
+.contact-form textarea {
     width: 100%;
-    padding: 12px;
+    padding: 18px;
     border: 2px solid var(--secondary);
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    outline: none;
+    background: var(--background);
+    transition: all 0.3s ease;
 }
 
-.submit-button {
-    background-color: var(--primary);
-    color: var(--light);
-    padding: 15px;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    border-radius: 8px;
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
+    background: var(--light);
+}
+
+.contact-form button {
     width: 100%;
-    transition: 0.3s;
-}
-
-.submit-button:hover {
-    background-color: var(--dark);
-}
-
-/* Sosyal Medya */
-.social-media {
-    text-align: center;
-    padding: 50px 0;
+    padding: 18px;
+    font-size: 1.3rem;
+    font-weight: 700;
     background: var(--primary);
     color: var(--light);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+}
+
+.contact-form button:hover {
+    background: var(--secondary);
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+}
+
+/* İletişim Bilgileri */
+.contact-info {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 50px;
+    background: var(--light);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px var(--shadow);
+    text-align: center;
+}
+
+.contact-info h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 30px;
+}
+
+.contact-info ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.3rem;
+    line-height: 2;
+}
+
+.contact-info ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-weight: 600;
+}
+
+.contact-info ul li i {
+    color: var(--primary);
+    font-size: 1.8rem;
+}
+
+/* Sosyal Medya Bağlantıları */
+.social-media {
+    text-align: center;
+    padding: 60px 20px;
 }
 
 .social-media h2 {
-    font-size: 28px;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--dark);
     margin-bottom: 20px;
 }
 
 .social-media a {
-    color: var(--light);
+    display: inline-block;
     margin: 0 15px;
-    font-size: 28px;
-    transition: 0.3s;
+    font-size: 2.5rem;
+    color: var(--primary);
+    transition: all 0.3s ease;
 }
 
 .social-media a:hover {
     color: var(--accent);
+    transform: scale(1.1);
+}
+
+/* Harita Bölümü */
+.map-section {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.map-section h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 30px;
+}
+
+#map {
+    width: 100%;
+    max-width: 1000px;
+    height: 500px;
+    margin: 0 auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px var(--shadow);
+}
+
+/* SSS Bölümü */
+.faq {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 50px;
+    background: var(--light);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px var(--shadow);
+}
+
+.faq h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.faq details {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-left: 4px solid var(--primary);
+    border-radius: 10px;
+    background: var(--background);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.faq details:hover {
+    background: var(--light);
+    box-shadow: 0 5px 15px var(--shadow);
+}
+
+.faq summary {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.faq p {
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-top: 10px;
 }
 
 /* Responsive Tasarım */
 @media (max-width: 768px) {
-    .contact-section {
-        flex-direction: column;
-        align-items: center;
+    .contact-header h1 {
+        font-size: 2.8rem;
     }
 
-    .contact-form-container {
-        width: 100%;
+    .contact-header p {
+        font-size: 1.3rem;
     }
 
-    .hero-content h1 {
-        font-size: 36px;
+    .contact-form, 
+    .contact-info, 
+    .faq {
+        padding: 30px;
+    }
+
+    .contact-form button {
+        font-size: 1.1rem;
+    }
+
+    .social-media a {
+        font-size: 2rem;
+    }
+
+    #map {
+        height: 400px;
     }
 }
 
@@ -188,7 +373,6 @@ body {
         <div class="loader-icon"></div>
         <p>Çocuk Hakları İçin Yükleniyor...</p>
     </div>
-
     <header class="header">
         <nav class="nav-container">
             <a href="#" class="logo">
@@ -204,88 +388,119 @@ body {
             </ul>
         </nav>
     </header>
-
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Geleceğimiz İçin Bir Adım At</h1>
-            <p>Çocuk haklarını korumak ve daha adil bir dünya için bize katıl.</p>
-            <a href="#contact-form" class="cta-button">Bize Ulaş</a>
+    <div class="hero">
+        <video class="video-bg" autoplay muted loop playsinline>
+            <source src="/images/background_video2.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>İnsan ve Çocuk Hakları</h1>
+                <p>Herkes için eşit haklar, adil bir dünya için temel taşlardır.</p>
+            </div>
         </div>
+    </div>
+
+    <section class="contact-header">
+        <h1>İletişime Geçin</h1>
+        <p>Bizimle iletişime geçerek çocuk hakları konusunda destek alabilir, önerilerde bulunabilir veya sorularınızı sorabilirsiniz.</p>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact-section">
-        <div class="contact-info">
-            <h2>İletişim Bilgilerimiz</h2>
-            <p><i class="fas fa-map-marker-alt"></i> Çocuk Hakları Derneği, İstanbul, Türkiye</p>
-            <p><i class="fas fa-phone-alt"></i> +90 123 456 78 90</p>
-            <p><i class="fas fa-envelope"></i> info@cocukhaklari.org</p>
-        </div>
-
-        <div class="contact-form-container" id="contact-form">
-            <h2>Bizimle İletişime Geçin</h2>
-            <form action="submit_form.php" method="POST">
-                <div class="form-group">
-                    <label for="name"><i class="fas fa-user"></i> Adınız:</label>
-                    <input type="text" id="name" name="name" placeholder="Adınızı girin" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email"><i class="fas fa-envelope"></i> E-posta:</label>
-                    <input type="email" id="email" name="email" placeholder="E-posta adresinizi girin" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="message"><i class="fas fa-comment-dots"></i> Mesajınız:</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Mesajınızı yazın" required></textarea>
-                </div>
-
-                <button type="submit" class="submit-button"><i class="fas fa-paper-plane"></i> Gönder</button>
-            </form>
-        </div>
+    <section class="contact-form">
+        <h2>Bize Yazın</h2>
+        <form action="/submit_contact" method="POST">
+            <div class="form-group">
+                <label for="name">Adınız</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-posta</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Konu</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Mesajınız</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn">Gönder</button>
+        </form>
+    </section>
+    <section class="contact-info">
+        <h2>İletişim Bilgilerimiz</h2>
+        <ul>
+            <li><i class="fas fa-map-marker-alt"></i> Ankara, Türkiye</li>
+            <li><i class="fas fa-phone"></i> +90 (312) 123 45 67</li>
+            <li><i class="fas fa-envelope"></i> info@cocukhaklari.org</li>
+        </ul>
+    </section>
+    <section class="map-section">
+        <h2>Bizi Ziyaret Edin</h2>
+        <div id="map" style="height: 400px;"></div>
     </section>
 
-    <!-- Social Media Section -->
     <section class="social-media">
         <h2>Bizi Takip Edin</h2>
         <a href="#"><i class="fab fa-facebook"></i></a>
         <a href="#"><i class="fab fa-twitter"></i></a>
         <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
     </section>
+    <section class="faq">
+        <h2>Sıkça Sorulan Sorular</h2>
+        <details>
+            <summary>Çocuk hakları nelerdir?</summary>
+            <p>Çocuk hakları, her çocuğun sağlıklı büyümesi, eğitim alması ve korunması için temel haklardır.</p>
+        </details>
+        <details>
+            <summary>Size nasıl destek olabilirim?</summary>
+            <p>Bize bağış yapabilir veya gönüllü olarak projelerimizde yer alabilirsiniz.</p>
+        </details>
+    </section>
+    
 
-
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-column">
-                <h4>Çocuk Hakları Platformu</h4>
-                <p>Çocukların geleceği için çalışıyoruz.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="footer-column">
-                <h4>Hızlı Bağlantılar</h4>
-                <ul>
-                    <li><a href="#home">Ana Sayfa</a></li>
-                    <li><a href="#about">Hakkımızda</a></li>
-                    <li><a href="#rights">Haklar</a></li>
-                    <li><a href="#campaigns">Kampanyalar</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>İletişim Bilgileri</h4>
-                <ul>
-                    <li><i class="fas fa-map-marker-alt"></i> Ankara, Türkiye</li>
-                    <li><i class="fas fa-phone"></i> +90 (312) 123 45 67</li>
-                    <li><i class="fas fa-envelope"></i> info@cocukhaklari.org</li>
-                </ul>
+<footer>
+    <div class="footer-content">
+        <div class="footer-column">
+            <h4>Çocuk Hakları Platformu</h4>
+            <p>Çocukların geleceği için çalışıyoruz.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
-    </footer>
-    <script src="/js/script.js"></script>
+        <div class="footer-column">
+            <h4>Hızlı Bağlantılar</h4>
+            <ul>
+                <li><a href="#home">Ana Sayfa</a></li>
+                <li><a href="#about">Hakkımızda</a></li>
+                <li><a href="#rights">Haklar</a></li>
+                <li><a href="#campaigns">Kampanyalar</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>İletişim Bilgileri</h4>
+            <ul>
+                <li><i class="fas fa-map-marker-alt"></i> Ankara, Türkiye</li>
+                <li><i class="fas fa-phone"></i> +90 (312) 123 45 67</li>
+                <li><i class="fas fa-envelope"></i> info@cocukhaklari.org</li>
+            </ul>
+        </div>
+    </div>
+</footer>
+<script src="/js/script.js"></script>
+<script>
+    var map = L.map('map').setView([39.92077, 32.85411], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+    L.marker([39.92077, 32.85411]).addTo(map)
+        .bindPopup('Çocuk Hakları Platformu')
+        .openPopup();
+</script>
+
+    
 </body>
 </html>
