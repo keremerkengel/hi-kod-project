@@ -6,8 +6,540 @@
     <title>Çocuk Hakları Platformu</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
+    <style>
+:root {
+    --primary: #2563eb;
+    --secondary: #3b82f6;
+    --accent: #60a5fa;
+    --background: #f0f9ff;
+    --text: #1e3a8a;
+    --light: #ffffff;
+    --dark: #1e40af;
+}
+
+
+/* Zaman çizelgesi konteyneri */
+.timeline-container {
+    width: 80%;
+    margin: 50px auto;
+}
+
+/* Zaman çizelgesi stili */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Çizgi */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: var(--primary);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+}
+
+/* Zaman çizelgesi öğesi */
+.timeline-item {
+    position: relative;
+    width: 48%;
+    background-color: #ffffff;
+    border-radius: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+/* Hover efekti */
+.timeline-item:hover {
+    transform: scale(1.05);
+}
+
+/* Nokta işareti */
+.timeline-dot {
+    position: absolute;
+    top: 30px;
+    width: 20px;
+    height: 20px;
+    background-color: var(--secondary);
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid var(--light);
+}
+
+/* İçerik stili */
+.timeline-content {
+    padding: 20px;
+    background-color: var(--accent);
+    border-radius: 10px;
+    text-align: left;
+    color: var(--text);
+}
+
+.timeline-content h2 {
+    margin: 0;
+    font-size: 24px;
+    color: var(--dark);
+}
+
+.timeline-content h3 {
+    margin: 10px 0 5px;
+    font-size: 20px;
+    color: var(--text);
+    font-weight: bold;
+}
+
+.timeline-content p {
+    font-size: 16px;
+    color: var(--dark);
+}
+
+/* Alternatif sıralama */
+.timeline-item:nth-child(odd) {
+    left: 0;
+    text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+    text-align: left;
+}
+
+/* Responsive tasarım */
+@media screen and (max-width: 768px) {
+    .timeline-item {
+        width: 100%;
+        left: 0 !important;
+        text-align: center;
+    }
+    
+    .timeline::after {
+        left: 10px;
+    }
+    
+    .timeline-dot {
+        left: 10px;
+    }
+}
+/* Video Bölümü Stilleri */
+/* Video Bölümü Stilleri */
+.video-section {
+    padding: 6rem 2rem;
+    background: var(--background);
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.video-card {
+    background: var(--light);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Video Badge */
+.video-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    z-index: 10;
+    font-weight: 500;
+}
+
+.video-badge.featured {
+    background: #f59e0b;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-content {
+    padding: 1.5rem;
+}
+
+/* Meta Bilgileri */
+.video-meta {
+    display: flex;
+    gap: 1.5rem;
+    color: var(--text);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.video-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.video-meta i {
+    color: var(--primary);
+}
+
+.video-content h3 {
+    color: var(--primary);
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.video-content p {
+    color: var(--text);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+/* Etiketler */
+.video-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tag {
+    background: var(--background);
+    color: var(--primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* İstatistikler */
+.video-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+    font-size: 0.85rem;
+}
+
+.stat-item i {
+    color: var(--primary);
+}
+
+/* Detay Linki */
+.video-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: gap 0.3s ease;
+}
+
+.video-link:hover {
+    gap: 0.8rem;
+}
+
+.video-link i {
+    font-size: 0.8rem;
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .video-card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .video-section {
+        padding: 4rem 1rem;
+    }
+    
+    .video-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+.cta-section {
+            background-color: var(--dark);
+            color: var(--light);
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 60px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--light);
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        .success-story {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background: var(--light);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            overflow: hidden;
+            animation: slideIn 1.5s ease-in-out;
+        }
+
+        .success-story h2 {
+            font-size: 2.2em;
+            color: var(--primary);
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        .success-story p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: var(--dark);
+            animation: fadeInUp 1.2s ease-in-out;
+        }
+
+        .success-story img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            animation: zoomIn 1.5s ease-in-out;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .success-story img:hover {
+            transform: scale(1.05);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin-top: 30px;
+            background: var(--secondary);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s ease-in-out;
+            animation: fadeInUp 1.4s ease-in-out;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .banner {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.banner-img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+}
+.stats-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: var(--secondary);
+            color: var(--light);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin: 50px;
+        }
+
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .stat-box {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 40px;
+            width: 320px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .stat-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-number {
+            font-size: 55px;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .stat-title {
+            font-size: 24px;
+            margin-top: 10px;
+            font-weight: bold;
+            color: var(--text);
+        }
+
+        .stat-description {
+            font-size: 18px;
+            margin-top: 10px;
+            color: var(--secondary);
+        }
+        .toast-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+/* Toast Bildirim */
+.toast {
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 250px;
+    font-size: 16px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Kapatma Butonu */
+.toast button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+/* Kapatma Butonu Hover Efekti */
+.toast button:hover {
+    color: #60a5fa;
+}
+
+/* Animasyonlar */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(20px);
+        display: none;
+    }
+}
+    </style>
 </head>
 <body>
+    <div class="toast-container">
+        <div id="toast" class="toast">
+            <span>Çocuk haklarına saygı gösterin! 💙</span>
+            <button onclick="closeToast()">X</button>
+        </div>
+    </div>
+
     <button id="scrollToTop" class="scroll-to-top">
         <i class="fas fa-chevron-up"></i>
     </button>
@@ -72,18 +604,36 @@
             </div>
         </div>
     </section>
+
     <section class="about-section" id="about">
         <div class="about-container">
             <div class="about-content">
-                <h2 class="section-title" style="text-align: start;">Hakkımızda</h2>
-                <p>Çocuk Hakları Platformu olarak, tüm çocukların temel haklarını korumak ve geliştirmek için çalışıyoruz. 2010 yılından bu yana sürdürdüğümüz çalışmalarımızla, binlerce çocuğun hayatına dokunduk.</p>
-                <p>Misyonumuz, her çocuğun güvenli, sağlıklı ve mutlu bir ortamda büyümesini sağlamaktır. Vizyonumuz ise çocuk haklarının tam anlamıyla korunduğu bir toplum oluşturmaktır.</p>
+                <h2 class="section-title">Hakkımızda</h2>
+                <p>Çocuk Hakları Platformu olarak, tüm çocukların temel haklarını korumak ve geliştirmek için çalışıyoruz.</p>
+                <p>Misyonumuz, her çocuğun güvenli, sağlıklı ve mutlu bir ortamda büyümesini sağlamaktır.</p>
+                <button class="custom-btn">Daha Fazla</button>
             </div>
             <div class="about-image">
                 <img src="/images/logo2.png" alt="Çocuk Hakları Platformu Ekibi" />
             </div>
         </div>
     </section>
+
+    <section class="success-story">
+        <h2>Elif’in Başarı Hikayesi</h2>
+        <img src="images/elif.png" alt="Elif'in başarı hikayesi">
+        <p>
+            Elif, küçük bir köyde büyüyen azimli bir çocuktu. Eğitim olanaklarına erişimde büyük zorluklar yaşadı, 
+            ancak ailesinin ve bir sivil toplum kuruluşunun desteğiyle burs kazanarak eğitim hayatına devam etti. 
+            Karşılaştığı engellere rağmen pes etmeyen Elif, bugün çocuk hakları konusunda bilinçlendirme çalışmaları 
+            yaparak diğer çocukların hayallerine ulaşmasına yardımcı oluyor.
+        </p>
+        <a href="#" class="btn">Daha Fazla Bilgi</a>
+    </section>
+    
+    <div class="banner">
+        <img src="/images/ayın bağışcısı.png" alt="Ayın Destekçisi" class="banner-img">
+    </div>
 
     <section class="campaigns-section" id="campaigns">
         <h2 class="section-title">Güncel Kampanyalar</h2>
@@ -101,9 +651,6 @@
                 </p>
                 <a href="#" class="cta-button">Kampanyaya Katıl</a>
             </div>
-    
-            
-    
             <div class="campaign-card">
                 <span class="campaign-badge">Yakında Başlıyor</span>
                 <h3>Çocuk Sağlığı Seferberliği</h3>
@@ -129,6 +676,27 @@
             </div>
         </div>
     
+        <section class="stats-section">
+            <h2>Çocuk Hakları Farkındalığı</h2>
+            <p>Daha iyi bir gelecek için çocuk haklarına destek veriyoruz!</p><br>
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-number" id="children-helped">0</div>
+                    <div class="stat-title">Çocuğa Destek Sağlandı</div>
+                    <div class="stat-description">Bu platform sayesinde birçok çocuğa umut olduk.</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="volunteers">0</div>
+                    <div class="stat-title">Gönüllü Katılım</div>
+                    <div class="stat-description">Çocuk haklarını savunan gönüllülerimizle birlikteyiz.</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="events">0</div>
+                    <div class="stat-title">Etkinlik Düzenlendi</div>
+                    <div class="stat-description">Çocuk hakları bilincini artırmak için birçok etkinlik gerçekleştirdik.</div>
+                </div>
+            </div>
+        </section>
         <!-- Tamamlanan Kampanyalar Bölümü -->
         <h3 class="sub-section-title">Tamamlanan Kampanyalar</h3>
         <div class="completed-campaigns">
@@ -155,28 +723,160 @@
             </div>
         </div>
     </section>
-    
-    <section class="contact-section" id="contact">
-        <div class="contact-container">
-            <h2 class="section-title">İletişime Geçin</h2>
-            <form class="contact-form">
-                <div class="form-group">
-                    <label for="name">Adınız Soyadınız</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">E-posta Adresiniz</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Mesajınız</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="submit-button">Gönder</button>
-            </form>
-        </div>
-    </section>
 
+
+<!-- Video Bölümü -->
+<section class="video-section">
+    <h2 class="section-title">Video İçeriklerimiz</h2>
+    <div class="video-grid">
+        <div class="video-card">
+            <div class="video-badge">Yeni Video</div>
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube-nocookie.com/embed/mtFDnBBOF4E" 
+                    title="Çocuk Hakları Eğitimi"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-content">
+                <div class="video-meta">
+                    <span><i class="fas fa-calendar"></i> 15 Ocak 2025</span>
+                    <span><i class="fas fa-eye"></i> 1.2K görüntülenme</span>
+                </div>
+                <h3>Çocuk Hakları Eğitimi</h3>
+                <p>Çocukların temel haklarını öğrenebilecekleri eğitici video serisi. Bu bölümde eğitim hakkı konusunu ele alıyoruz. </p>
+                <div class="video-tags">
+                    <span class="tag">Eğitim</span>
+                    <span class="tag">Temel Haklar</span>
+                    <span class="tag">Çocuk Gelişimi</span>
+                </div>
+                <div class="video-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span>256 beğeni</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-comment"></i>
+                        <span>45 yorum</span>
+                    </div>
+                </div>
+                <a href="#" class="video-link">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <div class="video-card">
+            <div class="video-badge featured">Öne Çıkan</div>
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube-nocookie.com/embed/ESZ7s2gQ0H4" 
+                    title="Kampanya Sonuçlarımız"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-content">
+                <div class="video-meta">
+                    <span><i class="fas fa-calendar"></i> 10 Ocak 2025</span>
+                    <span><i class="fas fa-eye"></i> 2.5K görüntülenme</span>
+                </div>
+                <h3>Çocuk ve Çocuk Hakları</h3>
+                <p>Çocukların temel haklarını öğrenebilecekleri eğitici video serisi. Bu bölümde eğitim hakkı konusunu ele alıyoruz. </p>
+                <div class="video-tags">
+                    <span class="tag">Kampanyalar</span>
+                    <span class="tag">Başarı Hikayeleri</span>
+                    <span class="tag">Sosyal Etki</span>
+                </div>
+                <div class="video-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span>483 beğeni</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-comment"></i>
+                        <span>72 yorum</span>
+                    </div>
+                </div>
+                <a href="#" class="video-link">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div> 
+
+        <div class="video-card">
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube-nocookie.com/embed/Tv3jgxgv4UI" 
+                    title="Çocukların Gözünden"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-content">
+                <div class="video-meta">
+                    <span><i class="fas fa-calendar"></i> 5 Ocak 2025</span>
+                    <span><i class="fas fa-eye"></i> 1.8K görüntülenme</span>
+                </div>
+                <h3>Çocukların Gözünden</h3>
+                <p>Çocukların temel haklarını öğrenebilecekleri eğitici video serisi. Bu bölümde eğitim hakkı konusunu ele alıyoruz. </p>
+                <div class="video-tags">
+                    <span class="tag">Röportaj</span>
+                    <span class="tag">Çocuk Görüşleri</span>
+                    <span class="tag">Deneyimler</span>
+                </div>
+                <div class="video-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span>342 beğeni</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-comment"></i>
+                        <span>58 yorum</span>
+                    </div>
+                </div>
+                <a href="#" class="video-link">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="cta-section">
+    <h2>Gönüllü Olmak İster misiniz?</h2>
+    <p>Kampanyalarımızda aktif rol alarak çocukların hayatına dokunun.</p><br>
+    <a href="#" class="btn">Gönüllü Ol</a>
+</section>
+    <div class="timeline-container">
+        <h1 style="color: #2563eb; margin-top: 40px ; text-align: center;">Çocuk Hakları Tarihçesi</h1><br>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h2 style="color: #ffffff;">1959</h2>
+                    <h3>Çocuk Hakları Bildirisi</h3>
+                    <p>Birleşmiş Milletler tarafından Çocuk Hakları Bildirisi kabul edildi.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item" style="margin-left: 20px;">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h2 style="color: #ffffff;">1989</h2>
+                    <h3>BM Çocuk Hakları Sözleşmesi</h3>
+                    <p>Birleşmiş Milletler Çocuk Hakları Sözleşmesi kabul edildi.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h2 style="color: #ffffff;">1995</h2>
+                    <h3>Türkiye'de Çocuk Hakları</h3>
+                    <p>Türkiye, Çocuk Hakları Sözleşmesi'ni onayladı ve uygulamaya başladı.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <footer>
         <div class="footer-content">
             <div class="footer-column">
@@ -208,5 +908,97 @@
         </div>
     </footer>
     <script src="/js/script.js"></script>
+    <script>
+        // Sayfa yüklendiğinde bildirimi göster
+window.onload = function() {
+    const toast = document.getElementById('toast');
+
+    // 2 saniye sonra bildirimi göster
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 2000);
+
+    // 7 saniye sonra otomatik olarak bildirimi gizle
+    setTimeout(() => {
+        hideToast();
+    }, 9000);
+}
+
+// Bildirimi manuel olarak kapat
+function closeToast() {
+    hideToast();
+}
+
+// Toast gizleme fonksiyonu
+function hideToast() {
+    const toast = document.getElementById('toast');
+    toast.classList.remove('show');
+    toast.classList.add('hide');
+
+    // Kapanma animasyonu bittikten sonra tamamen gizle
+    setTimeout(() => {
+        toast.style.display = 'none';
+    }, 500);
+}
+
+    </script>
+    <script>// Video thumbnail'lerine tıklama işlevselliği
+        document.addEventListener('DOMContentLoaded', function() {
+            const thumbnails = document.querySelectorAll('.video-thumbnail');
+            
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    const videoId = this.dataset.videoId;
+                    const iframe = document.createElement('iframe');
+                    
+                    iframe.setAttribute('src', `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`);
+                    iframe.setAttribute('frameborder', '0');
+                    iframe.setAttribute('allowfullscreen', '');
+                    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+                    
+                    // Thumbnail'i iframe ile değiştir
+                    this.parentNode.replaceChild(iframe, this);
+                    
+                    // iframe'i absolute pozisyonla yerleştir
+                    iframe.style.position = 'absolute';
+                    iframe.style.top = '0';
+                    iframe.style.left = '0';
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100%';
+                });
+            });
+        });</script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const aboutSection = document.querySelector(".about-section");
+                    setTimeout(() => {
+                        aboutSection.style.opacity = "1";
+                        aboutSection.style.transform = "translateY(0)";
+                    }, 500);
+                });
+            </script>
+            <script>
+                function animateCounter(id, start, end, duration) {
+                    let obj = document.getElementById(id);
+                    let current = start;
+                    let increment = end > start ? 1 : -1;
+                    let stepTime = Math.abs(Math.floor(duration / (end - start)));
+                    
+                    let timer = setInterval(function () {
+                        current += increment;
+                        obj.textContent = current;
+                        if (current === end) {
+                            clearInterval(timer);
+                        }
+                    }, stepTime);
+                }
+        
+                // Sayaçlar başlangıç değerleri
+                window.onload = function () {
+                    animateCounter("children-helped", 0, 375, 3000);
+                    animateCounter("volunteers", 0, 350, 2500);
+                    animateCounter("events", 0, 45, 2000);
+                };
+            </script>
 </body>
 </html>
