@@ -530,6 +530,71 @@
         display: none;
     }
 }
+.team-section {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.team-section h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #2563eb;
+}
+
+.team-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.team-member {
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 300px;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.team-member img {
+    width: 100%;
+    border-bottom: 5px solid #2563eb;
+}
+
+.member-info {
+    padding: 20px;
+}
+
+.member-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.member-info p {
+    color: #3b82f6;
+    font-weight: 400;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.social-icons a {
+    margin: 0 10px;
+    color: #2563eb;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #1e40af;
+}
     </style>
 </head>
 <body>
@@ -876,7 +941,61 @@
             </div>
         </div>
     </div>
+    <section class="team-section">
+        <h2>Takım Üyelerimiz</h2>
+        <div class="team-container">
+            <div class="team-member">
+                <img src="images/kerem.png" alt="Team Member">
+                <div class="member-info">
+                    <h3>Kerem Erkengel</h3>
+                    <p>Lead Project Manager & Frontend Developer</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
     
+            <div class="team-member">
+                <img src="images/sena.png" alt="Team Member">
+                <div class="member-info">
+                    <h3>Sema Nur Ata</h3>
+                    <p>UI/UX Designer & Leader</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="team-member">
+                <img src="images/eliff.png" alt="Team Member">
+                <div class="member-info">
+                    <h3>Elif Özbay</h3>
+                    <p>Frontend Developer</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="/images/ahmet.png" alt="Team Member">
+                <div class="member-info">
+                    <h3>Ahmet Demir</h3>
+                    <p>Frontend Engineer</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <footer>
         <div class="footer-content">
             <div class="footer-column">

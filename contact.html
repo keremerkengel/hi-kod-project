@@ -361,7 +361,83 @@ body {
         height: 400px;
     }
 }
+.team-section {
+    text-align: center;
+    padding: 50px 0;
+}
 
+.team-section h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #2563eb;
+}
+
+.team-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.team-member {
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 300px;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.team-member img {
+    width: 100%;
+    border-bottom: 5px solid #2563eb;
+}
+
+.member-info {
+    padding: 20px;
+}
+
+.member-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.member-info p {
+    color: #3b82f6;
+    font-weight: 400;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.social-icons a {
+    margin: 0 10px;
+    color: #2563eb;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #1e40af;
+}
+.banner {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    text-align: center;
+}
+.banner-img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+}
     </style>
 </head>
 <body>
@@ -373,6 +449,7 @@ body {
         <div class="loader-icon"></div>
         <p>Çocuk Hakları İçin Yükleniyor...</p>
     </div>
+
     <header class="header">
         <nav class="nav-container">
             <a href="#" class="logo">
@@ -441,6 +518,66 @@ body {
         <div id="map" style="height: 400px;"></div>
     </section>
 
+    <div class="banner">
+        <img src="/images/barıs_manco.png" alt="Ayın Destekçisi" class="banner-img">
+    </div>
+
+    <section class="team-section">
+        <h2>Takım Üyelerimiz</h2>
+        <div class="team-container">
+            <div class="team-member">
+                <img src="images/kerem.png" alt="Team Member">
+                <div class="member-info">
+                    <h3>Kerem Erkengel</h3>
+                    <p>Lead Project Manager & Frontend Developer</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="team-member">
+                <img src="images/sena.png" alt="Team Member">
+                <div class="member-info">
+                    <h3>Sema Nur Ata</h3>
+                    <p>UI/UX Designer</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="team-member">
+                <img src="images/eliff.png" alt="Team Member">
+                <div class="member-info">
+                    <h3>Elif Özbay</h3>
+                    <p>Frontend Developer</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="/images/ahmet.png" alt="Team Member">
+                <div class="member-info">
+                    <h3>Ahmet Demir</h3>
+                    <p>Frontend Engineer</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+      </div>
     <section class="social-media">
         <h2>Bizi Takip Edin</h2>
         <a href="#"><i class="fab fa-facebook"></i></a>
@@ -457,6 +594,28 @@ body {
             <summary>Size nasıl destek olabilirim?</summary>
             <p>Bize bağış yapabilir veya gönüllü olarak projelerimizde yer alabilirsiniz.</p>
         </details>
+        <details>
+            <summary>Çocuk haklarının ihlal edilmesi durumunda nereye başvurabilirim?
+            </summary>
+            <p>Çocuk İzlem Merkezleri<br>
+                Aile ve Sosyal Hizmetler Bakanlığı<br>
+                Polis ve Jandarma<br>
+                Çocuk Hakları Komiteleri<br>
+                Alo 183 Sosyal Destek Hattı</p>
+        </details>
+        <details>
+            <summary>Çocuk hakları konusunda nasıl farkındalık yaratılabilir?
+            </summary>
+            <p>Eğitim programları düzenlemek<br>
+                Çocuklara yönelik kampanyalar yapmak<br>
+                Medyada çocuk haklarını vurgulamak<br>
+                Çocukların kendi haklarını öğrenmelerini sağlamak</p>
+        </details>
+        <details>
+            <summary>Çocuk hakları ihlalleri nelerdir?
+            </summary>
+            <p>Çocuk işçiliği, çocuk istismarı, ayrımcılık, eğitim hakkının engellenmesi, zorla evlendirme ve savaş durumlarında çocuk askerlerin kullanılması gibi durumlar çocuk hakları ihlalleridir.</p>
+        </details>
     </section>
     
 
@@ -500,7 +659,28 @@ body {
         .bindPopup('Çocuk Hakları Platformu')
         .openPopup();
 </script>
+<script>
+    // Add hover animation
+    const teamMembers = document.querySelectorAll('.team-member');
+    teamMembers.forEach(member => {
+      member.addEventListener('mouseover', () => {
+        member.style.transform = 'translateY(-0.5rem)';
+        member.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+      });
+      member.addEventListener('mouseout', () => {
+        member.style.transform = 'translateY(0)';
+        member.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.05)';
+      });
 
-    
+      // Add click event to show team member details
+      member.addEventListener('click', () => {
+        alert(`
+          Name: ${member.querySelector('h3').textContent}
+          Role: ${member.querySelector('p').textContent}
+        `);
+      });
+    });
+  </script>
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
 </html>
