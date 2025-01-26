@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="shortcut icon" href="/images/shortcut_icon.png" >
     <style>
-        /* Mobile Menu Styles */
+                /* Mobile Menu Styles */
 @media (max-width: 768px) {
     .nav-links {
         display: none;
@@ -62,7 +62,7 @@
         transform: rotate(-45deg) translate(5px, -5px);
     }
 }
-                .banner {
+    .banner {
     width: 100%;
     max-width: 1920px;
     margin: 0 auto;
@@ -74,7 +74,134 @@
     max-height: 400px;
     object-fit: cover;
 }
-    </style>
+.social-media {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.social-media h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2563eb;
+    margin-bottom: 20px;
+}
+
+.social-media a {
+    display: inline-block;
+    margin: 0 15px;
+    font-size: 2.5rem;
+    color: var(--primary);
+    transition: all 0.3s ease;
+}
+
+.social-media a:hover {
+    color: var(--accent);
+    transform: scale(1.1);
+}
+.donation-section {
+    max-width: 600px;
+    margin: 60px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.donation-section h2 {
+    color: #2563eb;
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.donation-section p {
+    color: #1e3a8a;
+    font-size: 18px;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.card-preview {
+    background: #2563eb;
+    padding: 30px;
+    border-radius: 12px;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    text-align: left;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.card-number {
+    font-size: 28px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.card-holder,
+.card-expiry {
+    font-size: 20px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 18px;
+    color: #1e40af;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #3b82f6;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.input-group input:focus {
+    border-color: #1e40af;
+    outline: none;
+}
+
+.input-row {
+    display: flex;
+    gap: 20px;
+}
+
+.donate-btn {
+    background: #2563eb;
+    color: white;
+    padding: 18px;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.donate-btn:hover {
+    background: #1e40af;
+}
+</style>
 </head>
 <body>
     <button id="scrollToTop" class="scroll-to-top">
@@ -171,7 +298,12 @@
                 </ul>
             </div>
         </section>
-
+        <section class="social-media">
+            <h2>Bizi Takip Edin</h2>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </section>
         <section style="margin-top: 40px;">
             <h2 style="color: #2563eb; text-align: center;">Çocuk Haklarının Önemi</h2>
             <p style="text-align: center;">
@@ -220,6 +352,52 @@
     </div>
 </section>
     </main>
+    <section class="donation-section">
+        <h2>Çocuklara Destek Olun</h2>
+        <p>Bağışlarınız, çocukların daha iyi bir geleceğe sahip olması için kullanılacaktır.</p>
+    
+        <div class="card-preview">
+            <div class="card">
+                <div class="card-number" id="card-number-preview">•••• •••• •••• ••••</div>
+                <div class="card-holder" id="card-holder-preview">KART SAHİBİ</div>
+                <div class="card-expiry" id="card-expiry-preview">MM/YY</div>
+            </div>
+        </div>
+    
+        <form id="donation-form">
+            <div class="input-group">
+                <label for="donation-amount">Bağış Miktarı (₺):</label>
+                <input type="number" id="donation-amount" placeholder="Bağış miktarı girin" required>
+            </div>
+    
+            <div class="input-group">
+                <label for="card-number">Kredi Kartı Numarası:</label>
+                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+            </div>
+    
+            <div class="input-group">
+                <label for="card-holder">Kart Sahibi:</label>
+                <input type="text" id="card-holder" placeholder="Adınız Soyadınız" required>
+            </div>
+    
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="expiry-date">Son Kullanma Tarihi:</label>
+                    <input type="text" id="expiry-date" placeholder="MM/YY" maxlength="5" required>
+                </div>
+    
+                <div class="input-group">
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" placeholder="123" maxlength="3" required>
+                </div>
+            </div>
+    
+            <button type="submit" class="donate-btn">Bağış Yap</button>
+        </form>
+    </section>
+    
+    
+    
     <footer>
         <div class="footer-content">
             <div class="footer-column">
@@ -251,37 +429,75 @@
         </div>
     </footer>
     <script src="/js/script.js"></script>
-    <script>// Mobile Menu Toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.createElement('div');
-            menuToggle.classList.add('mobile-menu-toggle');
-            menuToggle.innerHTML = '<span></span><span></span><span></span>';
-        
-            const navContainer = document.querySelector('.nav-container');
-            const navLinks = document.querySelector('.nav-links');
-            
-            navContainer.insertBefore(menuToggle, navLinks);
-        
-            menuToggle.addEventListener('click', function() {
-                navLinks.classList.toggle('mobile-active');
-                menuToggle.classList.toggle('active');
-            });
-        
-            // Close menu when a link is clicked
-            navLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', function() {
-                    navLinks.classList.remove('mobile-active');
-                    menuToggle.classList.remove('active');
-                });
-            });
-        
-            // Close menu when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!navContainer.contains(event.target)) {
-                    navLinks.classList.remove('mobile-active');
-                    menuToggle.classList.remove('active');
-                }
-            });
-        });</script>
+    <script>
+        // Mobile Menu Toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.createElement('div');
+    menuToggle.classList.add('mobile-menu-toggle');
+    menuToggle.innerHTML = '<span></span><span></span><span></span>';
+
+    const navContainer = document.querySelector('.nav-container');
+    const navLinks = document.querySelector('.nav-links');
+    
+    navContainer.insertBefore(menuToggle, navLinks);
+
+    menuToggle.addEventListener('click', function() {
+        navLinks.classList.toggle('mobile-active');
+        menuToggle.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function() {
+            navLinks.classList.remove('mobile-active');
+            menuToggle.classList.remove('active');
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!navContainer.contains(event.target)) {
+            navLinks.classList.remove('mobile-active');
+            menuToggle.classList.remove('active');
+        }
+    });
+});
+    </script>
+   <script>document.getElementById("card-number").addEventListener("input", function () {
+    let formattedValue = this.value.replace(/\D/g, "").replace(/(.{4})/g, "$1 ").trim();
+    this.value = formattedValue;
+    document.getElementById("card-number-preview").innerText = formattedValue || "•••• •••• •••• ••••";
+});
+
+document.getElementById("card-holder").addEventListener("input", function () {
+    document.getElementById("card-holder-preview").innerText = this.value.toUpperCase() || "KART SAHİBİ";
+});
+
+document.getElementById("expiry-date").addEventListener("input", function () {
+    let formattedValue = this.value.replace(/\D/g, "").replace(/(\d{2})(\d{0,2})/, "$1/$2").trim();
+    this.value = formattedValue;
+    document.getElementById("card-expiry-preview").innerText = formattedValue || "MM/YY";
+});
+
+document.getElementById("donation-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    let amount = document.getElementById("donation-amount").value;
+    let cardNumber = document.getElementById("card-number").value;
+    let cardHolder = document.getElementById("card-holder").value;
+    let expiryDate = document.getElementById("expiry-date").value;
+    let cvv = document.getElementById("cvv").value;
+
+    if (amount === "" || cardNumber.length < 19 || cardHolder === "" || expiryDate.length < 5 || cvv.length < 3) {
+        alert("Lütfen tüm alanları eksiksiz ve doğru doldurun.");
+        return;
+    }
+
+    alert(`Bağışınız için teşekkür ederiz! ₺${amount} bağış yapıldı.`);
+    this.reset();
+    document.getElementById("card-number-preview").innerText = "•••• •••• •••• ••••";
+    document.getElementById("card-holder-preview").innerText = "KART SAHİBİ";
+    document.getElementById("card-expiry-preview").innerText = "MM/YY";
+});
+</script>
 </body>
 </html>

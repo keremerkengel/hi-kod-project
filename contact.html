@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İletişim | Çocuk Hakları Platformu</title>
+    <title>İletişim | Çocuk Hakları</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="shortcut icon" href="/images/shortcut_icon.png" >
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -65,7 +66,6 @@
         transform: rotate(-45deg) translate(5px, -5px);
     }
 }
-        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
         :root {
             --primary: #2563eb;
             --secondary: #3b82f6;
@@ -528,8 +528,8 @@ body {
     </section>
 
     <section class="contact-form">
-        <h2>Bize Yazın</h2>
-        <form action="/submit_contact" method="POST">
+        <h2>Lütfen Formu Doldurunuz</h2>
+        <form action="/submit_contact" method="POST" id="contactForm">
             <div class="form-group">
                 <label for="name">Adınız</label>
                 <input type="text" id="name" name="name" required>
@@ -548,6 +548,7 @@ body {
             </div>
             <button type="submit" class="btn">Gönder</button>
         </form>
+        
     </section>
     <section class="contact-info">
         <h2>İletişim Bilgilerimiz</h2>
@@ -759,6 +760,12 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   </script>
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Formun normal gönderimini engelle
+        alert('Mesajınız başarıyla gönderilmiştir!');
+        this.reset(); // Formu sıfırla
+    });
+</script>
 </body>
 </html>
