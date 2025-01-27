@@ -1231,6 +1231,88 @@ form {
             <button type="submit" class="donate-btn">Bağış Yap</button>
         </form>
     </section>
+    <div style="
+    text-align: center;
+    font-family: Arial, sans-serif;
+    padding: 60px 20px;
+    color: var(--text);
+    background: var(--background);
+">
+    <h2 style="
+        font-size: 32px;
+        font-weight: bold;
+        color: var(--dark);
+        margin-bottom: 20px;
+    ">Bültenimize Abone Olun</h2>
+
+    <p style="
+        font-size: 18px;
+        margin-bottom: 30px;
+        color: var(--text);
+    ">Güncellemeler ve özel içerikler için e-posta listemize katılın.</p>
+
+    <form id="newsletter-form" style="
+        display: flex;
+        justify-content: center; /* Elemanları tam ortalar */
+        align-items: center; /* Dikey ortalama */
+        gap: 15px;
+        flex-wrap: wrap;
+        max-width: 600px;
+        margin: 0 auto;
+    ">
+        <input type="email" id="email" placeholder="E-posta adresinizi girin" required style="
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid var(--accent);
+            border-radius: 30px;
+            outline: none;
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-sizing: border-box;
+        " 
+        onfocus="this.style.borderColor='var(--dark)'" 
+        onblur="this.style.borderColor='var(--accent)'">
+
+        <button type="submit" style="
+            background: var(--primary);
+            color: var(--light);
+            border: none;
+            border-radius: 30px;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        " 
+        onmouseover="this.style.background='var(--secondary)'" 
+        onmouseout="this.style.background='var(--primary)'">Abone Ol</button>
+    </form>
+
+    <p style="
+        margin-top: 20px;
+        font-size: 14px;
+        color: var(--dark);
+    ">Gizliliğinize önem veriyoruz. Spam yok, sadece değerli içerikler.</p>
+</div>
+
+<script>
+    document.getElementById('newsletter-form').addEventListener('submit', function(event) {
+        event.preventDefault();  // Sayfanın yeniden yüklenmesini engelle
+
+        // Form alanını kontrol et
+        const emailInput = document.getElementById('email').value;
+
+        if (emailInput.trim() === '') {
+            alert('Lütfen geçerli bir e-posta adresi girin!');
+        } else {
+            alert('Başarıyla kaydolundu!');
+            document.getElementById('newsletter-form').reset(); // Formu sıfırla
+        }
+    });
+</script>
+
     <footer>
         <div class="footer-content">
             <div class="footer-column">
