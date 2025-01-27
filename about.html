@@ -1,503 +1,738 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hakkımızda | Çocuk Hakları Platformu</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="shortcut icon" href="/images/shortcut_icon.png" >
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="shortcut icon" href="/images/shortcut_icon.png" />
     <style>
-                /* Mobile Menu Styles */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        position: fixed;
-        top: 70px;
-        left: 0;
+      /* Mobile Menu Styles */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          position: fixed;
+          top: 70px;
+          left: 0;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          flex-direction: column;
+          align-items: center;
+          padding: 2rem 0;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          z-index: 1000;
+        }
+
+        .nav-links.mobile-active {
+          display: flex;
+        }
+
+        .nav-links a {
+          margin: 1rem 0;
+          font-size: 1.2rem;
+        }
+
+        .mobile-menu-toggle {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          width: 30px;
+          height: 20px;
+          cursor: pointer;
+        }
+
+        .mobile-menu-toggle span {
+          width: 100%;
+          height: 3px;
+          background-color: var(--primary);
+          transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+          transform: rotate(-45deg) translate(5px, -5px);
+        }
+      }
+      .banner {
         width: 100%;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        flex-direction: column;
-        align-items: center;
-        padding: 2rem 0;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-    }
-
-    .nav-links.mobile-active {
-        display: flex;
-    }
-
-    .nav-links a {
-        margin: 1rem 0;
-        font-size: 1.2rem;
-    }
-
-    .mobile-menu-toggle {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 30px;
-        height: 20px;
-        cursor: pointer;
-    }
-
-    .mobile-menu-toggle span {
+        max-width: 1920px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .banner-img {
         width: 100%;
-        height: 3px;
-        background-color: var(--primary);
+        height: auto;
+        max-height: 400px;
+        object-fit: cover;
+      }
+      .social-media {
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .social-media h2 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #2563eb;
+        margin-bottom: 20px;
+      }
+
+      .social-media a {
+        display: inline-block;
+        margin: 0 15px;
+        font-size: 2.5rem;
+        color: var(--primary);
         transition: all 0.3s ease;
-    }
+      }
 
-    .mobile-menu-toggle.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-    }
+      .social-media a:hover {
+        color: var(--accent);
+        transform: scale(1.1);
+      }
+      .donation-section {
+        max-width: 600px;
+        margin: 60px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        text-align: center;
+      }
 
-    .mobile-menu-toggle.active span:nth-child(2) {
-        opacity: 0;
-    }
+      .donation-section h2 {
+        color: #2563eb;
+        font-size: 32px;
+        margin-bottom: 15px;
+      }
 
-    .mobile-menu-toggle.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(5px, -5px);
-    }
-}
-    .banner {
-    width: 100%;
-    max-width: 1920px;
-    margin: 0 auto;
-    text-align: center;
-}
-.banner-img {
-    width: 100%;
-    height: auto;
-    max-height: 400px;
-    object-fit: cover;
-}
-.social-media {
-    text-align: center;
-    padding: 60px 20px;
-}
+      .donation-section p {
+        color: #1e3a8a;
+        font-size: 18px;
+        margin-bottom: 25px;
+        line-height: 1.5;
+      }
 
-.social-media h2 {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #2563eb;
-    margin-bottom: 20px;
-}
+      .card-preview {
+        background: #2563eb;
+        padding: 30px;
+        border-radius: 12px;
+        color: white;
+        font-family: "Courier New", Courier, monospace;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
 
-.social-media a {
-    display: inline-block;
-    margin: 0 15px;
-    font-size: 2.5rem;
-    color: var(--primary);
-    transition: all 0.3s ease;
-}
+      .card {
+        text-align: left;
+        font-size: 20px;
+        letter-spacing: 2px;
+      }
 
-.social-media a:hover {
-    color: var(--accent);
-    transform: scale(1.1);
-}
-.donation-section {
-    max-width: 600px;
-    margin: 60px auto;
-    background: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    text-align: center;
-}
+      .card-number {
+        font-size: 28px;
+        margin-bottom: 15px;
+        text-align: center;
+      }
 
-.donation-section h2 {
-    color: #2563eb;
-    font-size: 32px;
-    margin-bottom: 15px;
-}
+      .card-holder,
+      .card-expiry {
+        font-size: 20px;
+        text-align: center;
+      }
 
-.donation-section p {
-    color: #1e3a8a;
-    font-size: 18px;
-    margin-bottom: 25px;
-    line-height: 1.5;
-}
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
 
-.card-preview {
-    background: #2563eb;
-    padding: 30px;
-    border-radius: 12px;
-    color: white;
-    font-family: 'Courier New', Courier, monospace;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
+      .input-group {
+        text-align: left;
+      }
 
-.card {
-    text-align: left;
-    font-size: 20px;
-    letter-spacing: 2px;
-}
+      .input-group label {
+        font-size: 18px;
+        color: #1e40af;
+        margin-bottom: 8px;
+        display: block;
+      }
 
-.card-number {
-    font-size: 28px;
-    margin-bottom: 15px;
-    text-align: center;
-}
+      .input-group input {
+        width: 100%;
+        padding: 14px;
+        border: 2px solid #3b82f6;
+        border-radius: 10px;
+        font-size: 18px;
+        text-align: center;
+        transition: all 0.3s ease-in-out;
+      }
 
-.card-holder,
-.card-expiry {
-    font-size: 20px;
-    text-align: center;
-}
+      .input-group input:focus {
+        border-color: #1e40af;
+        outline: none;
+      }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+      .input-row {
+        display: flex;
+        gap: 20px;
+      }
 
-.input-group {
-    text-align: left;
-}
+      .donate-btn {
+        background: #2563eb;
+        color: white;
+        padding: 18px;
+        border: none;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: bold;
+      }
 
-.input-group label {
-    font-size: 18px;
-    color: #1e40af;
-    margin-bottom: 8px;
-    display: block;
-}
+      .donate-btn:hover {
+        background: #1e40af;
+      }
 
-.input-group input {
-    width: 100%;
-    padding: 14px;
-    border: 2px solid #3b82f6;
-    border-radius: 10px;
-    font-size: 18px;
-    text-align: center;
-    transition: all 0.3s ease-in-out;
-}
+      .about-section {
+        background: #f0f9ff;
+        padding: 60px 20px;
+        text-align: center;
+      }
 
-.input-group input:focus {
-    border-color: #1e40af;
-    outline: none;
-}
-
-.input-row {
-    display: flex;
-    gap: 20px;
-}
-
-.donate-btn {
-    background: #2563eb;
-    color: white;
-    padding: 18px;
-    border: none;
-    border-radius: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-weight: bold;
-}
-
-.donate-btn:hover {
-    background: #1e40af;
-}
-</style>
-</head>
-<body>
+      @media screen and (max-width: 768px) {
+        .about-section {
+          padding: 12rem 2rem;
+        }
+        .input-row {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
     <button id="scrollToTop" class="scroll-to-top">
-        <i class="fas fa-chevron-up"></i>
+      <i class="fas fa-chevron-up"></i>
     </button>
 
     <div id="loader" class="loader">
-        <div class="loader-icon"></div>
-        <p>Çocuk Hakları İçin Yükleniyor...</p>
+      <div class="loader-icon"></div>
+      <p>Çocuk Hakları İçin Yükleniyor...</p>
     </div>
 
     <header class="header">
-        <nav class="nav-container">
-            <a href="/index.html" class="logo">
-                <i class="fas fa-child"></i>
-                Çocuk Hakları
-            </a>
-            <ul class="nav-links">
-                <li><a href="/index.html">Ana Sayfa</a></li>
-                <li><a href="/about.html">Hakkımızda</a></li>
-                <li><a href="/rights.html">Haklar</a></li>
-                <li><a href="/campaigns.html">Kampanyalar</a></li>
-                <li><a href="/contact.html">İletişim</a></li>
-            </ul>
-        </nav>
-    </header><br><br><br><br>
-    <main style="max-width: 1000px; margin: auto; padding: 40px; text-align: justify; line-height: 1.8; font-family: Arial, sans-serif; color: #403d37;">
-        
-        <section class="about-section" style="background: #f0f9ff; padding: 60px 20px; text-align: center;">
-            <div style="max-width: 1000px; margin: auto;">
-                <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
-                    <div style="flex: 1; max-width: 400px; margin: 10px;">
-                        <img src="images/logo2.png" alt="Çocuk Hakları" style="width: 100%; border-radius: 15px;">
-                    </div>
-                    <div style="flex: 2; max-width: 600px; text-align: left;">
-                        <h2 style="color: #2563eb; font-size: 36px; font-weight: bold;">Amacımız Ne?</h2>
-                        <p style="font-size: 18px; line-height: 1.8; color: #403d37;">
-                            Amacımız, çocukların temel haklarını öğrenmelerini sağlamak ve toplumda bu konuda farkındalık oluşturmaktır.
-                            Eğitim, sağlık ve sosyal hakları kapsayan projelerle çocukların geleceğini daha güvenli hale getirmeyi hedefliyoruz.
-                        </p>
-                        <p style="font-size: 18px; line-height: 1.8; color: #403d37;">
-                            Siz de bize katılarak çocuk haklarını destekleyebilir ve geleceğe umut olabilirsiniz.
-                        </p>
-                    </div>
-                </div>
+      <nav class="nav-container">
+        <a href="/index.html" class="logo">
+          <i class="fas fa-child"></i>
+          Çocuk Hakları
+        </a>
+        <ul class="nav-links">
+          <li><a href="/index.html">Ana Sayfa</a></li>
+          <li><a href="/about.html">Hakkımızda</a></li>
+          <li><a href="/rights.html">Haklar</a></li>
+          <li><a href="/campaigns.html">Kampanyalar</a></li>
+          <li><a href="/contact.html">İletişim</a></li>
+        </ul>
+      </nav>
+    </header>
+    <br /><br /><br /><br />
+    <main
+      style="
+        max-width: 1000px;
+        margin: auto;
+        padding: 40px;
+        text-align: justify;
+        line-height: 1.8;
+        font-family: Arial, sans-serif;
+        color: #403d37;
+      "
+    >
+      <section class="about-section">
+        <div style="max-width: 1000px; margin: auto">
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-wrap: wrap;
+            "
+          >
+            <div style="flex: 1; max-width: 400px; margin: 10px">
+              <img
+                src="images/logo2.png"
+                alt="Çocuk Hakları"
+                style="width: 100%; border-radius: 15px"
+              />
             </div>
-        </section>
-
-        <section class="vision-mission-section" style="background: #f0f9ff; padding: 60px 20px; text-align: center;">
-            <div style="max-width: 1000px; margin: auto;">
-                <h2 style="color: #2563eb; font-size: 36px; font-weight: bold;">Vizyon & Misyon</h2>
-                <p style="font-size: 20px; color: #403d37; margin-bottom: 40px;">
-                    Çocukların geleceğini korumak ve onlara eşit haklar sağlamak için çalışıyoruz.
-                </p>
-        
-                <div class="vision-mission-container" style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-                    <div class="mission-box" style="flex: 1; background: #2563eb; color: white; padding: 40px; border-radius: 10px; margin: 10px;">
-                        <i class="fas fa-bullseye" style="font-size: 50px; margin-bottom: 20px;"></i>
-                        <h3 style="font-size: 28px; margin-bottom: 15px;">Misyonumuz</h3>
-                        <p style="font-size: 18px; line-height: 1.6;">
-                            Çocuk haklarını savunarak, her çocuğun eğitim, sağlık ve barınma gibi temel haklara erişimini sağlamak.
-                        </p>
-                    </div>
-        
-                    <div class="vision-box" style="flex: 1; background: #00b5ee; color: white; padding: 40px; border-radius: 10px; margin: 10px;">
-                        <i class="fas fa-eye" style="font-size: 50px; margin-bottom: 20px;"></i>
-                        <h3 style="font-size: 28px; margin-bottom: 15px;">Vizyonumuz</h3>
-                        <p style="font-size: 18px; line-height: 1.6;">
-                            Tüm dünyada çocukların özgürce yaşayabileceği, sömürülmeyeceği ve haklarının korunduğu bir dünya yaratmak.
-                        </p>
-                    </div>
-                </div>
+            <div style="flex: 2; max-width: 600px; text-align: left">
+              <h2 style="color: #2563eb; font-size: 36px; font-weight: bold">
+                Amacımız Ne?
+              </h2>
+              <p style="font-size: 18px; line-height: 1.8; color: #403d37">
+                Amacımız, çocukların temel haklarını öğrenmelerini sağlamak ve
+                toplumda bu konuda farkındalık oluşturmaktır. Eğitim, sağlık ve
+                sosyal hakları kapsayan projelerle çocukların geleceğini daha
+                güvenli hale getirmeyi hedefliyoruz.
+              </p>
+              <p style="font-size: 18px; line-height: 1.8; color: #403d37">
+                Siz de bize katılarak çocuk haklarını destekleyebilir ve
+                geleceğe umut olabilirsiniz.
+              </p>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
-        <div class="banner">
-            <img src="/images/ozkan_ugur.png" alt="Ayın Destekçisi" class="banner-img">
+      <section
+        class="vision-mission-section"
+        style="background: #f0f9ff; padding: 60px 20px; text-align: center"
+      >
+        <div
+          style="
+            max-width: 1000px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          "
+        >
+          <h2 style="color: #2563eb; font-size: 36px; font-weight: bold">
+            Vizyon & Misyon
+          </h2>
+          <p style="font-size: 20px; color: #403d37; margin-bottom: 40px">
+            Çocukların geleceğini korumak ve onlara eşit haklar sağlamak için
+            çalışıyoruz.
+          </p>
+
+          <div
+            class="vision-mission-container"
+            style="
+              display: flex;
+              justify-content: space-between;
+              flex-wrap: wrap;
+            "
+          >
+            <div
+              class="mission-box"
+              style="
+                flex: 1;
+                background: #2563eb;
+                color: white;
+                padding: 40px;
+                border-radius: 10px;
+                margin: 10px;
+              "
+            >
+              <i
+                class="fas fa-bullseye"
+                style="font-size: 50px; margin-bottom: 20px"
+              ></i>
+              <h3 style="font-size: 28px; margin-bottom: 15px">Misyonumuz</h3>
+              <p style="font-size: 18px; line-height: 1.6">
+                Çocuk haklarını savunarak, her çocuğun eğitim, sağlık ve barınma
+                gibi temel haklara erişimini sağlamak.
+              </p>
+            </div>
+
+            <div
+              class="vision-box"
+              style="
+                flex: 1;
+                background: #00b5ee;
+                color: white;
+                padding: 40px;
+                border-radius: 10px;
+                margin: 10px;
+              "
+            >
+              <i
+                class="fas fa-eye"
+                style="font-size: 50px; margin-bottom: 20px"
+              ></i>
+              <h3 style="font-size: 28px; margin-bottom: 15px">Vizyonumuz</h3>
+              <p style="font-size: 18px; line-height: 1.6">
+                Tüm dünyada çocukların özgürce yaşayabileceği, sömürülmeyeceği
+                ve haklarının korunduğu bir dünya yaratmak.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="banner">
+        <img
+          src="/images/ozkan_ugur.png"
+          alt="Ayın Destekçisi"
+          class="banner-img"
+        />
+      </div>
+
+      <section
+        class="child-rights-section"
+        style="background: #f0f9ff; padding: 60px 20px; text-align: center"
+      >
+        <div style="max-width: 1000px; margin: auto">
+          <h2 style="color: #2563eb; font-size: 36px; font-weight: bold">
+            Çocuk Hakları Nedir?
+          </h2>
+          <p
+            style="
+              font-size: 20px;
+              color: #403d37;
+              margin-bottom: 40px;
+              line-height: 1.8;
+            "
+          >
+            Çocuk hakları, her çocuğun doğuştan sahip olduğu eğitim, sağlık,
+            barınma ve korunma haklarını kapsayan temel insan haklarıdır. 1989
+            yılında Birleşmiş Milletler tarafından kabul edilen "Çocuk Haklarına
+            Dair Sözleşme" ile tüm dünya çocuklarının hakları güvence altına
+            alınmıştır.
+          </p>
+          <ul style="list-style: none; padding: 0">
+            <li style="font-size: 18px; color: #403d37; margin-bottom: 10px">
+              <i class="fas fa-check-circle" style="color: #2563eb"></i> Yaşama
+              ve gelişme hakkı
+            </li>
+            <li style="font-size: 18px; color: #403d37; margin-bottom: 10px">
+              <i class="fas fa-check-circle" style="color: #2563eb"></i> Eğitim
+              hakkı
+            </li>
+            <li style="font-size: 18px; color: #403d37; margin-bottom: 10px">
+              <i class="fas fa-check-circle" style="color: #2563eb"></i> Sağlık
+              hizmetlerine erişim hakkı
+            </li>
+            <li style="font-size: 18px; color: #403d37; margin-bottom: 10px">
+              <i class="fas fa-check-circle" style="color: #2563eb"></i> İfade
+              özgürlüğü
+            </li>
+            <li style="font-size: 18px; color: #403d37; margin-bottom: 10px">
+              <i class="fas fa-check-circle" style="color: #2563eb"></i>
+              İstismardan korunma hakkı
+            </li>
+            <li style="font-size: 18px; color: #403d37; margin-bottom: 10px">
+              <i class="fas fa-check-circle" style="color: #2563eb"></i>
+              Ayrımcılıktan korunma hakkı
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="social-media">
+        <h2>Bizi Takip Edin</h2>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </section>
+      <section style="margin-top: 40px">
+        <h2 style="color: #2563eb; text-align: center">
+          Çocuk Haklarının Önemi
+        </h2>
+        <p style="text-align: center">
+          Çocuk hakları, her çocuğun sağlıklı ve güvenli bir yaşam sürmesini
+          garanti altına almak için kritik öneme sahiptir. Hakların bilinmesi ve
+          korunması, çocukların potansiyellerini gerçekleştirmelerine yardımcı
+          olur.
+        </p>
+        <img
+          src="images/childrens.png"
+          alt="Çocuk Haklarının Önemi"
+          style="
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 20px;
+            margin-left: 14px;
+          "
+        />
+      </section>
+
+      <section style="margin-top: 40px">
+        <h2 style="color: #2563eb; text-align: center">
+          Çocuk Haklarına Dair Sözleşme Maddeleri
+        </h2>
+        <table style="width: 100%; border-collapse: collapse; text-align: left">
+          <tr style="background-color: #3b82f6">
+            <th style="padding: 15px; border: 1px solid #403d37">Madde</th>
+            <th style="padding: 15px; border: 1px solid #403d37">Açıklama</th>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #403d37">Madde 1</td>
+            <td style="padding: 10px; border: 1px solid #403d37">
+              Çocuk, 18 yaşına kadar olan her bireyi kapsar.
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #403d37">Madde 12</td>
+            <td style="padding: 10px; border: 1px solid #403d37">
+              Çocukların kendilerini ilgilendiren konularda görüş bildirme hakkı
+              vardır.
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #403d37">Madde 19</td>
+            <td style="padding: 10px; border: 1px solid #403d37">
+              Her çocuk şiddet ve istismardan korunma hakkına sahiptir.
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #403d37">Madde 28</td>
+            <td style="padding: 10px; border: 1px solid #403d37">
+              Çocukların eğitim hakkı güvence altına alınmalıdır.
+            </td>
+          </tr>
+        </table>
+      </section>
+
+      <section
+        class="support-section"
+        style="
+          background: #f0f9ff;
+          padding: 60px 20px;
+          text-align: center;
+          color: #403d37;
+        "
+      >
+        <div style="max-width: 800px; margin: auto">
+          <h2 style="color: #2563eb; font-size: 36px; font-weight: bold">
+            Destek Olun
+          </h2>
+          <p style="font-size: 20px; margin-bottom: 30px; line-height: 1.6">
+            Çocuk haklarının korunması için farkındalık yaratmak ve destek olmak
+            ister misiniz? Gönüllü olabilir veya bağış yaparak projelerimize
+            katkı sağlayabilirsiniz.
+          </p>
+          <a
+            href="contact.html"
+            style="
+              display: inline-block;
+              background-color: #2563eb;
+              color: white;
+              padding: 15px 30px;
+              text-decoration: none;
+              border-radius: 5px;
+              font-size: 18px;
+              font-weight: bold;
+              border-radius: 50px;
+            "
+          >
+            Bize Ulaşın
+          </a>
+        </div>
+      </section>
+    </main>
+    <section class="donation-section">
+      <h2>Çocuklara Destek Olun</h2>
+      <p>
+        Bağışlarınız, çocukların daha iyi bir geleceğe sahip olması için
+        kullanılacaktır.
+      </p>
+
+      <div class="card-preview">
+        <div class="card">
+          <div class="card-number" id="card-number-preview">
+            •••• •••• •••• ••••
+          </div>
+          <div class="card-holder" id="card-holder-preview">KART SAHİBİ</div>
+          <div class="card-expiry" id="card-expiry-preview">MM/YY</div>
+        </div>
+      </div>
+
+      <form id="donation-form">
+        <div class="input-group">
+          <label for="donation-amount">Bağış Miktarı (₺):</label>
+          <input
+            type="number"
+            id="donation-amount"
+            placeholder="Bağış miktarı girin"
+            required
+          />
         </div>
 
-        <section class="child-rights-section" style="background: #f0f9ff; padding: 60px 20px; text-align: center;">
-            <div style="max-width: 1000px; margin: auto;">
-                <h2 style="color: #2563eb; font-size: 36px; font-weight: bold;">Çocuk Hakları Nedir?</h2>
-                <p style="font-size: 20px; color: #403d37; margin-bottom: 40px; line-height: 1.8;">
-                    Çocuk hakları, her çocuğun doğuştan sahip olduğu eğitim, sağlık, barınma ve korunma haklarını kapsayan temel insan haklarıdır. 
-                    1989 yılında Birleşmiş Milletler tarafından kabul edilen "Çocuk Haklarına Dair Sözleşme" ile tüm dünya çocuklarının hakları güvence altına alınmıştır.
-                </p>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="font-size: 18px; color: #403d37; margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #2563eb;"></i> Yaşama ve gelişme hakkı</li>
-                    <li style="font-size: 18px; color: #403d37; margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #2563eb;"></i> Eğitim hakkı</li>
-                    <li style="font-size: 18px; color: #403d37; margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #2563eb;"></i> Sağlık hizmetlerine erişim hakkı</li>
-                    <li style="font-size: 18px; color: #403d37; margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #2563eb;"></i> İfade özgürlüğü</li>
-                    <li style="font-size: 18px; color: #403d37; margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #2563eb;"></i> İstismardan korunma hakkı</li>
-                    <li style="font-size: 18px; color: #403d37; margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #2563eb;"></i> Ayrımcılıktan korunma hakkı</li>
-                </ul>
-            </div>
-        </section>
-        <section class="social-media">
-            <h2>Bizi Takip Edin</h2>
+        <div class="input-group">
+          <label for="card-number">Kredi Kartı Numarası:</label>
+          <input
+            type="text"
+            id="card-number"
+            placeholder="1234 5678 9012 3456"
+            maxlength="19"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <label for="card-holder">Kart Sahibi:</label>
+          <input
+            type="text"
+            id="card-holder"
+            placeholder="Adınız Soyadınız"
+            required
+          />
+        </div>
+
+        <div class="input-row">
+          <div class="input-group">
+            <label for="expiry-date">Son Kullanma Tarihi:</label>
+            <input
+              type="text"
+              id="expiry-date"
+              placeholder="MM/YY"
+              maxlength="5"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="cvv">CVV:</label>
+            <input
+              type="text"
+              id="cvv"
+              placeholder="123"
+              maxlength="3"
+              required
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="donate-btn">Bağış Yap</button>
+      </form>
+    </section>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-column">
+          <h4>Çocuk Hakları Platformu</h4>
+          <p>Çocukların geleceği için çalışıyoruz.</p>
+          <div class="social-links">
             <a href="#"><i class="fab fa-facebook"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="#"><i class="fab fa-instagram"></i></a>
-        </section>
-        <section style="margin-top: 40px;">
-            <h2 style="color: #2563eb; text-align: center;">Çocuk Haklarının Önemi</h2>
-            <p style="text-align: center;">
-                Çocuk hakları, her çocuğun sağlıklı ve güvenli bir yaşam sürmesini garanti altına almak için kritik öneme sahiptir. 
-                Hakların bilinmesi ve korunması, çocukların potansiyellerini gerçekleştirmelerine yardımcı olur.
-            </p>
-            <img src="images/childrens.png" alt="Çocuk Haklarının Önemi" style="width: 100%; border-radius: 10px; margin-top: 20px; margin-left: 14px;">
-        </section>
-
-        <section style="margin-top: 40px;">
-            <h2 style="color: #2563eb ; text-align: center;">Çocuk Haklarına Dair Sözleşme Maddeleri</h2>
-            <table style="width: 100%; border-collapse: collapse; text-align: left;">
-                <tr style="background-color: #3b82f6;">
-                    <th style="padding: 15px; border: 1px solid #403d37;">Madde</th>
-                    <th style="padding: 15px; border: 1px solid #403d37;">Açıklama</th>
-                </tr>
-                <tr>
-                    <td style="padding: 10px; border: 1px solid #403d37;">Madde 1</td>
-                    <td style="padding: 10px; border: 1px solid #403d37;">Çocuk, 18 yaşına kadar olan her bireyi kapsar.</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px; border: 1px solid #403d37;">Madde 12</td>
-                    <td style="padding: 10px; border: 1px solid #403d37;">Çocukların kendilerini ilgilendiren konularda görüş bildirme hakkı vardır.</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px; border: 1px solid #403d37;">Madde 19</td>
-                    <td style="padding: 10px; border: 1px solid #403d37;">Her çocuk şiddet ve istismardan korunma hakkına sahiptir.</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px; border: 1px solid #403d37;">Madde 28</td>
-                    <td style="padding: 10px; border: 1px solid #403d37;">Çocukların eğitim hakkı güvence altına alınmalıdır.</td>
-                </tr>
-            </table>
-        </section>
-
-        <section class="support-section" style="background: #f0f9ff; padding: 60px 20px; text-align: center; color: #403d37;">
-    <div style="max-width: 800px; margin: auto;">
-        <h2 style="color: #2563eb; font-size: 36px; font-weight: bold;">Destek Olun</h2>
-        <p style="font-size: 20px; margin-bottom: 30px; line-height: 1.6;">
-            Çocuk haklarının korunması için farkındalık yaratmak ve destek olmak ister misiniz?
-            Gönüllü olabilir veya bağış yaparak projelerimize katkı sağlayabilirsiniz.
-        </p>
-        <a href="contact.html" style="display: inline-block; background-color: #2563eb; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-size: 18px; font-weight: bold; border-radius: 50px;">
-            Bize Ulaşın
-        </a>
-    </div>
-</section>
-    </main>
-    <section class="donation-section">
-        <h2>Çocuklara Destek Olun</h2>
-        <p>Bağışlarınız, çocukların daha iyi bir geleceğe sahip olması için kullanılacaktır.</p>
-    
-        <div class="card-preview">
-            <div class="card">
-                <div class="card-number" id="card-number-preview">•••• •••• •••• ••••</div>
-                <div class="card-holder" id="card-holder-preview">KART SAHİBİ</div>
-                <div class="card-expiry" id="card-expiry-preview">MM/YY</div>
-            </div>
+          </div>
         </div>
-    
-        <form id="donation-form">
-            <div class="input-group">
-                <label for="donation-amount">Bağış Miktarı (₺):</label>
-                <input type="number" id="donation-amount" placeholder="Bağış miktarı girin" required>
-            </div>
-    
-            <div class="input-group">
-                <label for="card-number">Kredi Kartı Numarası:</label>
-                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
-            </div>
-    
-            <div class="input-group">
-                <label for="card-holder">Kart Sahibi:</label>
-                <input type="text" id="card-holder" placeholder="Adınız Soyadınız" required>
-            </div>
-    
-            <div class="input-row">
-                <div class="input-group">
-                    <label for="expiry-date">Son Kullanma Tarihi:</label>
-                    <input type="text" id="expiry-date" placeholder="MM/YY" maxlength="5" required>
-                </div>
-    
-                <div class="input-group">
-                    <label for="cvv">CVV:</label>
-                    <input type="text" id="cvv" placeholder="123" maxlength="3" required>
-                </div>
-            </div>
-    
-            <button type="submit" class="donate-btn">Bağış Yap</button>
-        </form>
-    </section>
-    
-    
-    
-    <footer>
-        <div class="footer-content">
-            <div class="footer-column">
-                <h4>Çocuk Hakları Platformu</h4>
-                <p>Çocukların geleceği için çalışıyoruz.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="footer-column">
-                <h4>Hızlı Bağlantılar</h4>
-                <ul>
-                    <li><a href="#home">Ana Sayfa</a></li>
-                    <li><a href="#about">Hakkımızda</a></li>
-                    <li><a href="#rights">Haklar</a></li>
-                    <li><a href="#campaigns">Kampanyalar</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>İletişim Bilgileri</h4>
-                <ul>
-                    <li><i class="fas fa-map-marker-alt"></i> Ankara, Türkiye</li>
-                    <li><i class="fas fa-phone"></i> +90 (312) 123 45 67</li>
-                    <li><i class="fas fa-envelope"></i> info@cocukhaklari.org</li>
-                </ul>
-            </div>
+        <div class="footer-column">
+          <h4>Hızlı Bağlantılar</h4>
+          <ul>
+            <li><a href="/">Ana Sayfa</a></li>
+            <li><a href="/about.html">Hakkımızda</a></li>
+            <li><a href="/rights.html">Haklar</a></li>
+            <li><a href="/campaigns.html">Kampanyalar</a></li>
+          </ul>
         </div>
+        <div class="footer-column">
+          <h4>İletişim Bilgileri</h4>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> Ankara, Türkiye</li>
+            <li><i class="fas fa-phone"></i> +90 (312) 123 45 67</li>
+            <li><i class="fas fa-envelope"></i> info@cocukhaklari.org</li>
+          </ul>
+        </div>
+      </div>
     </footer>
     <script src="/js/script.js"></script>
     <script>
-        // Mobile Menu Toggle
-document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.createElement('div');
-    menuToggle.classList.add('mobile-menu-toggle');
-    menuToggle.innerHTML = '<span></span><span></span><span></span>';
+      // Mobile Menu Toggle
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.createElement("div");
+        menuToggle.classList.add("mobile-menu-toggle");
+        menuToggle.innerHTML = "<span></span><span></span><span></span>";
 
-    const navContainer = document.querySelector('.nav-container');
-    const navLinks = document.querySelector('.nav-links');
-    
-    navContainer.insertBefore(menuToggle, navLinks);
+        const navContainer = document.querySelector(".nav-container");
+        const navLinks = document.querySelector(".nav-links");
 
-    menuToggle.addEventListener('click', function() {
-        navLinks.classList.toggle('mobile-active');
-        menuToggle.classList.toggle('active');
-    });
+        navContainer.insertBefore(menuToggle, navLinks);
 
-    // Close menu when a link is clicked
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', function() {
-            navLinks.classList.remove('mobile-active');
-            menuToggle.classList.remove('active');
+        menuToggle.addEventListener("click", function () {
+          navLinks.classList.toggle("mobile-active");
+          menuToggle.classList.toggle("active");
         });
-    });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (!navContainer.contains(event.target)) {
-            navLinks.classList.remove('mobile-active');
-            menuToggle.classList.remove('active');
-        }
-    });
-});
+        // Close menu when a link is clicked
+        navLinks.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", function () {
+            navLinks.classList.remove("mobile-active");
+            menuToggle.classList.remove("active");
+          });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener("click", function (event) {
+          if (!navContainer.contains(event.target)) {
+            navLinks.classList.remove("mobile-active");
+            menuToggle.classList.remove("active");
+          }
+        });
+      });
     </script>
-   <script>document.getElementById("card-number").addEventListener("input", function () {
-    let formattedValue = this.value.replace(/\D/g, "").replace(/(.{4})/g, "$1 ").trim();
-    this.value = formattedValue;
-    document.getElementById("card-number-preview").innerText = formattedValue || "•••• •••• •••• ••••";
-});
+    <script>
+      document
+        .getElementById("card-number")
+        .addEventListener("input", function () {
+          let formattedValue = this.value
+            .replace(/\D/g, "")
+            .replace(/(.{4})/g, "$1 ")
+            .trim();
+          this.value = formattedValue;
+          document.getElementById("card-number-preview").innerText =
+            formattedValue || "•••• •••• •••• ••••";
+        });
 
-document.getElementById("card-holder").addEventListener("input", function () {
-    document.getElementById("card-holder-preview").innerText = this.value.toUpperCase() || "KART SAHİBİ";
-});
+      document
+        .getElementById("card-holder")
+        .addEventListener("input", function () {
+          document.getElementById("card-holder-preview").innerText =
+            this.value.toUpperCase() || "KART SAHİBİ";
+        });
 
-document.getElementById("expiry-date").addEventListener("input", function () {
-    let formattedValue = this.value.replace(/\D/g, "").replace(/(\d{2})(\d{0,2})/, "$1/$2").trim();
-    this.value = formattedValue;
-    document.getElementById("card-expiry-preview").innerText = formattedValue || "MM/YY";
-});
+      document
+        .getElementById("expiry-date")
+        .addEventListener("input", function () {
+          let formattedValue = this.value
+            .replace(/\D/g, "")
+            .replace(/(\d{2})(\d{0,2})/, "$1/$2")
+            .trim();
+          this.value = formattedValue;
+          document.getElementById("card-expiry-preview").innerText =
+            formattedValue || "MM/YY";
+        });
 
-document.getElementById("donation-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-    let amount = document.getElementById("donation-amount").value;
-    let cardNumber = document.getElementById("card-number").value;
-    let cardHolder = document.getElementById("card-holder").value;
-    let expiryDate = document.getElementById("expiry-date").value;
-    let cvv = document.getElementById("cvv").value;
+      document
+        .getElementById("donation-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          let amount = document.getElementById("donation-amount").value;
+          let cardNumber = document.getElementById("card-number").value;
+          let cardHolder = document.getElementById("card-holder").value;
+          let expiryDate = document.getElementById("expiry-date").value;
+          let cvv = document.getElementById("cvv").value;
 
-    if (amount === "" || cardNumber.length < 19 || cardHolder === "" || expiryDate.length < 5 || cvv.length < 3) {
-        alert("Lütfen tüm alanları eksiksiz ve doğru doldurun.");
-        return;
-    }
+          if (
+            amount === "" ||
+            cardNumber.length < 19 ||
+            cardHolder === "" ||
+            expiryDate.length < 5 ||
+            cvv.length < 3
+          ) {
+            alert("Lütfen tüm alanları eksiksiz ve doğru doldurun.");
+            return;
+          }
 
-    alert(`Bağışınız için teşekkür ederiz! ₺${amount} bağış yapıldı.`);
-    this.reset();
-    document.getElementById("card-number-preview").innerText = "•••• •••• •••• ••••";
-    document.getElementById("card-holder-preview").innerText = "KART SAHİBİ";
-    document.getElementById("card-expiry-preview").innerText = "MM/YY";
-});
-</script>
-</body>
+          alert(`Bağışınız için teşekkür ederiz! ₺${amount} bağış yapıldı.`);
+          this.reset();
+          document.getElementById("card-number-preview").innerText =
+            "•••• •••• •••• ••••";
+          document.getElementById("card-holder-preview").innerText =
+            "KART SAHİBİ";
+          document.getElementById("card-expiry-preview").innerText = "MM/YY";
+        });
+    </script>
+  </body>
 </html>
