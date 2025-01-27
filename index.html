@@ -8,6 +8,133 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="shortcut icon" href="/images/shortcut_icon.png" >
     <style>
+        .donation-section {
+    max-width: 1000px;
+    margin: 60px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.card-preview {
+    background: #2563eb;
+    padding: 40px;
+    border-radius: 12px;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    max-width: 40%;
+}
+
+.card {
+    text-align: left;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.card-number {
+    font-size: 28px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.card-holder,
+.card-expiry {
+    font-size: 20px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    max-width: 55%;
+}
+
+.input-group {
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 18px;
+    color: #1e40af;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #3b82f6;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.input-group input:focus {
+    border-color: #1e40af;
+    outline: none;
+}
+
+.input-row {
+    display: flex;
+    gap: 20px;
+}
+
+.donate-btn {
+    background: #2563eb;
+    color: white;
+    padding: 18px;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.donate-btn:hover {
+    background: #1e40af;
+}
+
+.banner-img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+}
+        .filter-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.filter-reset {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    color: var(--gray);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-reset:hover {
+    background-color: var(--background);
+    color: var(--text);
+}
         /* Mobile Menu Styles */
 @media (max-width: 768px) {
     .nav-links {
@@ -655,11 +782,15 @@
 <body>
     <div class="toast-container">
         <div id="toast" class="toast">
-            <span>Çocuk haklarına saygı gösterin! 💙</span>
-            <button onclick="closeToast()">X</button>
+            <a href="/news.html" 
+               style="color: white; text-decoration: none; font-weight: bold; pointer-events: auto; cursor: pointer;">
+               Blog sayfamızı ziyaret ettiniz mi? 💙
+            </a>
+            <button onclick="closeToast()" style="background: none; border: none; color: white; font-size: 16px; cursor: pointer;">
+                X
+            </button>
         </div>
     </div>
-
     <button id="scrollToTop" class="scroll-to-top">
         <i class="fas fa-chevron-up"></i>
     </button>
@@ -671,7 +802,7 @@
 
     <header class="header">
         <nav class="nav-container">
-            <a href="#" class="logo">
+            <a href="/index.html" class="logo">
                 <i class="fas fa-child"></i>
                 Çocuk Hakları
             </a>
@@ -688,7 +819,7 @@
         <div class="hero-content">
             <h1>Her Çocuk Özeldir</h1>
             <p>Çocukların haklarını korumak ve seslerini duyurmak için buradayız.</p>
-            <a href="#rights" class="cta-button">Daha Fazla Bilgi</a>
+            <a href="/about.html" class="cta-button" >Daha Fazla Bilgi</a>
         </div>
     </section>
 
@@ -731,7 +862,7 @@
                 <h2 class="section-title">Hakkımızda</h2>
                 <p>Çocuk Hakları Platformu olarak, tüm çocukların temel haklarını korumak ve geliştirmek için çalışıyoruz.</p>
                 <p>Misyonumuz, her çocuğun güvenli, sağlıklı ve mutlu bir ortamda büyümesini sağlamaktır.</p>
-                <button class="custom-btn">Daha Fazla</button>
+                <a href="/about.html"><button class="custom-btn">Daha Fazla</button></a>
             </div>
             <div class="about-image">
                 <img src="/images/logo2.png" alt="Çocuk Hakları Platformu Ekibi" />
@@ -748,7 +879,7 @@
             Karşılaştığı engellere rağmen pes etmeyen Elif, bugün çocuk hakları konusunda bilinçlendirme çalışmaları 
             yaparak diğer çocukların hayallerine ulaşmasına yardımcı oluyor.
         </p>
-        <a href="#" class="btn">Daha Fazla Bilgi</a>
+        <a href="news.html" class="btn" style="border-radius: 100px;">Daha Fazla Bilgi</a>
     </section>
     
     <div class="banner">
@@ -769,7 +900,7 @@
                     <span><i class="fas fa-users"></i> 1,523 Destekçi</span>
                     <span><i class="fas fa-clock"></i> 45 Gün Kaldı</span>
                 </p>
-                <a href="#" class="cta-button">Kampanyaya Katıl</a>
+                <a href="/campaigns.html" class="cta-button">Kampanyaya Katıl</a>
             </div>
             <div class="campaign-card">
                 <span class="campaign-badge">Yakında Başlıyor</span>
@@ -778,7 +909,7 @@
                 <p class="campaign-stats">
                     <span><i class="fas fa-calendar"></i> Başlangıç: 1 Nisan 2025</span>
                 </p><br>
-                <a href="#" class="cta-button">Ön Kayıt Ol</a>
+                <a href="/campaigns.html" class="cta-button">Ön Kayıt Ol</a>
             </div>
     
             <div class="campaign-card">
@@ -792,7 +923,7 @@
                     <span><i class="fas fa-users"></i> 157 Destekçi</span>
                     <span><i class="fas fa-clock"></i> 116 Gün Kaldı</span>
                 </p>
-                <a href="#" class="cta-button">Bağış Yap</a>
+                <a href="/campaigns.html" class="cta-button">Bağış Yap</a>
             </div>
         </div>
     
@@ -828,7 +959,7 @@
                     <span><i class="fas fa-users"></i> 2,845 Destekçi</span>
                     <span><i class="fas fa-check-circle"></i> Hedef Aşıldı</span>
                 </p>
-                <a href="#" class="cta-button secondary">Detayları Gör</a>
+                <a href="/campaigns.html" class="cta-button secondary">Detayları Gör</a>
             </div>
     
             <div class="campaign-card completed">
@@ -839,12 +970,15 @@
                     <span><i class="fas fa-users"></i> 1,234 Destekçi</span>
                     <span><i class="fas fa-check-circle"></i> Hedef Gerçekleşti</span>
                 </p>
-                <a href="#" class="cta-button secondary">Proje Sonuçları</a>
+                <a href="/campaigns.html" class="cta-button secondary">Proje Sonuçları</a>
             </div>
         </div>
     </section>
 
+    <div class="banner">
 
+        <a href="/news.html"><img src="/images/abnn.png" alt="Blog Sayfası" class="banner-img"></a>
+    </div>
 <!-- Video Bölümü -->
 <section class="video-section">
     <h2 class="section-title">Video İçeriklerimiz</h2>
@@ -963,7 +1097,7 @@
 <section class="cta-section">
     <h2>Gönüllü Olmak İster misiniz?</h2>
     <p>Kampanyalarımızda aktif rol alarak çocukların hayatına dokunun.</p><br>
-    <a href="#" class="btn">Gönüllü Ol</a>
+    <a href="#" class="btn" style="border-radius: 40px;">Gönüllü Ol</a>
 </section>
     <div class="timeline-container">
         <h1 style="color: #2563eb; margin-top: 40px ; text-align: center;">Çocuk Hakları Tarihçesi</h1><br>
@@ -977,7 +1111,7 @@
                 </div>
             </div>
 
-            <div class="timeline-item" style="margin-left: 20px;">
+            <div class="timeline-item" style="margin-left: 10px;">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <h2 style="color: #ffffff;">1989</h2>
@@ -1050,6 +1184,52 @@
                 </div>
             </div>
         </div>
+    </section>
+    <div class="banner">
+      <a href="/contact.html#form-section"><img src="/images/background_video4.mp4" alt="Ayın Destekçisi" class="banner-img"></a> 
+    </div><br><br>
+
+    <h1 style="text-align: center; color: #000;">Her Çocuk Özeldir</h1>
+    <h2 style="text-align: center; color: #3b82f6;">Onların geleceğini kurtarmak bizim görevimiz!</h2>
+    <section class="donation-section">
+        <div class="card-preview">
+            <div class="card">
+                <div class="card-number">**** **** **** 3456</div>
+                <div class="card-holder">Kart Sahibi</div>
+                <div class="card-expiry">MM/YY</div>
+            </div>
+        </div>
+        
+        <form id="donation-form">
+            <div class="input-group">
+                <label for="donation-amount">Bağış Miktarı (₺):</label>
+                <input type="number" id="donation-amount" placeholder="Bağış miktarı girin" required>
+            </div>
+    
+            <div class="input-group">
+                <label for="card-number">Kredi Kartı Numarası:</label>
+                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+            </div>
+    
+            <div class="input-group">
+                <label for="card-holder">Kart Sahibi:</label>
+                <input type="text" id="card-holder" placeholder="Adınız Soyadınız" required>
+            </div>
+    
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="expiry-date">Son Kullanma Tarihi:</label>
+                    <input type="text" id="expiry-date" placeholder="MM/YY" maxlength="5" required>
+                </div>
+    
+                <div class="input-group">
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" placeholder="123" maxlength="3" required>
+                </div>
+            </div>
+    
+            <button type="submit" class="donate-btn">Bağış Yap</button>
+        </form>
     </section>
     <footer>
         <div class="footer-content">
@@ -1208,5 +1388,69 @@ function hideToast() {
                     animateCounter("events", 0, 45, 2000);
                 };
             </script>
+                    <script>
+                        // Kart bilgilerini dinamik olarak güncelleme
+            document.getElementById('card-number').addEventListener('input', function () {
+                const cardNumber = document.querySelector('.card-number');
+                cardNumber.textContent = this.value || '**** **** **** ****';
+            });
+            
+            document.getElementById('card-holder').addEventListener('input', function () {
+                const cardHolder = document.querySelector('.card-holder');
+                cardHolder.textContent = this.value || 'Kart Sahibi';
+            });
+            
+            document.getElementById('expiry-date').addEventListener('input', function () {
+                const expiryDate = document.querySelector('.card-expiry');
+                expiryDate.textContent = this.value || 'MM/YY';
+            });
+            
+            // CVV girişi kontrolü (sadece sayı kabul et)
+            document.getElementById('cvv').addEventListener('input', function () {
+                this.value = this.value.replace(/\D/g, '').slice(0, 3); // Sadece 3 rakam
+            });
+            
+            // Kart numarası formatlama (4x4 format)
+            document.getElementById('card-number').addEventListener('input', function () {
+                let value = this.value.replace(/\D/g, ''); // Sadece sayılar
+                value = value.match(/.{1,4}/g)?.join(' ') || ''; // 4'er gruplara böl
+                this.value = value.slice(0, 19); // Maksimum 19 karakter
+            });
+            
+            // Tarih formatı kontrolü
+            document.getElementById('expiry-date').addEventListener('input', function () {
+                let value = this.value.replace(/\D/g, ''); // Sadece sayılar
+                if (value.length >= 2) {
+                    value = value.slice(0, 2) + '/' + value.slice(2, 4);
+                }
+                this.value = value.slice(0, 5); // Maksimum 5 karakter (MM/YY)
+            });
+            
+            // Bağış formu gönderimi
+            document.getElementById('donation-form').addEventListener('submit', function (e) {
+                e.preventDefault(); // Sayfanın yenilenmesini engelle
+                
+                const donationAmount = document.getElementById('donation-amount').value;
+                const cardNumber = document.getElementById('card-number').value;
+                const cardHolder = document.getElementById('card-holder').value;
+                const expiryDate = document.getElementById('expiry-date').value;
+                const cvv = document.getElementById('cvv').value;
+            
+                if (donationAmount && cardNumber && cardHolder && expiryDate && cvv) {
+                    alert(`Teşekkürler! ${donationAmount}₺ bağış yaptınız.`);
+            
+                    // Form alanlarını sıfırlama
+                    document.getElementById('donation-form').reset();
+            
+                    // Kart önizlemesini sıfırlama
+                    document.querySelector('.card-number').textContent = '**** **** **** ****';
+                    document.querySelector('.card-holder').textContent = 'Kart Sahibi';
+                    document.querySelector('.card-expiry').textContent = 'MM/YY';
+                } else {
+                    alert('Lütfen tüm alanları eksiksiz doldurun.');
+                }
+            });
+            
+                    </script>
 </body>
 </html>
