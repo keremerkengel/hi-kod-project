@@ -5,12 +5,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anasayfa | Çocuk Hakları Platformu</title>
     <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet/dist/leaflet.css"
+/>
+    <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="shortcut icon" href="/images/shortcut_icon.png" />
     <style>
+    .bulten-modal {
+      display: none;           /* Başlangıçta kapalı */
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5); 
+      opacity: 0; 
+      transition: opacity 0.4s ease; 
+    }
+    .bulten-modal.show {
+      display: block;
+      opacity: 1; 
+    }
+
+    .bulten-modal-icerik {
+      background-color: #f0f9ff;
+      width: 90%;
+      max-width: 600px;
+      margin: 60px auto;       /* Ekran merkezine yakın */
+      padding: 30px;
+      border-radius: 10px;
+      position: relative; 
+      
+      /* Başlangıçta küçük ve yarı saydam görünecek */
+      transform: scale(0.8);
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    /* 
+      Modal .show olduğunda içeriği büyütüp 
+      opak hale getiriyoruz 
+    */
+    .bulten-modal.show .bulten-modal-icerik {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    /* Kapatma butonu (X) */
+    #kapatBultenModal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--dark);
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    #kapatBultenModal:hover {
+      color: var(--secondary);
+    }
+
+    /* Abone formunu saran container */
+    .newsletter-container {
+      text-align: center;
+      color: var(--text);
+      background: var(--background);
+      padding: 40px 20px;
+      border-radius: 8px;
+    }
+
+    .newsletter-container h2 {
+      font-size: 32px;
+      font-weight: bold;
+      color: var(--dark);
+      margin-bottom: 20px;
+    }
+
+    .newsletter-container p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: var(--dark);
+    }
+
+    /* Form yapısı */
+    #newsletter-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    #newsletter-form input[type="email"] {
+      padding: 15px;
+      font-size: 18px;
+      border: 2px solid var(--accent);
+      border-radius: 30px;
+      outline: none;
+      width: 100%;
+      max-width: 400px;
+      transition: all 0.3s ease;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    #newsletter-form input[type="email"]:focus {
+      border-color: var(--dark);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Buton stili */
+    #newsletter-form button[type="submit"] {
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      color: var(--light);
+      border: none;
+      border-radius: 30px;
+      padding: 15px 40px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #newsletter-form button[type="submit"]:hover {
+      opacity: 0.9;
+    }
+
+    .newsletter-container p:last-child {
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--dark);
+    }
       .donation-section {
         max-width: 1000px;
         margin: 60px auto;
@@ -838,6 +973,20 @@
       .social-icons a:hover {
         color: #1e40af;
       }
+            /* Harita Alanı */
+            #map-section {
+        padding: 80px 0;
+      }
+
+      #mapid {
+        width: 100%;
+        max-width: 1000px;
+        height: 400px;
+        border-radius: 20px;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 2px solid #ccc;
+      }
     </style>
   </head>
   <body>
@@ -1032,6 +1181,17 @@
           <a href="/campaigns.html" class="cta-button">Bağış Yap</a>
         </div>
       </div>
+
+      <section id="map-section">
+        <div class="container">
+          <h2 class="section-title">Türkiye'de Desteklediğimiz Bölgeler</h2>
+          <p style="text-align: center;">
+            Platformumuzdan yararlanan kişileri harita üzerinde görebilirsiniz.
+          </p>
+          <br />
+          <div id="mapid"></div>
+        </div>
+      </section>
 
       <section class="stats-section">
         <h2>Çocuk Hakları Farkındalığı</h2>
@@ -1414,6 +1574,36 @@
         <button type="submit" class="donate-btn">Bağış Yap</button>
       </form>
     </section>
+    <div id="bultenModal" class="bulten-modal">
+      <div class="bulten-modal-icerik">
+  
+        <!-- Kapatma Butonu -->
+        <span id="kapatBultenModal">&times;</span>
+        
+        <!-- Abonelik İçeriğiniz -->
+        <div class="newsletter-container">
+          <h2>Bültenimize Abone Olun</h2>
+          <p>Güncellemeler ve özel içerikler için e-posta listemize katılın.</p>
+  
+          <form id="newsletter-form">
+            <input
+              type="email"
+              id="email"
+              placeholder="E-posta adresinizi girin"
+              required
+            />
+            <button type="submit">
+              Abone Ol
+            </button>
+          </form>
+  
+          <p>Gizliliğinize önem veriyoruz. Spam yok, sadece değerli içerikler.</p>
+        </div>
+        <!-- /Abonelik İçeriği -->
+  
+      </div>
+    </div>
+
     <div
       style="
         text-align: center;
@@ -1545,6 +1735,50 @@
       </div>
     </footer>
     <script src="/js/script.js"></script>
+        <!-- AOS ve Proje Scriptleri -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            var map = L.map("mapid").setView([38.9637, 35.2433], 6);
+    
+            // Harita katmanı
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+              maxZoom: 18,
+              attribution: "© OpenStreetMap",
+            }).addTo(map);
+    
+            // Örnek veri
+            var beneficiaries = [
+              { city: "İstanbul", lat: 41.0082, lng: 28.9784, count: 1200 },
+              { city: "Ankara", lat: 39.9208, lng: 32.8541, count: 800 },
+              { city: "İzmir", lat: 38.4237, lng: 27.1428, count: 500 },
+              { city: "Bursa", lat: 40.1828, lng: 29.0669, count: 300 },
+              { city: "Antalya", lat: 36.8969, lng: 30.7133, count: 450 },
+              { city: "Adana", lat: 36.9914, lng: 35.3308, count: 350 },
+              { city: "Gaziantep", lat: 37.0662, lng: 37.3833, count: 620 },
+              { city: "Diyarbakır", lat: 37.9144, lng: 40.2306, count: 280 },
+              { city: "Konya", lat: 37.8713, lng: 32.4846, count: 410 },
+              { city: "Kayseri", lat: 38.7225, lng: 35.4875, count: 200 },
+              { city: "Samsun", lat: 41.2797, lng: 36.3361, count: 330 },
+              { city: "Trabzon", lat: 41.0015, lng: 39.7178, count: 220 },
+              { city: "Mersin", lat: 36.8121, lng: 34.6415, count: 450 },
+            ];
+    
+            // Marker ekleme
+            beneficiaries.forEach(function (location) {
+              L.marker([location.lat, location.lng])
+                .addTo(map)
+                .bindPopup(
+                  "<b>" +
+                    location.city +
+                    "</b><br>" +
+                    "Yararlanan Kişi: " +
+                    location.count
+                );
+            });
+          });
+        </script>
     <script>
       // Mobile Menu Toggle
       document.addEventListener("DOMContentLoaded", function () {
@@ -1755,5 +1989,56 @@
           }
         });
     </script>
+  <script>
+    // Sayfa yüklendiğinde modalı göster
+    window.onload = function() {
+      let modal = document.getElementById("bultenModal");
+      // Önce display: block
+      modal.style.display = "block";
+      // Biraz gecikmeyle .show ekleyerek animasyonu başlat
+      setTimeout(() => {
+        modal.classList.add("show");
+      }, 10);
+    };
+
+    // Kapatma butonu
+    const kapatBultenModal = document.getElementById("kapatBultenModal");
+    kapatBultenModal.onclick = function() {
+      closeModal();
+    };
+
+    // Modal dışına tıklayınca kapatma
+    window.onclick = function(event) {
+      const modal = document.getElementById("bultenModal");
+      if (event.target === modal) {
+        closeModal();
+      }
+    };
+
+    // Modal kapatma fonksiyonu (animasyonlu)
+    function closeModal() {
+      let modal = document.getElementById("bultenModal");
+      modal.classList.remove("show"); // show kaldırınca opacity/scale geri döner
+      // Animasyon bitince tamamen gizle
+      setTimeout(() => {
+        modal.style.display = "none";
+      }, 400); // transition süresiyle eşleştirin
+    }
+
+    // Form gönderim olayı
+    document.getElementById("newsletter-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // Sayfanın yeniden yüklenmesini engelle
+
+      const emailInput = document.getElementById("email").value.trim();
+      if (emailInput === "") {
+      } else {
+        alert("Başarıyla kaydolundu!");
+        document.getElementById("newsletter-form").reset();
+        
+        // Otomatik olarak modalı kapat
+        closeModal();
+      }
+    });
+  </script>
   </body>
 </html>
