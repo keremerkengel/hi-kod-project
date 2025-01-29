@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anasayfa | Çocuk Hakları Platformu</title>
     <link
+    rel="stylesheet"
+    href="https://unpkg.com/swiper/swiper-bundle.min.css"
+  />
+    <link
   rel="stylesheet"
   href="https://unpkg.com/leaflet/dist/leaflet.css"
 />
@@ -15,6 +19,59 @@
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="shortcut icon" href="/images/shortcut_icon.png" />
     <style>
+      .kapsayıcı {
+  max-width: 800px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #2563eb;
+}
+
+#sayac {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #2563eb;
+}
+
+#madde-metni {
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  color: #34495e;
+}
+
+.butonlar {
+  text-align: center;
+}
+
+button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  margin: 0 0.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+  background: #1e40af;
+}
+
+button:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
     .bulten-modal {
       display: none;           /* Başlangıçta kapalı */
       position: fixed;
@@ -798,56 +855,64 @@
         object-fit: cover;
       }
       .stats-section {
-        text-align: center;
-        padding: 80px 20px;
-        background: var(--secondary);
-        color: var(--light);
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        margin: 50px;
-      }
+  background-color: var(--background);
+  text-align: center;
+  padding: 60px 20px;
+  border-radius: 12px;
+}
 
-      .stats-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 40px;
-      }
+.stats-section h2 {
+  color: var(--primary);
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
 
-      .stat-box {
-        background: var(--light);
-        border-radius: 15px;
-        padding: 40px;
-        width: 320px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        text-align: center;
-        color: var(--dark);
-      }
+.stats-section p {
+  color: var(--text);
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
 
-      .stat-box:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-      }
+.stats-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
 
-      .stat-number {
-        font-size: 55px;
-        font-weight: bold;
-        color: var(--accent);
-      }
+.stat-box {
+  background: var(--light);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 280px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-      .stat-title {
-        font-size: 24px;
-        margin-top: 10px;
-        font-weight: bold;
-        color: var(--text);
-      }
+.stat-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
 
-      .stat-description {
-        font-size: 18px;
-        margin-top: 10px;
-        color: var(--secondary);
-      }
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--secondary);
+  margin-bottom: 10px;
+}
+
+.stat-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 5px;
+}
+
+.stat-description {
+  font-size: 1rem;
+  color: var(--text);
+}
       .toast-container {
         position: fixed;
         bottom: 20px;
@@ -1199,29 +1264,45 @@
         <br />
         <div class="stats-container">
           <div class="stat-box">
-            <div class="stat-number" id="children-helped">0</div>
+            <div class="stat-number" data-target="1250">0</div>
             <div class="stat-title">Çocuğa Destek Sağlandı</div>
             <div class="stat-description">
               Bu platform sayesinde birçok çocuğa umut olduk.
             </div>
           </div>
+          
           <div class="stat-box">
-            <div class="stat-number" id="volunteers">0</div>
+            <div class="stat-number" data-target="350">0</div>
             <div class="stat-title">Gönüllü Katılım</div>
             <div class="stat-description">
               Çocuk haklarını savunan gönüllülerimizle birlikteyiz.
             </div>
           </div>
+          
           <div class="stat-box">
-            <div class="stat-number" id="events">0</div>
+            <div class="stat-number" data-target="75">0</div>
             <div class="stat-title">Etkinlik Düzenlendi</div>
             <div class="stat-description">
-              Çocuk hakları bilincini artırmak için birçok etkinlik
-              gerçekleştirdik.
+              Çocuk hakları bilincini artırmak için birçok etkinlik gerçekleştirdik.
             </div>
           </div>
+          
         </div>
       </section>
+
+
+      <div class="kapsayıcı">
+        <h1>Çocuk Hakları Sözleşmesi Maddeleri</h1>
+        <div id="sayac">Madde: 1</div>
+        <div id="madde-metni">
+          <!-- Madde metni buraya gelecek -->
+        </div>
+        <div class="butonlar">
+          <button id="oncekiBtn" disabled>Önceki</button>
+          <button id="sonrakiBtn">Sonraki</button>
+        </div>
+      </div>
+
       <!-- Tamamlanan Kampanyalar Bölümü -->
       <h3 class="sub-section-title">Tamamlanan Kampanyalar</h3>
       <div class="completed-campaigns">
@@ -1846,6 +1927,29 @@
         }, 500);
       }
     </script>
+        <script>
+          function animateCounter(id, start, end, duration) {
+            let obj = document.getElementById(id);
+            let current = start;
+            let increment = end > start ? 1 : -1;
+            let stepTime = Math.abs(Math.floor(duration / (end - start)));
+    
+            let timer = setInterval(function () {
+              current += increment;
+              obj.textContent = current;
+              if (current === end) {
+                clearInterval(timer);
+              }
+            }, stepTime);
+          }
+    
+          // Sayaçlar başlangıç değerleri
+          window.onload = function () {
+            animateCounter("children-helped", 0, 375, 3000);
+            animateCounter("volunteers", 0, 350, 2500);
+            animateCounter("events", 0, 45, 2000);
+          };
+        </script>
     <script>
       // Video thumbnail'lerine tıklama işlevselliği
       document.addEventListener("DOMContentLoaded", function () {
@@ -1881,6 +1985,53 @@
       });
     </script>
     <script>
+      document.addEventListener("DOMContentLoaded", () => {
+  const stats = document.querySelectorAll(".stat-number");
+  const section = document.querySelector(".stats-section");
+  let hasAnimated = false;
+
+  function animateNumbers() {
+    if (hasAnimated) return;
+
+    stats.forEach(stat => {
+      const target = parseInt(stat.getAttribute("data-target"));
+      let count = 0;
+      const duration = 2500; // Artışın süresi (ms)
+      const intervalTime = 30; // Artış sıklığı (ms)
+      const increment = target / (duration / intervalTime);
+
+      const updateCount = () => {
+        count += increment;
+        if (count < target) {
+          stat.innerText = Math.floor(count);
+          setTimeout(updateCount, intervalTime);
+        } else {
+          stat.innerText = target;
+        }
+      };
+
+      updateCount();
+    });
+
+    hasAnimated = true;
+  }
+
+  function checkScroll() {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.offsetHeight;
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+
+    if (scrollY + windowHeight > sectionTop + sectionHeight / 4) {
+      animateNumbers();
+    }
+  }
+
+  window.addEventListener("scroll", checkScroll);
+});
+
+    </script>
+    <script>
       document.addEventListener("DOMContentLoaded", function () {
         const aboutSection = document.querySelector(".about-section");
         setTimeout(() => {
@@ -1890,27 +2041,104 @@
       });
     </script>
     <script>
-      function animateCounter(id, start, end, duration) {
-        let obj = document.getElementById(id);
-        let current = start;
-        let increment = end > start ? 1 : -1;
-        let stepTime = Math.abs(Math.floor(duration / (end - start)));
+      // Çocuk Hakları Sözleşmesi'nin 54 maddesi
+const maddeler = [
+  "Bu Sözleşme'ye göre 18 yaşına kadar her insan çocuktur.",
+  "Çocuk hakları, hiçbir ayrım gözetilmeksizin bütün çocuklar için geçerlidir.",
+  "Çocuğun her türlü faaliyette çocuğun yararı ilk düşüncedir.",
+  "Devletler, bu sözleşmede tanınan hakların uygulanmasını sağlamak için her türlü önlemi almalıdır.",
+  "Devletler, anne-baba ve aileyi çocuğun haklarının uygulanmasında desteklemelidir.",
+  "Çocuk, her zaman kendi ülkesinde vatandaş olarak tanınmalıdır.",
+  "Her çocuğun ismi ve kimliği vardır ve her çocuk koruma hakkına sahiptir.",
+  "Çocuklar, çocuğa özel ulusal yasalarla uygun şekilde koruma hakkına sahiptir.",
+  "Çocuk, yaşadığı ortamda aile çevresinden ayrılmamalıdır.",
+  "Çocuk, mecburi önlemler olmaksızın aile çevresinden ayrılmamalıdır.",
+  "Çocuk, yanlışlıkla sınır dışına çıkarılmamalı ve geri getirilmelidir.",
+  "Çocuk, kendisini ilgilendiren kararlarla ilgili görüş bildirme hakkına sahiptir.",
+  "Çocuk, ifade özgürlüğüne sahiptir.",
+  "Çocuk, eğitim hakkına sahiptir ve bu eğitim ücretsiz olmalıdır.",
+  "Çocuk, din ve vicdan özgürlüğüne sahiptir.",
+  "Çocuğun özel hayatına, aile hayatına ve gizliliğine saygı gösterilmelidir.",
+  "Çocuk, bilgiye erişim hakkına sahiptir.",
+  "Çocuk, çocuk olarak korunmalıdır ve yetişkin haklarına sahip olmamalıdır.",
+  "Çocuk, istismar, ihmalkarlık ve kötü muameleden korunmalıdır.",
+  "Çocuk, bakıma muhtaç olduğunda uygun bakım ve koruma hizmetlerine erişim hakkına sahiptir.",
+  "Çocuk, geçici bakım veya koruma gerektiren durumlarda korunmalıdır.",
+  "Engelli çocuklar, toplumun tüm alanlarında eşit haklara sahiptir.",
+  "Çocuklar, herhangi bir hastalık veya engellilik durumunda uygun sağlık hizmetlerine erişim hakkına sahiptir.",
+  "Çocuklar, en yüksek sağlık seviyesine ulaşma hakkına sahiptir.",
+  "Çocuklar, aile ve toplum içinde yaşam standartlarının korunmasını hak eder.",
+  "Çocuklar, eğitim hakkına sahiptir ve zorunlu eğitim almalıdır.",
+  "Çocuklar, eğitim aracılığıyla gelişimlerini tam olarak gerçekleştirme hakkına sahiptir.",
+  "Çocukların eğitim sistemi, çocukların haklarına uygun olmalıdır.",
+  "Eğitim, çocuğun kişisel gelişimini, saygılı davranışları ve sorumluluk duygusunu desteklemelidir.",
+  "Çocuklar, kendi toplulukları ve kültürleri içinde korunma hakkına sahiptir.",
+  "Çocuklar, oyun ve dinlenme hakkına sahiptir.",
+  "Çocuklar, bağımlılık yapıcı maddelerden korunmalıdır.",
+  "Çocuklar, zararlı alışkanlıklardan korunmalıdır.",
+  "Çocuklar, bilgiye erişim yoluyla zararlı bilgilere maruz kalmamalıdır.",
+  "Çocuklar, kaçırılma, ticaret ve istismardan korunmalıdır.",
+  "Çocuklar, işçiliğin kötüye kullanımından korunmalıdır.",
+  "Çocuklar, istismara maruz kaldıklarında uygun yasal koruma ve yardım almalıdır.",
+  "Çocuklar, mülteci durumunda korunmalıdır.",
+  "Çocuklar, mahkeme veya diğer resmi işlemler sırasında korunmalıdır.",
+  "Çocuklar, cezai sorumluluk yaşına ulaşmadıkça cezalandırılmamalıdır.",
+  "Çocukların haklarının ihlal edilmesi durumunda tazminat hakkı vardır.",
+  "Çocuk hakları ulusal, bölgesel ve uluslararası düzeyde tanınmalı ve korunmalıdır.",
+  "Devletler, Çocuk Hakları Sözleşmesi'nin uygulanmasını sağlamak için gerekli yasaları kabul etmelidir.",
+  "Çocuk hakları, uluslararası işbirliği yoluyla korunmalıdır.",
+  "Çocuk haklarının korunması için gerekli ulusal ve uluslararası mekanizmalar kurulmalıdır.",
+  "Çocuk haklarının korunması için gerekli finansal kaynaklar sağlanmalıdır.",
+  " Çocuk haklarının ihlal edilmesi durumunda etkili yasal yollar sağlanmalıdır.",
+  "Çocuk haklarının uygulanmasını izlemek için bağımsız kurumlar kurulmalıdır.",
+  "Çocuk hakları konusundaki araştırmalar desteklenmelidir.",
+  "Çocuk haklarının tanıtılması ve farkındalığın artırılması sağlanmalıdır.",
+  "Çocuk hakları ile ilgili ulusal ve uluslararası işbirliği teşvik edilmelidir.",
+  "Çocuk hakları konusunda eğitim ve öğretim programları geliştirilmelidir.",
+  "Çocuk hakları ihlallerinin önlenmesi için stratejiler oluşturulmalıdır.",
+  "Bu Sözleşme, üye devletlerin onayı ile yürürlüğe girer ve taraf devletler için bağlayıcıdır."
+];
 
-        let timer = setInterval(function () {
-          current += increment;
-          obj.textContent = current;
-          if (current === end) {
-            clearInterval(timer);
-          }
-        }, stepTime);
-      }
+// Mevcut gösterilen maddenin indexi (0 tabanlı sayım)
+let mevcutIndeks = 0;
 
-      // Sayaçlar başlangıç değerleri
-      window.onload = function () {
-        animateCounter("children-helped", 0, 375, 3000);
-        animateCounter("volunteers", 0, 350, 2500);
-        animateCounter("events", 0, 45, 2000);
-      };
+// HTML’deki elementleri JS’e bağlıyoruz
+const sayacElement = document.getElementById("sayac");
+const maddeMetniElement = document.getElementById("madde-metni");
+const oncekiBtn = document.getElementById("oncekiBtn");
+const sonrakiBtn = document.getElementById("sonrakiBtn");
+
+// Sayfada gösterilecek maddeyi güncelleyen fonksiyon
+function guncelleGosterim(index) {
+  // Madde sayısını (1'den başlayarak) gösteriyoruz
+  sayacElement.textContent = `Madde: ${index + 1}`;
+  // Dizideki madde metnini gösteriyoruz
+  maddeMetniElement.textContent = maddeler[index];
+
+  // "Önceki" butonunu ilk maddede devre dışı bırak
+  oncekiBtn.disabled = (index === 0);
+  // "Sonraki" butonunu son maddede devre dışı bırak
+  sonrakiBtn.disabled = (index === maddeler.length - 1);
+}
+
+// Butonlara tıklama olaylarını tanımlıyoruz
+oncekiBtn.addEventListener("click", () => {
+  if (mevcutIndeks > 0) {
+    mevcutIndeks--;
+    guncelleGosterim(mevcutIndeks);
+  }
+});
+
+sonrakiBtn.addEventListener("click", () => {
+  if (mevcutIndeks < maddeler.length - 1) {
+    mevcutIndeks++;
+    guncelleGosterim(mevcutIndeks);
+  }
+});
+
+// Sayfa ilk yüklendiğinde ilk maddeyi göster
+guncelleGosterim(mevcutIndeks);
+
     </script>
     <script>
       // Kart bilgilerini dinamik olarak güncelleme

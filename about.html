@@ -4,1053 +4,233 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hakkımızda | Çocuk Hakları Platformu</title>
-
-    <!-- AOS ve FontAwesome CSS -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
-      rel="stylesheet"
-    />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
     <link rel="shortcut icon" href="/images/shortcut_icon.png" />
-
     <style>
-      :root {
-        --primary: #2563eb;
-        --secondary: #3b82f6;
-        --accent: #60a5fa;
-        --background: #f0f9ff;
-        --text: #1e3a8a;
-        --light: #ffffff;
-        --dark: #1e40af;
-      }
-
-      /* Genel container */
-      .container {
-        max-width: 1200px;
-        width: 90%;
-        margin: 0 auto;
-        padding: 0 1rem;
-      }
-
-      /* Sıfırlamalar */
-      html {
-        box-sizing: border-box;
-      }
-      *,
-      *::before,
-      *::after {
-        box-sizing: inherit;
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
-        font-family: Arial, sans-serif;
-        background: var(--background);
-        color: var(--text);
-        margin: 0;
-      }
-
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
-
-      ul {
-        list-style: none;
-      }
-
-      /* Loader */
-      .loader {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--background);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 2000;
-      }
-
-      .loader-icon {
-        width: 50px;
-        height: 50px;
-        border: 5px solid transparent;
-        border-top: 5px solid var(--primary);
-        border-right: 5px solid var(--secondary);
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      /* Header ve Navigasyon */
-      .header {
-        background: var(--light);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
-      .nav-container {
-        max-width: 1200px;
-        width: 90%;
-        margin: 0 auto;
-        padding: 1rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .logo {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: var(--dark);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-      .nav-links {
-        display: flex;
-        gap: 1rem;
-      }
-      .nav-links li {
-        display: inline-block;
-      }
-      .nav-links a {
-        color: var(--dark);
-        font-weight: 500;
-        transition: color 0.3s;
-      }
-      .nav-links a:hover {
-        color: var(--primary);
-      }
-
-      /* Mobil Menü Toggle */
-      .mobile-menu-toggle {
-        display: none;
-        cursor: pointer;
-        flex-direction: column;
-        gap: 5px;
-      }
-      .mobile-menu-toggle span {
-        width: 25px;
-        height: 3px;
-        background: var(--dark);
-      }
+      /* Mobile Menu Styles */
       @media (max-width: 768px) {
         .nav-links {
-          position: absolute;
+          display: none;
+          position: fixed;
           top: 70px;
-          right: 0;
+          left: 0;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
           flex-direction: column;
-          background: var(--light);
-          width: 200px;
-          border-radius: 8px;
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-          padding: 1rem;
-          transition: max-height 0.3s ease, opacity 0.3s ease;
-          max-height: 0;
-          overflow: hidden;
-          opacity: 0;
+          align-items: center;
+          padding: 2rem 0;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          z-index: 1000;
         }
+
         .nav-links.mobile-active {
-          max-height: 300px;
-          opacity: 1;
-        }
-        .mobile-menu-toggle {
           display: flex;
         }
-      }
-      .mobile-menu-toggle.active span:nth-of-type(1) {
-        transform: translateY(8px) rotate(45deg);
-      }
-      .mobile-menu-toggle.active span:nth-of-type(2) {
-        opacity: 0;
-      }
-      .mobile-menu-toggle.active span:nth-of-type(3) {
-        transform: translateY(-8px) rotate(-45deg);
-      }
 
-      /* Hero Section */
-      .hero {
-        position: relative;
-        height: 80vh;
-        min-height: 600px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-      }
-
-      .video-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .hero-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-      }
-
-      .hero-content {
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        padding: 0 2rem;
-        max-width: 900px;
-        margin: 0 auto;
-      }
-
-      /* Inline style'la verilen font büyüklüklerini media query ile kontrol edeceğiz */
-      .hero h1 {
-        font-size: 60px; /* Orjinal değer */
-        font-weight: 800;
-        margin-bottom: 1.5rem;
-        color: var(--light);
-      }
-
-      .hero p {
-        font-size: 30px; /* Orjinal değer */
-        color: var(--light);
-        margin-bottom: 2rem;
-      }
-
-      @media (max-width: 992px) {
-        .hero {
-          min-height: 500px;
+        .nav-links a {
+          margin: 1rem 0;
+          font-size: 1.2rem;
         }
-        .hero h1 {
-          font-size: 3rem;
+
+        .mobile-menu-toggle {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          width: 30px;
+          height: 20px;
+          cursor: pointer;
         }
-        .hero p {
-          font-size: 1.3rem;
+
+        .mobile-menu-toggle span {
+          width: 100%;
+          height: 3px;
+          background-color: var(--primary);
+          transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+          transform: rotate(-45deg) translate(5px, -5px);
         }
       }
-      @media (max-width: 576px) {
-        .hero {
-          min-height: 400px;
-        }
-        .hero h1 {
-          font-size: 2.2rem;
-        }
-        .hero p {
-          font-size: 1.1rem;
-        }
-      }
-
-      /* Banner Section */
       .banner {
-        margin: 4rem auto;
+        width: 100%;
         max-width: 1920px;
-        overflow: hidden;
+        margin: 0 auto;
+        text-align: center;
       }
-
       .banner-img {
         width: 100%;
-        height: 300px;
+        height: auto;
+        max-height: 400px;
         object-fit: cover;
-        transition: transform 0.3s ease;
       }
-
-      /* Daha küçük ekranlarda banner yüksekliğini düşürmek için */
-      @media (max-width: 768px) {
-        .banner-img {
-          height: 200px;
-        }
-      }
-
-      /* Scroll to Top Button */
-      .scroll-to-top {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-        background-color: #60a5fa;
-        color: #1e3a8a;
-        border: none;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        cursor: pointer;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s, visibility 0.3s;
-        z-index: 1000;
-      }
-
-      .scroll-to-top.show {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      /* Hakkımızda Section */
-      .hakkimizda-section {
-        background: var(--background);
-        padding: 80px 0;
-      }
-
-      .hakkimizda-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 40px;
-      }
-
-      .hakkimizda-content .text {
-        flex: 1;
-      }
-
-      .hakkimizda-content .text h2 {
-        font-size: 36px;
-        color: var(--text);
-        margin-bottom: 15px;
-      }
-
-      .hakkimizda-content .text p {
-        font-size: 18px;
-        color: var(--dark);
-        line-height: 1.6;
-        margin-bottom: 1rem;
-      }
-
-      .hakkimizda-content .image {
-        flex: 1;
+      .social-media {
         text-align: center;
+        padding: 60px 20px;
       }
 
-      .hakkimizda-content .image img {
-        width: 100%;
-        max-width: 500px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      .social-media h2 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #2563eb;
+        margin-bottom: 20px;
       }
 
-      @media (max-width: 768px) {
-        .hakkimizda-content {
-          flex-direction: column;
-          text-align: center;
-        }
+      .social-media a {
+        display: inline-block;
+        margin: 0 15px;
+        font-size: 2.5rem;
+        color: var(--primary);
+        transition: all 0.3s ease;
       }
 
-      /* Galeri (Hizmetlerimiz) Section */
-      .galeri-section {
-        background: var(--background);
-        padding: 80px 0;
-        text-align: center;
-      }
-
-      .gallery-slider {
-        position: relative;
-        max-width: 90%;
-        margin: auto;
-        overflow: hidden;
-      }
-
-      .gallery-wrapper {
-        overflow: hidden;
-        width: 100%;
-      }
-
-      .gallery-track {
-        display: flex;
-        gap: 20px;
-        transition: transform 0.5s ease-in-out;
-      }
-
-      .gallery-item {
-        flex: 0 0 300px;
-        position: relative;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-      }
-
-      .gallery-item img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 10px;
-        transition: transform 0.3s ease;
-      }
-
-      .gallery-item:hover {
-        transform: scale(1.05);
-      }
-
-      .gallery-item:hover img {
-        filter: brightness(80%);
-      }
-
-      .overlay {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        color: var(--light);
-        padding: 10px;
-        text-align: center;
-        font-size: 18px;
-        font-weight: bold;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      .gallery-item:hover .overlay {
-        opacity: 1;
-      }
-
-      .prev-btn, .next-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: var(--primary);
-        color: var(--light);
-        border: none;
-        font-size: 24px;
-        padding: 10px;
-        cursor: pointer;
-        transition: background 0.3s, transform 0.2s;
-        z-index: 10;
-      }
-
-      .prev-btn:hover, .next-btn:hover {
-        background: var(--accent);
+      .social-media a:hover {
+        color: var(--accent);
         transform: scale(1.1);
       }
-
-      .prev-btn {
-        left: 10px;
-      }
-
-      .next-btn {
-        right: 10px;
-      }
-
-      /* Mobil Uyumluluk (Galeri) */
-      @media (max-width: 768px) {
-        .gallery-item {
-          flex: 0 0 80%;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .gallery-item {
-          flex: 0 0 100%;
-        }
-      }
-
-      /* Misyon & Vizyon Section */
-      .misyon-vizyon-section {
-        background: var(--background);
-        padding: 100px 0;
+      .donation-section {
+        max-width: 600px;
+        margin: 60px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         text-align: center;
-        position: relative;
       }
 
-      .misyon-vizyon-section .section-title {
-        font-size: 36px;
-        margin-bottom: 40px;
-        color: var(--text);
-      }
-
-      .misyon-vizyon-content {
-        display: flex;
-        gap: 40px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      .misyon-vizyon-content .card {
-        background: var(--secondary);
-        padding: 30px;
-        border-radius: 10px;
-        flex: 1;
-        max-width: 500px;
-        transition: transform 0.3s ease-in-out, background 0.3s;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        margin: 1rem;
-      }
-
-      .misyon-vizyon-content .card:hover {
-        transform: translateY(-10px);
-        background: var(--accent);
-      }
-
-      .misyon-vizyon-content .card .icon {
-        font-size: 40px;
+      .donation-section h2 {
+        color: #2563eb;
+        font-size: 32px;
         margin-bottom: 15px;
       }
 
-      .misyon-vizyon-content .card h3 {
-        font-size: 24px;
-        margin-bottom: 15px;
-        color: var(--light);
-      }
-
-      .misyon-vizyon-content .card p {
+      .donation-section p {
+        color: #1e3a8a;
         font-size: 18px;
-        line-height: 1.6;
-        color: var(--light);
+        margin-bottom: 25px;
+        line-height: 1.5;
       }
 
-      @media (max-width: 768px) {
-        .misyon-vizyon-content {
-          flex-direction: column;
-        }
-        .misyon-vizyon-content .card {
-          max-width: 100%;
-        }
-      }
-
-      /* Değerlerimiz Section */
-      .degerlerimiz-section {
-        background: var(--background);
-        padding: 100px 0;
-        text-align: center;
-      }
-
-      .section-title {
-        font-size: 36px;
-        color: var(--text);
-        margin-bottom: 10px;
-      }
-
-      .section-subtitle {
-        font-size: 20px;
-        color: var(--dark);
-        margin-bottom: 40px;
-        opacity: 0.8;
-      }
-
-      .degerlerimiz-content {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 30px;
-        max-width: 1200px;
-        margin: auto;
-      }
-
-      @media (max-width: 1024px) {
-        .degerlerimiz-content {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      @media (max-width: 768px) {
-        .degerlerimiz-content {
-          grid-template-columns: 1fr;
-        }
+      .card-preview {
+        background: #2563eb;
+        padding: 30px;
+        border-radius: 12px;
+        color: white;
+        font-family: "Courier New", Courier, monospace;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       }
 
       .card {
-        background: var(--light);
-        padding: 40px;
-        border-radius: 12px;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        text-align: center;
+        text-align: left;
+        font-size: 20px;
+        letter-spacing: 2px;
       }
 
-      .card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      }
-
-      .card .icon {
-        width: 80px;
-        height: 80px;
-        background: var(--primary);
-        color: var(--light);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 36px;
-        margin: 0 auto 20px;
-        transition: background 0.3s ease;
-      }
-
-      .card:hover .icon {
-        background: var(--secondary);
-      }
-
-      .card h3 {
-        font-size: 24px;
-        color: var(--dark);
-        margin-bottom: 10px;
-      }
-
-      .card p {
-        font-size: 18px;
-        color: var(--text);
-        line-height: 1.6;
-      }
-
-      /* Harita Alanı */
-      #map-section {
-        padding: 80px 0;
-      }
-
-      #mapid {
-        width: 100%;
-        max-width: 1000px;
-        height: 400px;
-        border-radius: 20px;
-        margin: 0 auto;
-        overflow: hidden;
-        border: 2px solid #ccc;
-      }
-
-      /* Ekibimiz Section */
-      .ekibimiz-section {
-        background: var(--background);
-        padding: 100px 0;
-        text-align: center;
-      }
-
-      .ekibimiz-content {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 30px;
-        max-width: 1200px;
-        margin: auto;
-      }
-
-      .team-card {
-        background: var(--light);
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        cursor: pointer;
-      }
-
-      .team-card:hover {
-        transform: translateY(-8px);
-        background: var(--secondary);
-        color: var(--light);
-      }
-
-      .team-image {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        overflow: hidden;
-        margin: auto;
+      .card-number {
+        font-size: 28px;
         margin-bottom: 15px;
-        border: 4px solid var(--primary);
-        transition: border-color 0.3s;
+        text-align: center;
       }
 
-      .team-card:hover .team-image {
-        border-color: var(--light);
+      .card-holder,
+      .card-expiry {
+        font-size: 20px;
+        text-align: center;
       }
 
-      .team-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
       }
 
-      .team-card h3 {
-        font-size: 22px;
-        margin-bottom: 5px;
-        color: var(--text);
-        transition: color 0.3s;
+      .input-group {
+        text-align: left;
       }
 
-      .team-card p {
+      .input-group label {
         font-size: 18px;
-        color: var(--dark);
-        opacity: 0.8;
-        transition: color 0.3s;
+        color: #1e40af;
+        margin-bottom: 8px;
+        display: block;
       }
 
-      .team-card:hover h3,
-      .team-card:hover p {
-        color: var(--light);
-      }
-
-      .social-icons {
-        margin-top: 15px;
-      }
-
-      .social-icons a {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        background: var(--primary);
-        color: var(--light);
-        border-radius: 50%;
-        margin: 0 5px;
-        transition: background 0.3s ease, transform 0.2s;
-        text-decoration: none;
-        font-size: 18px;
-      }
-
-      .social-icons a:hover {
-        background: var(--accent);
-        transform: scale(1.1);
-      }
-
-      @media (max-width: 768px) {
-        .ekibimiz-content {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      /* Modal Tasarımı */
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 10;
-        left: 0;
-        top: 0;
+      .input-group input {
         width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        align-items: center;
-        justify-content: center;
-        transition: opacity 0.3s ease;
-      }
-
-      .modal.show {
-        display: flex; /* Modal açıldığında aktif olacak */
-        opacity: 1;
-      }
-
-      .modal-content {
-        background: var(--light);
-        padding: 20px;
+        padding: 14px;
+        border: 2px solid #3b82f6;
         border-radius: 10px;
-        text-align: center;
-        max-width: 400px;
-        width: 90%;
-        position: relative;
-        transform: translateY(-20px);
-        transition: transform 0.3s ease;
-      }
-
-      .modal img {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 10px;
-        border: 3px solid var(--primary);
-      }
-
-      .close {
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        font-size: 24px;
-        cursor: pointer;
-      }
-
-      .modal-content.show {
-        transform: translateY(0);
-      }
-
-      #modal-bio {
-        font-size: 16px;
-        color: var(--dark);
-        margin-top: 10px;
-        line-height: 1.6;
-        text-align: justify;
-        padding: 10px;
-        border-top: 1px solid var(--primary);
-      }
-
-      /* İstatistikler Section */
-      .istatistikler-section {
-        background: var(--background);
-        padding: 100px 0;
-        text-align: center;
-      }
-
-      .istatistikler-content {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 30px;
-        max-width: 1200px;
-        margin: auto;
-      }
-
-      .istatistik-card {
-        background: var(--light);
-        padding: 40px;
-        border-radius: 12px;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .istatistik-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      }
-
-      .istatistik-card i {
-        font-size: 40px;
-        color: var(--primary);
-        margin-bottom: 10px;
-      }
-
-      .istatistik-card h3 {
-        font-size: 32px;
-        font-weight: bold;
-        color: var(--dark);
-      }
-
-      .istatistik-card p {
         font-size: 18px;
-        color: var(--text);
-      }
-
-      @media (max-width: 768px) {
-        .istatistikler-content {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .istatistikler-content {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      /* Ünlüler Bölümü (Slider) */
-      .unluler-section {
-        background: var(--background);
-        padding: 100px 0;
         text-align: center;
+        transition: all 0.3s ease-in-out;
       }
 
-      .slider-container {
-        position: relative;
-        max-width: 90%;
-        margin: auto;
-        overflow: hidden;
-        background: var(--background);
-        padding: 20px 0;
+      .input-group input:focus {
+        border-color: #1e40af;
+        outline: none;
       }
 
-      .slider-wrapper {
+      .input-row {
         display: flex;
         gap: 20px;
-        transition: transform 0.5s ease;
-        will-change: transform;
       }
 
-      .testimonial-card {
-        flex: 0 0 300px;
-        background: var(--light);
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .testimonial-card:hover {
-        transform: translateY(-5px) scale(1.05);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      }
-
-      .testimonial-card img {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 15px;
-        border: 3px solid var(--primary);
-      }
-
-      .testimonial-card h3 {
+      .donate-btn {
+        background: #2563eb;
+        color: white;
+        padding: 18px;
+        border: none;
+        border-radius: 10px;
         font-size: 20px;
-        color: var(--text);
-        margin-bottom: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: bold;
       }
 
-      .testimonial-card p {
-        font-size: 16px;
-        color: var(--dark);
-        margin-bottom: 10px;
-        opacity: 0.8;
+      .donate-btn:hover {
+        background: #1e40af;
       }
 
-      .testimonial-card blockquote {
-        font-size: 16px;
-        color: var(--text);
-        font-style: italic;
-      }
-
-/* Galatasaray Efsaneleri Sliderındaki Butonlar */
-.prev-btn-testimonial,
-.next-btn-testimonial {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: var(--accent);
-  color: var(--light);
-  border: none;
-  font-size: 24px;
-  padding: 10px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-  z-index: 10;
-}
-
-/* Üzerine gelindiğinde görsel tepki */
-.prev-btn-testimonial:hover,
-.next-btn-testimonial:hover {
-  background: var(--accent);
-  transform: scale(1.1);
-}
-
-/* Konumlandırma */
-.prev-btn-testimonial {
-  left: 8px;  /* Slider’ın solunda */
-}
-
-.next-btn-testimonial {
-  right: 8px; /* Slider’ın sağında */
-}
-
-      @media (max-width: 768px) {
-        .slider-wrapper {
-          gap: 10px;
-        }
-        .testimonial-card {
-          flex: 0 0 80%;
-          margin: auto;
-        }
-      }
-
-      /* Destek Olun (support-section) */
-      .support-section {
+      .about-section {
         background: #f0f9ff;
         padding: 60px 20px;
         text-align: center;
-        color: #403d37;
-      }
-      .support-section h2 {
-        color: #1e3a8a;
-        font-size: 36px;
-        font-weight: bold;
-      }
-      .support-section p {
-        font-size: 20px;
-        margin-bottom: 30px;
-        line-height: 1.6;
-      }
-      .support-section a {
-        display: inline-block;
-        background-color: #1e3a8a;
-        color: white;
-        padding: 15px 30px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-size: 18px;
-        font-weight: bold;
-        border-radius: 50px;
       }
 
-      /* Footer */
-      footer {
-        background: var(--dark);
-        color: var(--light);
-        padding: 4rem 2rem;
-        margin-top: 4rem;
-      }
-
-      .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 3rem;
-      }
-
-      .footer-content h4 {
-        font-size: 1.2rem;
-        margin-bottom: 1rem;
-      }
-
-      .footer-content p {
-        margin-bottom: 1rem;
-      }
-
-      .footer-column ul li {
-        margin-bottom: 0.5rem;
-        color: var(--light);
-      }
-
-      .footer-column ul li a {
-        color: var(--light);
-        transition: color 0.3s;
-      }
-      .footer-column ul li a:hover {
-        color: var(--accent);
-      }
-
-      .social-links a {
-        margin-right: 0.5rem;
-        color: var(--light);
-        font-size: 1.2rem;
+      @media screen and (max-width: 768px) {
+        .about-section {
+          padding: 12rem 2rem;
+        }
+        .input-row {
+          flex-direction: column;
+        }
       }
     </style>
   </head>
   <body>
-    <!-- Scroll to Top Button -->
     <button id="scrollToTop" class="scroll-to-top">
       <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- Loader -->
     <div id="loader" class="loader">
       <div class="loader-icon"></div>
       <p>Çocuk Hakları İçin Yükleniyor...</p>
     </div>
 
-    <!-- Header ve Navigasyon -->
     <header class="header">
       <nav class="nav-container">
         <a href="/index.html" class="logo">
@@ -1066,423 +246,365 @@
         </ul>
       </nav>
     </header>
-
-    <div class="hero">
-      <video class="video-bg" autoplay muted loop playsinline>
-        <source src="/images/background_video5.mp4" type="video/mp4" />
-      </video>
-      <div class="hero-overlay"></div>
-      <div class="container">
-        <div class="hero-content">
-          <h1 style="font-size: 60px">İnsan ve Çocuk Hakları</h1>
-          <p style="font-size: 30px">
-            Herkes için eşit haklar, adil bir dünya için temel taşlardır.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <section id="hakkimizda" class="hakkimizda-section">
-      <div class="container">
-        <div class="hakkimizda-content">
-          <div class="text">
-            <h2>Biz Kimiz?</h2>
-            <p>
-              Çocuk hakları ve insan hakları konusunda farkındalık yaratmak için
-              çalışan bağımsız bir oluşumuz. Amacımız, bireyleri bilinçlendirmek,
-              haklarını öğrenmelerini sağlamak ve adil bir dünya için ilham
-              vermektir.
-            </p>
-            <p>
-              Projelerimiz, eğitim programlarımız ve etkinliklerimizle dünya
-              çapında birçok insana ulaşıyoruz.
-            </p>
-          </div>
-          <div class="image">
-            <img src="images/platform.png" alt="Hakkımızda" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="galeri" class="galeri-section">
-      <div class="container">
-        <h2 class="section-title">Hizmetlerimiz</h2>
-        <p class="section-subtitle">Gerçekleştirdiğimiz projelerden bazı kareler.</p>
-
-        <div class="gallery-slider">
-          <button class="prev-btn">&#10094;</button>
-          <div class="gallery-wrapper">
-            <div class="gallery-track">
-              <!-- Resim 1 -->
-              <div class="gallery-item">
-                <img src="images/etkinlik1.png" alt="Eğitim Programı">
-                <div class="overlay">Eğitim Programları</div>
-              </div>
-
-              <!-- Resim 2 -->
-              <div class="gallery-item">
-                <img src="images/etkinlik2.png" alt="Gönüllü Kampanya">
-                <div class="overlay">Gönüllü Kampanyalar</div>
-              </div>
-
-              <!-- Resim 3 -->
-              <div class="gallery-item">
-                <img src="images/etkinlik3.png" alt="Çocuk Etkinlikleri">
-                <div class="overlay">Çocuk Etkinlikleri</div>
-              </div>
-
-              <!-- Resim 4 -->
-              <div class="gallery-item">
-                <img src="images/etkinlik4.png" alt="Yardım Dağıtımı">
-                <div class="overlay">Yardım Dağıtımları</div>
-              </div>
-
-              <!-- Resim 5 -->
-              <div class="gallery-item">
-                <img src="images/etkinlik5.png" alt="Sosyal Projeler">
-                <div class="overlay">Sosyal Projeler</div>
-              </div>
-            </div>
-          </div>
-          <button class="next-btn">&#10095;</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="misyon-vizyon" class="misyon-vizyon-section">
-      <div class="container">
-        <h2 class="section-title">Misyonumuz & Vizyonumuz</h2>
-        <div class="misyon-vizyon-content">
-          <div class="card misyon">
-            <div class="icon"><i class="fas fa-hand-holding-heart"></i></div>
-            <h3>Misyonumuz</h3>
-            <p>
-              Çocuk hakları ve insan hakları konusunda bilinç oluşturarak,
-              sürdürülebilir bir farkındalık yaratmayı amaçlıyoruz. Eğitim,
-              savunuculuk ve projelerimizle daha adil bir dünya inşa ediyoruz.
-            </p>
-          </div>
-          <div class="card vizyon">
-            <div class="icon"><i class="fas fa-globe"></i></div>
-            <h3>Vizyonumuz</h3>
-            <p>
-              Gelecek nesillere daha adil, eşit ve sürdürülebilir bir dünya
-              bırakmak için çalışıyoruz. Evrensel insan haklarını herkes için
-              erişilebilir hale getirmeyi hedefliyoruz.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="degerlerimiz" class="degerlerimiz-section">
-      <div class="container">
-        <h2 class="section-title">Değerlerimiz</h2>
-        <p class="section-subtitle">Bizim için önemli olan temel değerlerimiz.</p>
-        <div class="degerlerimiz-content">
-          <div class="card">
-            <div class="icon"><i class="fas fa-balance-scale"></i></div>
-            <h3>Adalet</h3>
-            <p>
-              Herkes için eşit fırsatlar sunarak, insan haklarını en iyi şekilde
-              savunuyoruz.
-            </p>
-          </div>
-          <div class="card">
-            <div class="icon"><i class="fas fa-handshake"></i></div>
-            <h3>İş Birliği</h3>
-            <p>Güçlü ortaklıklarla daha büyük değişimler yaratıyoruz.</p>
-          </div>
-          <div class="card">
-            <div class="icon"><i class="fas fa-seedling"></i></div>
-            <h3>Sürdürülebilirlik</h3>
-            <p>
-              Uzun vadeli çözümler geliştirerek gelecek nesillere daha iyi bir
-              dünya bırakıyoruz.
-            </p>
-          </div>
-          <div class="card">
-            <div class="icon"><i class="fas fa-heart"></i></div>
-            <h3>Empati</h3>
-            <p>
-              İnsan haklarına duyarlı yaklaşarak toplumları bilinçlendiriyoruz.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="banner">
-      <img src="/images/cansu.png" alt="Ayın Destekçisi" class="banner-img" />
-    </div>
-
-    <section id="map-section">
-      <div class="container">
-        <h2 class="section-title">Türkiye'de Desteklediğimiz Bölgeler</h2>
-        <p style="text-align: center;">
-          Platformumuzdan yararlanan kişileri harita üzerinde görebilirsiniz.
-        </p>
-        <br />
-        <div id="mapid"></div>
-      </div>
-    </section>
-
-    <section id="ekibimiz" class="ekibimiz-section">
-      <div class="container">
-        <h2 class="section-title">Ekibimiz</h2>
-        <p class="section-subtitle">Alanında uzman ve tutkulu ekibimizle tanışın.</p>
-
-        <div class="ekibimiz-content">
-          <!-- Takım Üyesi 1 -->
-          <div
-            class="team-card"
-            data-name="Kerem Erkengel"
-            data-role="Kurucu & CEO"
-            data-desc="Çocuk hakları konusunda uzman bir liderdir."
-            data-image="images/kerem.png"
-            data-bio="
-            Kerem Erkengel, 22 yaşında Mehmet Akif Ersoy Üniversitesi Bilişim Sistemleri ve Teknolojileri öğrencisidir. Teknolojiye olan ilgisinin yanı sıra, spor yapmayı ve yeni yerler keşfetmeyi seven Kerem, sosyal projelere gönül vermiş ve özellikle çocuk hakları konusunda farkındalık yaratmayı amaçlamaktadır. "
-          >
-            <div class="team-image">
-              <img src="images/kerem.png" alt="Kerem Erkengel" />
-            </div>
-            <h3>Kerem Erkengel</h3>
-            <p>Kurucu & CEO</p>
-          </div>
-
-          <!-- Takım Üyesi 2 -->
-          <div
-            class="team-card"
-            data-name="Sema Nur Ata"
-            data-role="Proje Yöneticisi"
-            data-desc="Projeleri başarıyla yöneten, organizasyonel yetenekleri güçlü bir isimdir."
-            data-image="images/sema.png"
-            data-bio="Sema Nur Ata, 23 yaşında Bilgisayar Programcılığı mezunudur. Teknolojiye olan ilgisinin yanı sıra seyahat etmeyi ve kitap okumayı seven Sema, sosyal projelere gönül vermiş ve özellikle kadınların teknoloji alanında daha fazla yer alması konusunda farkındalık yaratmayı amaçlamaktadır."
-          >
-            <div class="team-image">
-              <img src="images/sema.png" alt="Sema Nur Ata" />
-            </div>
-            <h3>Sema Nur Ata</h3>
-            <p>Proje Yöneticisi</p>
-          </div>
-
-          <!-- Takım Üyesi 3 -->
-          <div
-            class="team-card"
-            data-name="Ahmet Demir"
-            data-role="İletişim Uzmanı"
-            data-desc="Halkla ilişkiler, medya ve kampanya süreçlerinde deneyimlidir."
-            data-image="images/ahmet.png"
-            data-bio="
-            Ahmet Demir, Fırat Üniversitesi Bilgisayar Programcılığı mezunudur. Teknolojiye olan ilgisinin yanı sıra seyahat etmeyi ve doğa sporlarıyla ilgilenmeyi seven Ahmet, sosyal projelere gönül vermiş ve özellikle eğitimde fırsat eşitliği konusunda farkındalık yaratmayı amaçlamaktadır."
-          >
-            <div class="team-image">
-              <img src="images/ahmet.png" alt="Ahmet Demir" />
-            </div>
-            <h3>Ahmet Demir</h3>
-            <p>İletişim Uzmanı</p>
-          </div>
-
-          <!-- Takım Üyesi 4 -->
-          <div
-            class="team-card"
-            data-name="Elif Özbay"
-            data-role="Grafik Tasarımcı"
-            data-desc="Görsel tasarımlarla projelere estetik ve etkileyici bir dokunuş katar."
-            data-image="images/eliff.png"
-            data-bio="Elif Özbay, 24 yaşında bir Bilgisayar Mühendisi olarak Karadeniz Teknik Üniversitesi'nden mezun olmuştur. Teknolojiye olan ilgisinin yanı sıra seyahat etmeyi ve at binmeyi seven Elif, sosyal projelere gönül vermiş ve özellikle çocuk hakları konusunda farkındalık yaratmayı amaçlamaktadır."
-          >
-            <div class="team-image">
-              <img src="images/eliff.png" alt="Elif Özbay" />
-            </div>
-            <h3>Elif Özbay</h3>
-            <p>Grafik Tasarımcı</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Modal Yapısı -->
-    <div id="team-modal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <img id="modal-image" src="" alt="Takım Üyesi" />
-        <h3 id="modal-name"></h3>
-        <p id="modal-role"></p>
-        <p id="modal-desc"></p>
-        <p id="modal-bio"></p>
-      </div>
-    </div>
-
-    <section id="istatistikler" class="istatistikler-section">
-      <div class="container">
-        <h2 class="section-title">Başarılarımız</h2>
-        <p class="section-subtitle">
-          Bugüne kadar yaptığımız çalışmalarla birçok insanın hayatına dokunduk.
-        </p>
-        <div class="istatistikler-content">
-          <div class="istatistik-card">
-            <i class="fas fa-child"></i>
-            <h3><span class="counter" data-target="5000">0</span>+</h3>
-            <p>Eğitilen Çocuk</p>
-          </div>
-
-          <div class="istatistik-card">
-            <i class="fas fa-users"></i>
-            <h3><span class="counter" data-target="100">0</span>+</h3>
-            <p>Gönüllü Sayısı</p>
-          </div>
-
-          <div class="istatistik-card">
-            <i class="fas fa-hand-holding-heart"></i>
-            <h3><span class="counter" data-target="200">0</span>+</h3>
-            <p>Etkinlik Düzenlendi</p>
-          </div>
-
-          <div class="istatistik-card">
-            <i class="fas fa-globe"></i>
-            <h3><span class="counter" data-target="50">0</span></h3>
-            <p>Ülkeye Ulaşıldı</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="unluler" class="unluler-section">
-      <div class="container">
-        <h2 class="section-title">Galatasaray Efsaneleri Bizim Hakkımızda Ne Diyor?</h2>
-        <p style="text-align: center;">
-          Kulübümüzün efsaneleri, kampanyamız hakkında görüşlerini paylaşıyor.
-        </p>
-    
-        <!-- Buton sınıflarını değiştirdik (prev-btn-testimonial / next-btn-testimonial) -->
-        <div class="slider-container">
-          <button class="prev-btn-testimonial">&#10094;</button>
-          <div class="slider">
-            <div class="slider-wrapper">
-              <div class="testimonial-card">
-                <img src="images/fatih-terim.png" alt="Fatih Terim" />
-                <h3>Fatih Terim</h3>
-                <p>Teknik Direktör</p>
-                <blockquote>
-                  “Galatasaray, her zaman sosyal sorumluluk projelerinde öncü
-                  olmuştur. Bu kampanya da bunun en güzel örneklerinden biri.”
-                </blockquote>
-              </div>
-    
-              <div class="testimonial-card">
-                <img src="images/muslera.png" alt="Fernando Muslera" />
-                <h3>Fernando Muslera</h3>
-                <p>Kaleci & Kaptan</p>
-                <blockquote>
-                  “Sahada yaptığımız gibi, saha dışında da birlik olmalıyız.
-                  Çocuklarımızın geleceği için destek zamanı!”
-                </blockquote>
-              </div>
-    
-              <div class="testimonial-card">
-                <img src="images/arda-turan.png" alt="Arda Turan" />
-                <h3>Arda Turan</h3>
-                <p>Eski Futbolcu & Teknik Direktör</p>
-                <blockquote>
-                  “Ben de bir zamanlar bir çocuktum. Bu tür projelerin önemi çok
-                  büyük. Destek vermek gurur verici!”
-                </blockquote>
-              </div>
-    
-              <div class="testimonial-card">
-                <img src="images/drogba.png" alt="Didier Drogba" />
-                <h3>Didier Drogba</h3>
-                <p>Eski Forvet</p>
-                <blockquote>
-                  “Futbol sadece sahada değil, toplumda da etki yaratmalı. Bu
-                  harika bir girişim!”
-                </blockquote>
-              </div>
-    
-              <div class="testimonial-card">
-                <img src="images/hagi.png" alt="Gheorghe Hagi" />
-                <h3>Gheorghe Hagi</h3>
-                <p>Eski Futbolcu & Teknik Direktör</p>
-                <blockquote>
-                  “Galatasaray ruhu, her zaman insanlara yardım etmeyi içerir.
-                  Bu proje de bunun bir yansıması.”
-                </blockquote>
-              </div>
-    
-              <div class="testimonial-card">
-                <img src="images/gomis.png" alt="Bafetimbi Gomis" />
-                <h3>Bafetimbi Gomis</h3>
-                <p>Eski Forvet</p>
-                <blockquote>
-                  “Ben Galatasaray’da büyük bir aile gördüm. Şimdi bu ailenin
-                  çocuklar için bir araya geldiğini görmek harika!”
-                </blockquote>
-              </div>
-    
-              <div class="testimonial-card">
-                <img src="images/melo.png" alt="Felipe Melo" />
-                <h3>Felipe Melo</h3>
-                <p>Eski Kaptan</p>
-                <blockquote>
-                  “Sahada olduğu gibi saha dışında da kazanmalıyız. Bu tür
-                  projeleri desteklemek görevimiz.”
-                </blockquote>
-              </div>
-    
-              <div class="testimonial-card">
-                <img src="images/dursun-ozbek.png" alt="Ünal Aysal" />
-                <h3>Ünal Aysal</h3>
-                <p>Eski Başkan</p>
-                <blockquote>
-                  “Galatasaray sadece bir futbol kulübü değil, aynı zamanda
-                  toplumsal sorumluluğun öncüsüdür.”
-                </blockquote>
-              </div>
-            </div>
-          </div>
-          <button class="next-btn-testimonial">&#10095;</button>
-        </div>
-      </div>
-    </section>
-    
-
-    <section
-      class="support-section"
+    <br /><br /><br /><br />
+    <main
       style="
-        background: #f0f9ff;
-        padding: 60px 20px;
-        text-align: center;
+        max-width: 1000px;
+        margin: auto;
+        padding: 40px;
+        text-align: justify;
+        line-height: 1.8;
+        font-family: Arial, sans-serif;
         color: #403d37;
       "
     >
-      <div style="max-width: 800px; margin: auto">
-        <h2 style="color: #60a5fa; font-size: 36px; font-weight: bold">
-          Destek Olun
-        </h2>
-        <p style="font-size: 20px; margin-bottom: 30px; line-height: 1.6">
-          Çocuk haklarının korunması için farkındalık yaratmak ve destek olmak
-          ister misiniz? Gönüllü olabilir veya bağış yaparak projelerimize
-          katkı sağlayabilirsiniz.
-        </p>
-        <a
-          href="contact.html"
+      <section class="about-section">
+        <div style="max-width: 1000px; margin: auto">
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-wrap: wrap;
+            "
+          >
+            <div style="flex: 1; max-width: 400px; margin: 10px">
+              <img
+                src="images/logo2.png"
+                alt="Çocuk Hakları"
+                style="width: 100%; border-radius: 15px"
+              />
+            </div>
+            <div style="flex: 2; max-width: 600px; text-align: left">
+              <h2 style="color: #2563eb; font-size: 36px; font-weight: bold">
+                Amacımız Ne?
+              </h2>
+              <p style="font-size: 18px; line-height: 1.8; color: #403d37">
+                Amacımız, çocukların temel haklarını öğrenmelerini sağlamak ve
+                toplumda bu konuda farkındalık oluşturmaktır. Eğitim, sağlık ve
+                sosyal hakları kapsayan projelerle çocukların geleceğini daha
+                güvenli hale getirmeyi hedefliyoruz.
+              </p>
+              <p style="font-size: 18px; line-height: 1.8; color: #403d37">
+                Siz de bize katılarak çocuk haklarını destekleyebilir ve
+                geleceğe umut olabilirsiniz.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="vision-mission-section"
+        style="background: #f0f9ff; padding: 60px 20px; text-align: center"
+      >
+        <div
           style="
-            display: inline-block;
-            background-color: #60a5fa;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 50px;
+            max-width: 1000px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
           "
         >
-          Bize Ulaşın
-        </a>
+          <h2 style="color: #2563eb; font-size: 36px; font-weight: bold">
+            Vizyon & Misyon
+          </h2>
+          <p style="font-size: 20px; color: #403d37; margin-bottom: 40px">
+            Çocukların geleceğini korumak ve onlara eşit haklar sağlamak için
+            çalışıyoruz.
+          </p>
+
+          <div
+            class="vision-mission-container"
+            style="
+              display: flex;
+              justify-content: space-between;
+              flex-wrap: wrap;
+            "
+          >
+            <div
+              class="mission-box"
+              style="
+                flex: 1;
+                background: #2563eb;
+                color: white;
+                padding: 40px;
+                border-radius: 10px;
+                margin: 10px;
+              "
+            >
+              <i
+                class="fas fa-bullseye"
+                style="font-size: 50px; margin-bottom: 20px"
+              ></i>
+              <h3 style="font-size: 28px; margin-bottom: 15px">Misyonumuz</h3>
+              <p style="font-size: 18px; line-height: 1.6">
+                Çocuk haklarını savunarak, her çocuğun eğitim, sağlık ve barınma
+                gibi temel haklara erişimini sağlamak.
+              </p>
+            </div>
+
+            <div
+              class="vision-box"
+              style="
+                flex: 1;
+                background: #00b5ee;
+                color: white;
+                padding: 40px;
+                border-radius: 10px;
+                margin: 10px;
+              "
+            >
+              <i
+                class="fas fa-eye"
+                style="font-size: 50px; margin-bottom: 20px"
+              ></i>
+              <h3 style="font-size: 28px; margin-bottom: 15px">Vizyonumuz</h3>
+              <p style="font-size: 18px; line-height: 1.6">
+                Tüm dünyada çocukların özgürce yaşayabileceği, sömürülmeyeceği
+                ve haklarının korunduğu bir dünya yaratmak.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="banner">
+        <img
+          src="/images/ozkan_ugur.png"
+          alt="Ayın Destekçisi"
+          class="banner-img"
+        />
       </div>
+
+      <section
+        class="child-rights-section"
+        style="background: #f0f9ff; padding: 60px 20px; text-align: center"
+      >
+        <div style="max-width: 1000px; margin: auto">
+          <h2 style="color: #2563eb; font-size: 36px; font-weight: bold">
+            Çocuk Hakları Nedir?
+          </h2>
+          <p
+            style="
+              font-size: 20px;
+              color: #403d37;
+              margin-bottom: 40px;
+              line-height: 1.8;
+            "
+          >
+            Çocuk hakları, her çocuğun doğuştan sahip olduğu eğitim, sağlık,
+            barınma ve korunma haklarını kapsayan temel insan haklarıdır. 1989
+            yılında Birleşmiş Milletler tarafından kabul edilen "Çocuk Haklarına
+            Dair Sözleşme" ile tüm dünya çocuklarının hakları güvence altına
+            alınmıştır.
+          </p>
+          <ul style="list-style: none; padding: 0">
+            <li style="font-size: 18px; color: #403d37; margin-bottom: 10px">
+              <i class="fas fa-check-circle" style="color: #2563eb"></i> Yaşama
+              ve gelişme hakkı
+            </li>
+            <li style="font-size: 18px; color: #403d37; margin-bottom: 10px">
+              <i class="fas fa-check-circle" style="color: #2563eb"></i> Eğitim
+              hakkı
+            </li>
+            <li style="font-size: 18px; color: #403d37; margin-bottom: 10px">
+              <i class="fas fa-check-circle" style="color: #2563eb"></i> Sağlık
+              hizmetlerine erişim hakkı
+            </li>
+            <li style="font-size: 18px; color: #403d37; margin-bottom: 10px">
+              <i class="fas fa-check-circle" style="color: #2563eb"></i> İfade
+              özgürlüğü
+            </li>
+            <li style="font-size: 18px; color: #403d37; margin-bottom: 10px">
+              <i class="fas fa-check-circle" style="color: #2563eb"></i>
+              İstismardan korunma hakkı
+            </li>
+            <li style="font-size: 18px; color: #403d37; margin-bottom: 10px">
+              <i class="fas fa-check-circle" style="color: #2563eb"></i>
+              Ayrımcılıktan korunma hakkı
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="social-media">
+        <h2>Bizi Takip Edin</h2>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </section>
+      <section style="margin-top: 40px">
+        <h2 style="color: #2563eb; text-align: center">
+          Çocuk Haklarının Önemi
+        </h2>
+        <p style="text-align: center">
+          Çocuk hakları, her çocuğun sağlıklı ve güvenli bir yaşam sürmesini
+          garanti altına almak için kritik öneme sahiptir. Hakların bilinmesi ve
+          korunması, çocukların potansiyellerini gerçekleştirmelerine yardımcı
+          olur.
+        </p>
+        <img
+          src="images/childrens.png"
+          alt="Çocuk Haklarının Önemi"
+          style="
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 20px;
+            margin-left: 14px;
+          "
+        />
+      </section>
+
+      <section style="margin-top: 40px">
+        <h2 style="color: #2563eb; text-align: center">
+          Çocuk Haklarına Dair Sözleşme Maddeleri
+        </h2>
+        <table style="width: 100%; border-collapse: collapse; text-align: left">
+          <tr style="background-color: #3b82f6">
+            <th style="padding: 15px; border: 1px solid #403d37">Madde</th>
+            <th style="padding: 15px; border: 1px solid #403d37">Açıklama</th>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #403d37">Madde 1</td>
+            <td style="padding: 10px; border: 1px solid #403d37">
+              Çocuk, 18 yaşına kadar olan her bireyi kapsar.
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #403d37">Madde 12</td>
+            <td style="padding: 10px; border: 1px solid #403d37">
+              Çocukların kendilerini ilgilendiren konularda görüş bildirme hakkı
+              vardır.
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #403d37">Madde 19</td>
+            <td style="padding: 10px; border: 1px solid #403d37">
+              Her çocuk şiddet ve istismardan korunma hakkına sahiptir.
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #403d37">Madde 28</td>
+            <td style="padding: 10px; border: 1px solid #403d37">
+              Çocukların eğitim hakkı güvence altına alınmalıdır.
+            </td>
+          </tr>
+        </table>
+      </section>
+
+      <section
+        class="support-section"
+        style="
+          background: #f0f9ff;
+          padding: 60px 20px;
+          text-align: center;
+          color: #403d37;
+        "
+      >
+        <div style="max-width: 800px; margin: auto">
+          <h2 style="color: #2563eb; font-size: 36px; font-weight: bold">
+            Destek Olun
+          </h2>
+          <p style="font-size: 20px; margin-bottom: 30px; line-height: 1.6">
+            Çocuk haklarının korunması için farkındalık yaratmak ve destek olmak
+            ister misiniz? Gönüllü olabilir veya bağış yaparak projelerimize
+            katkı sağlayabilirsiniz.
+          </p>
+          <a
+            href="contact.html"
+            style="
+              display: inline-block;
+              background-color: #2563eb;
+              color: white;
+              padding: 15px 30px;
+              text-decoration: none;
+              border-radius: 5px;
+              font-size: 18px;
+              font-weight: bold;
+              border-radius: 50px;
+            "
+          >
+            Bize Ulaşın
+          </a>
+        </div>
+      </section>
+    </main>
+    <section class="donation-section">
+      <h2>Çocuklara Destek Olun</h2>
+      <p>
+        Bağışlarınız, çocukların daha iyi bir geleceğe sahip olması için
+        kullanılacaktır.
+      </p>
+
+      <div class="card-preview">
+        <div class="card">
+          <div class="card-number" id="card-number-preview">
+            •••• •••• •••• ••••
+          </div>
+          <div class="card-holder" id="card-holder-preview">KART SAHİBİ</div>
+          <div class="card-expiry" id="card-expiry-preview">MM/YY</div>
+        </div>
+      </div>
+
+      <form id="donation-form">
+        <div class="input-group">
+          <label for="donation-amount">Bağış Miktarı (₺):</label>
+          <input
+            type="number"
+            id="donation-amount"
+            placeholder="Bağış miktarı girin"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <label for="card-number">Kredi Kartı Numarası:</label>
+          <input
+            type="text"
+            id="card-number"
+            placeholder="1234 5678 9012 3456"
+            maxlength="19"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <label for="card-holder">Kart Sahibi:</label>
+          <input
+            type="text"
+            id="card-holder"
+            placeholder="Adınız Soyadınız"
+            required
+          />
+        </div>
+
+        <div class="input-row">
+          <div class="input-group">
+            <label for="expiry-date">Son Kullanma Tarihi:</label>
+            <input
+              type="text"
+              id="expiry-date"
+              placeholder="MM/YY"
+              maxlength="5"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="cvv">CVV:</label>
+            <input
+              type="text"
+              id="cvv"
+              placeholder="123"
+              maxlength="3"
+              required
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="donate-btn">Bağış Yap</button>
+      </form>
     </section>
 
     <footer>
@@ -1515,55 +637,8 @@
         </div>
       </div>
     </footer>
-
-    <!-- AOS ve Proje Scriptleri -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="/js/script.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var map = L.map("mapid").setView([38.9637, 35.2433], 6);
-
-        // Harita katmanı
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          maxZoom: 18,
-          attribution: "© OpenStreetMap",
-        }).addTo(map);
-
-        // Örnek veri
-        var beneficiaries = [
-          { city: "İstanbul", lat: 41.0082, lng: 28.9784, count: 1200 },
-          { city: "Ankara", lat: 39.9208, lng: 32.8541, count: 800 },
-          { city: "İzmir", lat: 38.4237, lng: 27.1428, count: 500 },
-          { city: "Bursa", lat: 40.1828, lng: 29.0669, count: 300 },
-          { city: "Antalya", lat: 36.8969, lng: 30.7133, count: 450 },
-          { city: "Adana", lat: 36.9914, lng: 35.3308, count: 350 },
-          { city: "Gaziantep", lat: 37.0662, lng: 37.3833, count: 620 },
-          { city: "Diyarbakır", lat: 37.9144, lng: 40.2306, count: 280 },
-          { city: "Konya", lat: 37.8713, lng: 32.4846, count: 410 },
-          { city: "Kayseri", lat: 38.7225, lng: 35.4875, count: 200 },
-          { city: "Samsun", lat: 41.2797, lng: 36.3361, count: 330 },
-          { city: "Trabzon", lat: 41.0015, lng: 39.7178, count: 220 },
-          { city: "Mersin", lat: 36.8121, lng: 34.6415, count: 450 },
-        ];
-
-        // Marker ekleme
-        beneficiaries.forEach(function (location) {
-          L.marker([location.lat, location.lng])
-            .addTo(map)
-            .bindPopup(
-              "<b>" +
-                location.city +
-                "</b><br>" +
-                "Yararlanan Kişi: " +
-                location.count
-            );
-        });
-      });
-    </script>
-    <script>
-      // AOS Init
-      AOS.init();
-
       // Mobile Menu Toggle
       document.addEventListener("DOMContentLoaded", function () {
         const menuToggle = document.createElement("div");
@@ -1580,7 +655,7 @@
           menuToggle.classList.toggle("active");
         });
 
-        // Menüden bir linke tıklanınca kapansın
+        // Close menu when a link is clicked
         navLinks.querySelectorAll("a").forEach((link) => {
           link.addEventListener("click", function () {
             navLinks.classList.remove("mobile-active");
@@ -1588,7 +663,7 @@
           });
         });
 
-        // Menünün dışında bir yere tıklanırsa kapansın
+        // Close menu when clicking outside
         document.addEventListener("click", function (event) {
           if (!navContainer.contains(event.target)) {
             navLinks.classList.remove("mobile-active");
@@ -1597,206 +672,67 @@
         });
       });
     </script>
-    <script src="/js/script.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const counters = document.querySelectorAll(".counter");
-        const options = {
-          root: null,
-          threshold: 0.5, // Görünürlük %50
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const counter = entry.target;
-              const target = +counter.getAttribute("data-target");
-              let count = 0;
-              const increment = target / 100;
-
-              const updateCounter = () => {
-                count += increment;
-                if (count < target) {
-                  counter.innerText = Math.ceil(count);
-                  requestAnimationFrame(updateCounter);
-                } else {
-                  counter.innerText = target;
-                }
-              };
-
-              updateCounter();
-              observer.unobserve(counter);
-            }
-          });
-        }, options);
-
-        counters.forEach((counter) => {
-          observer.observe(counter);
-        });
-      });
-    </script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Galatasaray Efsaneleri Slider Seçimi
-    const testimonialSlider = document.querySelector(
-      "#unluler .slider-wrapper"
-    );
-    const prevBtnTestimonial = document.querySelector(".prev-btn-testimonial");
-    const nextBtnTestimonial = document.querySelector(".next-btn-testimonial");
-    let scrollAmountTestimonial = 0;
-    let autoSlideTimerTestimonial;
-
-    function moveTestimonialSlide(dir) {
-      const cardWidth =
-        document.querySelector(".testimonial-card").offsetWidth + 20;
-      scrollAmountTestimonial += dir * cardWidth;
-
-      // Döngüsel olsun istiyorsak:
-      if (scrollAmountTestimonial < 0) {
-        scrollAmountTestimonial =
-          testimonialSlider.scrollWidth - testimonialSlider.clientWidth;
-      } else if (
-        scrollAmountTestimonial >
-        testimonialSlider.scrollWidth - testimonialSlider.clientWidth
-      ) {
-        scrollAmountTestimonial = 0;
-      }
-
-      testimonialSlider.style.transform = `translateX(-${scrollAmountTestimonial}px)`;
-    }
-
-    function startAutoSlideTestimonial() {
-      autoSlideTimerTestimonial = setInterval(() => moveTestimonialSlide(1), 3000);
-    }
-
-    function stopAutoSlideTestimonial() {
-      clearInterval(autoSlideTimerTestimonial);
-    }
-
-    // Butonlara tıklayınca çalışması
-    prevBtnTestimonial.addEventListener("click", () => {
-      stopAutoSlideTestimonial();
-      moveTestimonialSlide(-1);
-      startAutoSlideTestimonial(); // Tekrar otomatiği başlatmak isterseniz
-    });
-
-    nextBtnTestimonial.addEventListener("click", () => {
-      stopAutoSlideTestimonial();
-      moveTestimonialSlide(1);
-      startAutoSlideTestimonial(); // Tekrar otomatiği başlatmak isterseniz
-    });
-
-    // Slider’ın üstüne gelince otomatik kayma durabilir
-    testimonialSlider.addEventListener("mouseenter", stopAutoSlideTestimonial);
-    testimonialSlider.addEventListener("mouseleave", startAutoSlideTestimonial);
-
-    // Dokunmatik destek (mobil)
-    testimonialSlider.addEventListener("touchstart", stopAutoSlideTestimonial);
-    testimonialSlider.addEventListener("touchend", startAutoSlideTestimonial);
-
-    // Sayfa yüklendiğinde otomatik başlat
-    startAutoSlideTestimonial();
-  });
-</script>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const teamCards = document.querySelectorAll(".team-card");
-        const modal = document.getElementById("team-modal");
-        const modalImage = document.getElementById("modal-image");
-        const modalName = document.getElementById("modal-name");
-        const modalRole = document.getElementById("modal-role");
-        const modalDesc = document.getElementById("modal-desc");
-        const modalBio = document.getElementById("modal-bio");
-        const closeModal = document.querySelector(".close");
-
-        teamCards.forEach((card) => {
-          card.addEventListener("click", function () {
-            modalImage.src = this.getAttribute("data-image");
-            modalName.innerText = this.getAttribute("data-name");
-            modalRole.innerText = this.getAttribute("data-role");
-            modalDesc.innerText = this.getAttribute("data-desc");
-            modalBio.innerText = this.getAttribute("data-bio");
-
-            modal.classList.add("show");
-            document.body.style.overflow = "hidden";
-          });
+      document
+        .getElementById("card-number")
+        .addEventListener("input", function () {
+          let formattedValue = this.value
+            .replace(/\D/g, "")
+            .replace(/(.{4})/g, "$1 ")
+            .trim();
+          this.value = formattedValue;
+          document.getElementById("card-number-preview").innerText =
+            formattedValue || "•••• •••• •••• ••••";
         });
 
-        function closeModalFunc() {
-          modal.classList.remove("show");
-          document.body.style.overflow = "auto";
-        }
-
-        closeModal.addEventListener("click", closeModalFunc);
-
-        // Modal dışında bir yere tıklanınca kapansın
-        window.addEventListener("click", function (event) {
-          if (event.target === modal) {
-            closeModalFunc();
-          }
+      document
+        .getElementById("card-holder")
+        .addEventListener("input", function () {
+          document.getElementById("card-holder-preview").innerText =
+            this.value.toUpperCase() || "KART SAHİBİ";
         });
 
-        // ESC tuşuna basınca modal kapansın
-        document.addEventListener("keydown", function (event) {
-          if (event.key === "Escape") {
-            closeModalFunc();
-          }
+      document
+        .getElementById("expiry-date")
+        .addEventListener("input", function () {
+          let formattedValue = this.value
+            .replace(/\D/g, "")
+            .replace(/(\d{2})(\d{0,2})/, "$1/$2")
+            .trim();
+          this.value = formattedValue;
+          document.getElementById("card-expiry-preview").innerText =
+            formattedValue || "MM/YY";
         });
-      });
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const sliderTrack = document.querySelector(".gallery-track");
-        const prevBtn = document.querySelector(".prev-btn");
-        const nextBtn = document.querySelector(".next-btn");
 
-        let scrollAmount = 0;
-        let autoSlideTimer;
+      document
+        .getElementById("donation-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          let amount = document.getElementById("donation-amount").value;
+          let cardNumber = document.getElementById("card-number").value;
+          let cardHolder = document.getElementById("card-holder").value;
+          let expiryDate = document.getElementById("expiry-date").value;
+          let cvv = document.getElementById("cvv").value;
 
-        function moveSlide(dir) {
-          const cardWidth =
-            document.querySelector(".gallery-item").offsetWidth + 20;
-          scrollAmount += dir * cardWidth;
-
-          if (scrollAmount < 0) {
-            scrollAmount = sliderTrack.scrollWidth - sliderTrack.clientWidth;
-          } else if (scrollAmount > sliderTrack.scrollWidth - sliderTrack.clientWidth) {
-            scrollAmount = 0;
+          if (
+            amount === "" ||
+            cardNumber.length < 19 ||
+            cardHolder === "" ||
+            expiryDate.length < 5 ||
+            cvv.length < 3
+          ) {
+            alert("Lütfen tüm alanları eksiksiz ve doğru doldurun.");
+            return;
           }
 
-          sliderTrack.style.transform = `translateX(-${scrollAmount}px)`;
-        }
-
-        function startAutoSlide() {
-          autoSlideTimer = setInterval(() => moveSlide(1), 3000);
-        }
-
-        function stopAutoSlide() {
-          clearInterval(autoSlideTimer);
-        }
-
-        prevBtn.addEventListener("click", () => {
-          stopAutoSlide();
-          moveSlide(-1);
-          startAutoSlide();
+          alert(`Bağışınız için teşekkür ederiz! ₺${amount} bağış yapıldı.`);
+          this.reset();
+          document.getElementById("card-number-preview").innerText =
+            "•••• •••• •••• ••••";
+          document.getElementById("card-holder-preview").innerText =
+            "KART SAHİBİ";
+          document.getElementById("card-expiry-preview").innerText = "MM/YY";
         });
-
-        nextBtn.addEventListener("click", () => {
-          stopAutoSlide();
-          moveSlide(1);
-          startAutoSlide();
-        });
-
-        sliderTrack.addEventListener("mouseenter", stopAutoSlide);
-        sliderTrack.addEventListener("mouseleave", startAutoSlide);
-
-        // Dokunmatik Destek
-        sliderTrack.addEventListener("touchstart", stopAutoSlide);
-        sliderTrack.addEventListener("touchend", startAutoSlide);
-
-        startAutoSlide();
-      });
     </script>
   </body>
 </html>
