@@ -13,6 +13,93 @@
 
     <link rel="shortcut icon" href="/images/shortcut_icon.png" />
     <style>
+.cr-container {
+    background-color: var(--cr-light);
+    padding: 30px 50px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    margin: 40px auto; /* Yatay ortalama ve üst/alt boşluk ekleme */
+    transition: transform 0.3s;
+}
+
+.cr-container:hover {
+    transform: translateY(-5px);
+}
+
+.cr-container h1 {
+    color: var(--cr-primary);
+    margin-bottom: 25px;
+    font-size: 2.5rem;
+}
+
+.cr-counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.cr-btn {
+    background-color: var(--cr-secondary);
+    color: var(--cr-light);
+    border: none;
+    padding: 15px 25px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    margin: 0 15px;
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cr-btn:hover {
+    background-color: var(--cr-dark);
+    transform: scale(1.1);
+}
+
+#cr-count {
+    font-size: 2.5rem;
+    width: 60px;
+    display: inline-block;
+}
+
+.cr-rights-display h2 {
+    color: var(--cr-primary);
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.cr-right-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--cr-accent);
+    color: var(--cr-light);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.cr-right-item:hover {
+    background-color: var(--cr-secondary);
+    transform: scale(1.02);
+}
+
+.cr-right-item i {
+    font-size: 2rem;
+    margin-right: 15px;
+}
+
+.cr-right-item p {
+    font-size: 1.2rem;
+    text-align: left;
+}
       #modal-bio {
     font-size: 16px;
     color: var(--dark);
@@ -1229,6 +1316,20 @@ footer {
       </div>
   </div>
 </section>
+<div class="cr-container">
+  <h1>Çocuk Hakları Sayacı</h1>
+  <div class="cr-counter">
+      <button id="cr-decrease" class="cr-btn"><i class="fas fa-minus"></i></button>
+      <span id="cr-count">0</span>
+      <button id="cr-increase" class="cr-btn"><i class="fas fa-plus"></i></button>
+  </div>
+  <div class="cr-rights-display">
+      <h2>Hak:</h2>
+      <div id="cr-right-display" class="cr-right-item">
+          <!-- Dinamik olarak hak burada görünecek -->
+      </div>
+  </div>
+</div>
 <section id="unluler" class="unluler-section">
   <div class="container">
       <h2 class="section-title">Galatasaray Efsaneleri Bizim Hakkımızda Ne Diyor?</h2>
@@ -1322,7 +1423,6 @@ footer {
       </div>
   </div>
 </section>
-
     <footer>
       <div class="footer-content">
         <div class="footer-column">
@@ -1353,7 +1453,158 @@ footer {
         </div>
       </div>
     </footer>
-
+    <script>const cr_rights = [
+      "Yaşama hakkı",
+      "Kimlik hakkı",
+      "Aile yaşama ve koruma hakkı",
+      "Eğitim hakkı",
+      "Sağlık hizmetlerine erişim hakkı",
+      "Oyun ve dinlenme hakkı",
+      "Güvenli bir ortamda büyüme hakkı",
+      "Görüş bildirme hakkı",
+      "Ayrımcılık olmaksızın haklara erişim hakkı",
+      "Dinlenme ve eğlence hakkı",
+      "Çalışma koşullarından korunma hakkı",
+      "Bilgi edinme hakkı",
+      "Adil yargılanma hakkı",
+      "Gizlilik hakkı",
+      "Özgürlük hakkı",
+      "Düşünce ve ifade özgürlüğü",
+      "Toplanma ve dernek kurma hakkı",
+      "Kültürel yaşama katılma hakkı",
+      "Doğa ve çevreyi koruma hakkı",
+      "Ebeveynlerin bakımına erişim hakkı",
+      "Aile içi şiddetten korunma hakkı",
+      "Sığınma hakkı",
+      "Mülkiyet hakkı",
+      "Eşitlik hakkı",
+      "Çalışma hakkı",
+      "Din ve inanç özgürlüğü",
+      "Toplumsal katılım hakkı",
+      "Yararlanma hakkı",
+      "Bilimsel gelişmelerden yararlanma hakkı",
+      "Medya ve bilgiye erişim hakkı",
+      "Ekonomik yardım hakkı",
+      "Sosyal güvenlik hakkı",
+      "Hukuki temsil hakkı",
+      "Mahremiyet hakkı",
+      "Cinsiyet eşitliği hakkı",
+      "Engellilik durumunda destek hakkı",
+      "Dil ve iletişim hakkı",
+      "Hukuki koruma hakkı",
+      "Dinlenme ve serbest zaman hakkı",
+      "Taşıma ve seyahat özgürlüğü",
+      "Fikirlerin serbestçe ifade edilmesi hakkı",
+      "Siyasi katılım hakkı",
+      "Eğitim materyallerine erişim hakkı",
+      "Sosyal hizmetlerden yararlanma hakkı",
+      "Kişisel gelişim hakkı",
+      "Toplum içindeki rol ve sorumluluk hakkı",
+      "Çevresel sağlıktan yararlanma hakkı",
+      "Doğal kaynaklardan yararlanma hakkı",
+      "Toplumla etkileşim hakkı",
+      "Sanat ve kültür faaliyetlerine katılma hakkı",
+      "Fiziksel güvenlik hakkı",
+      "Psikolojik güvenlik hakkı",
+      "Ekonomik kaynaklara erişim hakkı",
+      "Sevilme Hakkı"
+  ];
+  
+  let cr_count = 0;
+  const cr_maxCount = 54;
+  
+  const cr_countSpan = document.getElementById('cr-count');
+  const cr_increaseBtn = document.getElementById('cr-increase');
+  const cr_decreaseBtn = document.getElementById('cr-decrease');
+  const cr_rightDisplay = document.getElementById('cr-right-display');
+  
+  // İkonlar dizisi (Font Awesome ikon sınıfları)
+  const cr_icons = [
+      "fas fa-heart",
+      "fas fa-id-badge",
+      "fas fa-home",
+      "fas fa-book",
+      "fas fa-stethoscope",
+      "fas fa-gamepad",
+      "fas fa-shield-alt",
+      "fas fa-comment",
+      "fas fa-balance-scale",
+      "fas fa-music",
+      "fas fa-briefcase",
+      "fas fa-info-circle",
+      "fas fa-gavel",
+      "fas fa-lock",
+      "fas fa-umbrella",
+      "fas fa-pen-fancy",
+      "fas fa-users",
+      "fas fa-paint-brush",
+      "fas fa-tree",
+      "fas fa-hand-holding-heart",
+      "fas fa-hand-paper",
+      "fas fa-umbrella-beach",
+      "fas fa-handshake",
+      "fas fa-equality",
+      "fas fa-briefcase",
+      "fas fa-praying-hands",
+      "fas fa-user-group",
+      "fas fa-leaf",
+      "fas fa-flask",
+      "fas fa-newspaper",
+      "fas fa-hand-holding-usd",
+      "fas fa-shield-virus",
+      "fas fa-balance-scale-left",
+      "fas fa-transgender",
+      "fas fa-wheelchair",
+      "fas fa-language",
+      "fas fa-user-shield",
+      "fas fa-bed",
+      "fas fa-car",
+      "fas fa-lightbulb",
+      "fas fa-bullhorn",
+      "fas fa-book-open",
+      "fas fa-hands-helping",
+      "fas fa-user-graduate",
+      "fas fa-tasks",
+      "fas fa-water",
+      "fas fa-seedling",
+      "fas fa-users",
+      "fas fa-palette",
+      "fas fa-shield-alt",
+      "fas fa-brain",
+      "fas fa-coins"
+  ];
+  
+  cr_increaseBtn.addEventListener('click', () => {
+      if (cr_count < cr_maxCount) {
+          cr_count++;
+          cr_updateCounter();
+      }
+  });
+  
+  cr_decreaseBtn.addEventListener('click', () => {
+      if (cr_count > 0) {
+          cr_count--;
+          cr_updateCounter();
+      }
+  });
+  
+  function cr_updateCounter() {
+      cr_countSpan.textContent = cr_count;
+  
+      if (cr_count === 0) {
+          cr_rightDisplay.innerHTML = ''; // Hiç hak gösterilmez
+          return;
+      }
+  
+      const currentRight = cr_rights[cr_count - 1];
+      const currentIcon = cr_icons[(cr_count - 1) % cr_icons.length];
+  
+      cr_rightDisplay.innerHTML = `
+          <i class="${currentIcon}"></i>
+          <p>${cr_count}. Hak: ${currentRight}</p>
+      `;
+  }
+  </script>
     <!-- AOS ve Proje Scriptleri -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
