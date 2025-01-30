@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anasayfa | Çocuk Hakları Platformu</title>
     <link
-    rel="stylesheet"
-    href="https://unpkg.com/swiper/swiper-bundle.min.css"
-  />
-    <link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet/dist/leaflet.css"
-/>
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
@@ -20,189 +17,190 @@
     <link rel="shortcut icon" href="/images/shortcut_icon.png" />
     <style>
       .kapsayıcı {
-  max-width: 800px;
-  margin: 2rem auto;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
+        max-width: 800px;
+        margin: 2rem auto;
+        background: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
 
-h1 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #2563eb;
-}
+      h1 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #2563eb;
+      }
 
-#sayac {
-  font-weight: bold;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
-  color: #2563eb;
-}
+      #sayac {
+        font-weight: bold;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        color: #2563eb;
+      }
 
-#madde-metni {
-  margin-bottom: 2rem;
-  line-height: 1.6;
-  font-size: 1.1rem;
-  color: #34495e;
-}
+      #madde-metni {
+        margin-bottom: 2rem;
+        line-height: 1.6;
+        font-size: 1.1rem;
+        color: #34495e;
+      }
 
-.butonlar {
-  text-align: center;
-}
+      .butonlar {
+        display: flex;
+        justify-content: center;
+      }
 
-button {
-  background: #2563eb;
-  color: #fff;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  margin: 0 0.5rem;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
+      button {
+        background: #2563eb;
+        color: #fff;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        margin: 0 0.5rem;
+        font-size: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
 
-button:hover:not(:disabled) {
-  background: #1e40af;
-}
+      button:hover:not(:disabled) {
+        background: #1e40af;
+      }
 
-button:disabled {
-  background: #bdc3c7;
-  cursor: not-allowed;
-}
-    .bulten-modal {
-      display: none;           /* Başlangıçta kapalı */
-      position: fixed;
-      z-index: 9999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.5); 
-      opacity: 0; 
-      transition: opacity 0.4s ease; 
-    }
-    .bulten-modal.show {
-      display: block;
-      opacity: 1; 
-    }
+      button:disabled {
+        background: #bdc3c7;
+        cursor: not-allowed;
+      }
+      .bulten-modal {
+        display: none; /* Başlangıçta kapalı */
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+      .bulten-modal.show {
+        display: block;
+        opacity: 1;
+      }
 
-    .bulten-modal-icerik {
-      background-color: #f0f9ff;
-      width: 90%;
-      max-width: 600px;
-      margin: 60px auto;       /* Ekran merkezine yakın */
-      padding: 30px;
-      border-radius: 10px;
-      position: relative; 
-      
-      /* Başlangıçta küçük ve yarı saydam görünecek */
-      transform: scale(0.8);
-      opacity: 0;
-      transition: transform 0.4s ease, opacity 0.4s ease;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    }
+      .bulten-modal-icerik {
+        background-color: #f0f9ff;
+        width: 90%;
+        max-width: 600px;
+        margin: 60px auto; /* Ekran merkezine yakın */
+        padding: 30px;
+        border-radius: 10px;
+        position: relative;
 
-    /* 
+        /* Başlangıçta küçük ve yarı saydam görünecek */
+        transform: scale(0.8);
+        opacity: 0;
+        transition: transform 0.4s ease, opacity 0.4s ease;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      /* 
       Modal .show olduğunda içeriği büyütüp 
       opak hale getiriyoruz 
     */
-    .bulten-modal.show .bulten-modal-icerik {
-      transform: scale(1);
-      opacity: 1;
-    }
+      .bulten-modal.show .bulten-modal-icerik {
+        transform: scale(1);
+        opacity: 1;
+      }
 
-    /* Kapatma butonu (X) */
-    #kapatBultenModal {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 24px;
-      font-weight: bold;
-      color: var(--dark);
-      cursor: pointer;
-      transition: color 0.2s ease;
-    }
+      /* Kapatma butonu (X) */
+      #kapatBultenModal {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--dark);
+        cursor: pointer;
+        transition: color 0.2s ease;
+      }
 
-    #kapatBultenModal:hover {
-      color: var(--secondary);
-    }
+      #kapatBultenModal:hover {
+        color: var(--secondary);
+      }
 
-    /* Abone formunu saran container */
-    .newsletter-container {
-      text-align: center;
-      color: var(--text);
-      background: var(--background);
-      padding: 40px 20px;
-      border-radius: 8px;
-    }
+      /* Abone formunu saran container */
+      .newsletter-container {
+        text-align: center;
+        color: var(--text);
+        background: var(--background);
+        padding: 40px 20px;
+        border-radius: 8px;
+      }
 
-    .newsletter-container h2 {
-      font-size: 32px;
-      font-weight: bold;
-      color: var(--dark);
-      margin-bottom: 20px;
-    }
+      .newsletter-container h2 {
+        font-size: 32px;
+        font-weight: bold;
+        color: var(--dark);
+        margin-bottom: 20px;
+      }
 
-    .newsletter-container p {
-      font-size: 18px;
-      margin-bottom: 30px;
-      color: var(--dark);
-    }
+      .newsletter-container p {
+        font-size: 18px;
+        margin-bottom: 30px;
+        color: var(--dark);
+      }
 
-    /* Form yapısı */
-    #newsletter-form {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+      /* Form yapısı */
+      #newsletter-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        max-width: 600px;
+        margin: 0 auto;
+      }
 
-    #newsletter-form input[type="email"] {
-      padding: 15px;
-      font-size: 18px;
-      border: 2px solid var(--accent);
-      border-radius: 30px;
-      outline: none;
-      width: 100%;
-      max-width: 400px;
-      transition: all 0.3s ease;
-      text-align: center;
-      box-sizing: border-box;
-    }
+      #newsletter-form input[type="email"] {
+        padding: 15px;
+        font-size: 18px;
+        border: 2px solid var(--accent);
+        border-radius: 30px;
+        outline: none;
+        width: 100%;
+        max-width: 400px;
+        transition: all 0.3s ease;
+        text-align: center;
+        box-sizing: border-box;
+      }
 
-    #newsletter-form input[type="email"]:focus {
-      border-color: var(--dark);
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    }
+      #newsletter-form input[type="email"]:focus {
+        border-color: var(--dark);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
 
-    /* Buton stili */
-    #newsletter-form button[type="submit"] {
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      color: var(--light);
-      border: none;
-      border-radius: 30px;
-      padding: 15px 40px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
+      /* Buton stili */
+      #newsletter-form button[type="submit"] {
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        color: var(--light);
+        border: none;
+        border-radius: 30px;
+        padding: 15px 40px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
 
-    #newsletter-form button[type="submit"]:hover {
-      opacity: 0.9;
-    }
+      #newsletter-form button[type="submit"]:hover {
+        opacity: 0.9;
+      }
 
-    .newsletter-container p:last-child {
-      margin-top: 20px;
-      font-size: 14px;
-      color: var(--dark);
-    }
+      .newsletter-container p:last-child {
+        margin-top: 20px;
+        font-size: 14px;
+        color: var(--dark);
+      }
       .donation-section {
         max-width: 1000px;
         margin: 60px auto;
@@ -855,69 +853,69 @@ button:disabled {
         object-fit: cover;
       }
       .stats-section {
-  background-color: var(--background);
-  text-align: center;
-  padding: 60px 20px;
-  border-radius: 12px;
-}
+        background-color: var(--background);
+        text-align: center;
+        padding: 60px 20px;
+        border-radius: 12px;
+      }
 
-.stats-section h2 {
-  color: var(--primary);
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
+      .stats-section h2 {
+        color: var(--primary);
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
 
-.stats-section p {
-  color: var(--text);
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-}
+      .stats-section p {
+        color: var(--text);
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+      }
 
-.stats-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
+      .stats-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
 
-.stat-box {
-  background: var(--light);
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: 280px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+      .stat-box {
+        background: var(--light);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 280px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
 
-.stat-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
+      .stat-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
 
-.stat-number {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: var(--secondary);
-  margin-bottom: 10px;
-}
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--secondary);
+        margin-bottom: 10px;
+      }
 
-.stat-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: var(--dark);
-  margin-bottom: 5px;
-}
+      .stat-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--dark);
+        margin-bottom: 5px;
+      }
 
-.stat-description {
-  font-size: 1rem;
-  color: var(--text);
-}
+      .stat-description {
+        font-size: 1rem;
+        color: var(--text);
+      }
       .toast-container {
         position: fixed;
         bottom: 20px;
         left: 20px;
-        z-index: 1000;
+        z-index: 9999;
       }
 
       /* Toast Bildirim */
@@ -1038,8 +1036,8 @@ button:disabled {
       .social-icons a:hover {
         color: #1e40af;
       }
-            /* Harita Alanı */
-            #map-section {
+      /* Harita Alanı */
+      #map-section {
         padding: 80px 0;
       }
 
@@ -1250,7 +1248,7 @@ button:disabled {
       <section id="map-section">
         <div class="container">
           <h2 class="section-title">Türkiye'de Desteklediğimiz Bölgeler</h2>
-          <p style="text-align: center;">
+          <p style="text-align: center">
             Platformumuzdan yararlanan kişileri harita üzerinde görebilirsiniz.
           </p>
           <br />
@@ -1270,7 +1268,7 @@ button:disabled {
               Bu platform sayesinde birçok çocuğa umut olduk.
             </div>
           </div>
-          
+
           <div class="stat-box">
             <div class="stat-number" data-target="350">0</div>
             <div class="stat-title">Gönüllü Katılım</div>
@@ -1278,18 +1276,17 @@ button:disabled {
               Çocuk haklarını savunan gönüllülerimizle birlikteyiz.
             </div>
           </div>
-          
+
           <div class="stat-box">
             <div class="stat-number" data-target="75">0</div>
             <div class="stat-title">Etkinlik Düzenlendi</div>
             <div class="stat-description">
-              Çocuk hakları bilincini artırmak için birçok etkinlik gerçekleştirdik.
+              Çocuk hakları bilincini artırmak için birçok etkinlik
+              gerçekleştirdik.
             </div>
           </div>
-          
         </div>
       </section>
-
 
       <div class="kapsayıcı">
         <h1>Çocuk Hakları Sözleşmesi Maddeleri</h1>
@@ -1657,15 +1654,14 @@ button:disabled {
     </section>
     <div id="bultenModal" class="bulten-modal">
       <div class="bulten-modal-icerik">
-  
         <!-- Kapatma Butonu -->
         <span id="kapatBultenModal">&times;</span>
-        
+
         <!-- Abonelik İçeriğiniz -->
         <div class="newsletter-container">
           <h2>Bültenimize Abone Olun</h2>
           <p>Güncellemeler ve özel içerikler için e-posta listemize katılın.</p>
-  
+
           <form id="newsletter-form">
             <input
               type="email"
@@ -1673,15 +1669,14 @@ button:disabled {
               placeholder="E-posta adresinizi girin"
               required
             />
-            <button type="submit">
-              Abone Ol
-            </button>
+            <button type="submit">Abone Ol</button>
           </form>
-  
-          <p>Gizliliğinize önem veriyoruz. Spam yok, sadece değerli içerikler.</p>
+
+          <p>
+            Gizliliğinize önem veriyoruz. Spam yok, sadece değerli içerikler.
+          </p>
         </div>
         <!-- /Abonelik İçeriği -->
-  
       </div>
     </div>
 
@@ -1816,50 +1811,50 @@ button:disabled {
       </div>
     </footer>
     <script src="/js/script.js"></script>
-        <!-- AOS ve Proje Scriptleri -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-        <script>
-          document.addEventListener("DOMContentLoaded", function () {
-            var map = L.map("mapid").setView([38.9637, 35.2433], 6);
-    
-            // Harita katmanı
-            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-              maxZoom: 18,
-              attribution: "© OpenStreetMap",
-            }).addTo(map);
-    
-            // Örnek veri
-            var beneficiaries = [
-              { city: "İstanbul", lat: 41.0082, lng: 28.9784, count: 1200 },
-              { city: "Ankara", lat: 39.9208, lng: 32.8541, count: 800 },
-              { city: "İzmir", lat: 38.4237, lng: 27.1428, count: 500 },
-              { city: "Bursa", lat: 40.1828, lng: 29.0669, count: 300 },
-              { city: "Antalya", lat: 36.8969, lng: 30.7133, count: 450 },
-              { city: "Adana", lat: 36.9914, lng: 35.3308, count: 350 },
-              { city: "Gaziantep", lat: 37.0662, lng: 37.3833, count: 620 },
-              { city: "Diyarbakır", lat: 37.9144, lng: 40.2306, count: 280 },
-              { city: "Konya", lat: 37.8713, lng: 32.4846, count: 410 },
-              { city: "Kayseri", lat: 38.7225, lng: 35.4875, count: 200 },
-              { city: "Samsun", lat: 41.2797, lng: 36.3361, count: 330 },
-              { city: "Trabzon", lat: 41.0015, lng: 39.7178, count: 220 },
-              { city: "Mersin", lat: 36.8121, lng: 34.6415, count: 450 },
-            ];
-    
-            // Marker ekleme
-            beneficiaries.forEach(function (location) {
-              L.marker([location.lat, location.lng])
-                .addTo(map)
-                .bindPopup(
-                  "<b>" +
-                    location.city +
-                    "</b><br>" +
-                    "Yararlanan Kişi: " +
-                    location.count
-                );
-            });
-          });
-        </script>
+    <!-- AOS ve Proje Scriptleri -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var map = L.map("mapid").setView([38.9637, 35.2433], 6);
+
+        // Harita katmanı
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 18,
+          attribution: "© OpenStreetMap",
+        }).addTo(map);
+
+        // Örnek veri
+        var beneficiaries = [
+          { city: "İstanbul", lat: 41.0082, lng: 28.9784, count: 1200 },
+          { city: "Ankara", lat: 39.9208, lng: 32.8541, count: 800 },
+          { city: "İzmir", lat: 38.4237, lng: 27.1428, count: 500 },
+          { city: "Bursa", lat: 40.1828, lng: 29.0669, count: 300 },
+          { city: "Antalya", lat: 36.8969, lng: 30.7133, count: 450 },
+          { city: "Adana", lat: 36.9914, lng: 35.3308, count: 350 },
+          { city: "Gaziantep", lat: 37.0662, lng: 37.3833, count: 620 },
+          { city: "Diyarbakır", lat: 37.9144, lng: 40.2306, count: 280 },
+          { city: "Konya", lat: 37.8713, lng: 32.4846, count: 410 },
+          { city: "Kayseri", lat: 38.7225, lng: 35.4875, count: 200 },
+          { city: "Samsun", lat: 41.2797, lng: 36.3361, count: 330 },
+          { city: "Trabzon", lat: 41.0015, lng: 39.7178, count: 220 },
+          { city: "Mersin", lat: 36.8121, lng: 34.6415, count: 450 },
+        ];
+
+        // Marker ekleme
+        beneficiaries.forEach(function (location) {
+          L.marker([location.lat, location.lng])
+            .addTo(map)
+            .bindPopup(
+              "<b>" +
+                location.city +
+                "</b><br>" +
+                "Yararlanan Kişi: " +
+                location.count
+            );
+        });
+      });
+    </script>
     <script>
       // Mobile Menu Toggle
       document.addEventListener("DOMContentLoaded", function () {
@@ -1927,29 +1922,29 @@ button:disabled {
         }, 500);
       }
     </script>
-        <script>
-          function animateCounter(id, start, end, duration) {
-            let obj = document.getElementById(id);
-            let current = start;
-            let increment = end > start ? 1 : -1;
-            let stepTime = Math.abs(Math.floor(duration / (end - start)));
-    
-            let timer = setInterval(function () {
-              current += increment;
-              obj.textContent = current;
-              if (current === end) {
-                clearInterval(timer);
-              }
-            }, stepTime);
+    <script>
+      function animateCounter(id, start, end, duration) {
+        let obj = document.getElementById(id);
+        let current = start;
+        let increment = end > start ? 1 : -1;
+        let stepTime = Math.abs(Math.floor(duration / (end - start)));
+
+        let timer = setInterval(function () {
+          current += increment;
+          obj.textContent = current;
+          if (current === end) {
+            clearInterval(timer);
           }
-    
-          // Sayaçlar başlangıç değerleri
-          window.onload = function () {
-            animateCounter("children-helped", 0, 375, 3000);
-            animateCounter("volunteers", 0, 350, 2500);
-            animateCounter("events", 0, 45, 2000);
-          };
-        </script>
+        }, stepTime);
+      }
+
+      // Sayaçlar başlangıç değerleri
+      window.onload = function () {
+        animateCounter("children-helped", 0, 375, 3000);
+        animateCounter("volunteers", 0, 350, 2500);
+        animateCounter("events", 0, 45, 2000);
+      };
+    </script>
     <script>
       // Video thumbnail'lerine tıklama işlevselliği
       document.addEventListener("DOMContentLoaded", function () {
@@ -1986,50 +1981,49 @@ button:disabled {
     </script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-  const stats = document.querySelectorAll(".stat-number");
-  const section = document.querySelector(".stats-section");
-  let hasAnimated = false;
+        const stats = document.querySelectorAll(".stat-number");
+        const section = document.querySelector(".stats-section");
+        let hasAnimated = false;
 
-  function animateNumbers() {
-    if (hasAnimated) return;
+        function animateNumbers() {
+          if (hasAnimated) return;
 
-    stats.forEach(stat => {
-      const target = parseInt(stat.getAttribute("data-target"));
-      let count = 0;
-      const duration = 2500; // Artışın süresi (ms)
-      const intervalTime = 30; // Artış sıklığı (ms)
-      const increment = target / (duration / intervalTime);
+          stats.forEach((stat) => {
+            const target = parseInt(stat.getAttribute("data-target"));
+            let count = 0;
+            const duration = 2500; // Artışın süresi (ms)
+            const intervalTime = 30; // Artış sıklığı (ms)
+            const increment = target / (duration / intervalTime);
 
-      const updateCount = () => {
-        count += increment;
-        if (count < target) {
-          stat.innerText = Math.floor(count);
-          setTimeout(updateCount, intervalTime);
-        } else {
-          stat.innerText = target;
+            const updateCount = () => {
+              count += increment;
+              if (count < target) {
+                stat.innerText = Math.floor(count);
+                setTimeout(updateCount, intervalTime);
+              } else {
+                stat.innerText = target;
+              }
+            };
+
+            updateCount();
+          });
+
+          hasAnimated = true;
         }
-      };
 
-      updateCount();
-    });
+        function checkScroll() {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          const scrollY = window.scrollY;
+          const windowHeight = window.innerHeight;
 
-    hasAnimated = true;
-  }
+          if (scrollY + windowHeight > sectionTop + sectionHeight / 4) {
+            animateNumbers();
+          }
+        }
 
-  function checkScroll() {
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.offsetHeight;
-    const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
-
-    if (scrollY + windowHeight > sectionTop + sectionHeight / 4) {
-      animateNumbers();
-    }
-  }
-
-  window.addEventListener("scroll", checkScroll);
-});
-
+        window.addEventListener("scroll", checkScroll);
+      });
     </script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -2042,103 +2036,102 @@ button:disabled {
     </script>
     <script>
       // Çocuk Hakları Sözleşmesi'nin 54 maddesi
-const maddeler = [
-  "Bu Sözleşme'ye göre 18 yaşına kadar her insan çocuktur.",
-  "Çocuk hakları, hiçbir ayrım gözetilmeksizin bütün çocuklar için geçerlidir.",
-  "Çocuğun her türlü faaliyette çocuğun yararı ilk düşüncedir.",
-  "Devletler, bu sözleşmede tanınan hakların uygulanmasını sağlamak için her türlü önlemi almalıdır.",
-  "Devletler, anne-baba ve aileyi çocuğun haklarının uygulanmasında desteklemelidir.",
-  "Çocuk, her zaman kendi ülkesinde vatandaş olarak tanınmalıdır.",
-  "Her çocuğun ismi ve kimliği vardır ve her çocuk koruma hakkına sahiptir.",
-  "Çocuklar, çocuğa özel ulusal yasalarla uygun şekilde koruma hakkına sahiptir.",
-  "Çocuk, yaşadığı ortamda aile çevresinden ayrılmamalıdır.",
-  "Çocuk, mecburi önlemler olmaksızın aile çevresinden ayrılmamalıdır.",
-  "Çocuk, yanlışlıkla sınır dışına çıkarılmamalı ve geri getirilmelidir.",
-  "Çocuk, kendisini ilgilendiren kararlarla ilgili görüş bildirme hakkına sahiptir.",
-  "Çocuk, ifade özgürlüğüne sahiptir.",
-  "Çocuk, eğitim hakkına sahiptir ve bu eğitim ücretsiz olmalıdır.",
-  "Çocuk, din ve vicdan özgürlüğüne sahiptir.",
-  "Çocuğun özel hayatına, aile hayatına ve gizliliğine saygı gösterilmelidir.",
-  "Çocuk, bilgiye erişim hakkına sahiptir.",
-  "Çocuk, çocuk olarak korunmalıdır ve yetişkin haklarına sahip olmamalıdır.",
-  "Çocuk, istismar, ihmalkarlık ve kötü muameleden korunmalıdır.",
-  "Çocuk, bakıma muhtaç olduğunda uygun bakım ve koruma hizmetlerine erişim hakkına sahiptir.",
-  "Çocuk, geçici bakım veya koruma gerektiren durumlarda korunmalıdır.",
-  "Engelli çocuklar, toplumun tüm alanlarında eşit haklara sahiptir.",
-  "Çocuklar, herhangi bir hastalık veya engellilik durumunda uygun sağlık hizmetlerine erişim hakkına sahiptir.",
-  "Çocuklar, en yüksek sağlık seviyesine ulaşma hakkına sahiptir.",
-  "Çocuklar, aile ve toplum içinde yaşam standartlarının korunmasını hak eder.",
-  "Çocuklar, eğitim hakkına sahiptir ve zorunlu eğitim almalıdır.",
-  "Çocuklar, eğitim aracılığıyla gelişimlerini tam olarak gerçekleştirme hakkına sahiptir.",
-  "Çocukların eğitim sistemi, çocukların haklarına uygun olmalıdır.",
-  "Eğitim, çocuğun kişisel gelişimini, saygılı davranışları ve sorumluluk duygusunu desteklemelidir.",
-  "Çocuklar, kendi toplulukları ve kültürleri içinde korunma hakkına sahiptir.",
-  "Çocuklar, oyun ve dinlenme hakkına sahiptir.",
-  "Çocuklar, bağımlılık yapıcı maddelerden korunmalıdır.",
-  "Çocuklar, zararlı alışkanlıklardan korunmalıdır.",
-  "Çocuklar, bilgiye erişim yoluyla zararlı bilgilere maruz kalmamalıdır.",
-  "Çocuklar, kaçırılma, ticaret ve istismardan korunmalıdır.",
-  "Çocuklar, işçiliğin kötüye kullanımından korunmalıdır.",
-  "Çocuklar, istismara maruz kaldıklarında uygun yasal koruma ve yardım almalıdır.",
-  "Çocuklar, mülteci durumunda korunmalıdır.",
-  "Çocuklar, mahkeme veya diğer resmi işlemler sırasında korunmalıdır.",
-  "Çocuklar, cezai sorumluluk yaşına ulaşmadıkça cezalandırılmamalıdır.",
-  "Çocukların haklarının ihlal edilmesi durumunda tazminat hakkı vardır.",
-  "Çocuk hakları ulusal, bölgesel ve uluslararası düzeyde tanınmalı ve korunmalıdır.",
-  "Devletler, Çocuk Hakları Sözleşmesi'nin uygulanmasını sağlamak için gerekli yasaları kabul etmelidir.",
-  "Çocuk hakları, uluslararası işbirliği yoluyla korunmalıdır.",
-  "Çocuk haklarının korunması için gerekli ulusal ve uluslararası mekanizmalar kurulmalıdır.",
-  "Çocuk haklarının korunması için gerekli finansal kaynaklar sağlanmalıdır.",
-  " Çocuk haklarının ihlal edilmesi durumunda etkili yasal yollar sağlanmalıdır.",
-  "Çocuk haklarının uygulanmasını izlemek için bağımsız kurumlar kurulmalıdır.",
-  "Çocuk hakları konusundaki araştırmalar desteklenmelidir.",
-  "Çocuk haklarının tanıtılması ve farkındalığın artırılması sağlanmalıdır.",
-  "Çocuk hakları ile ilgili ulusal ve uluslararası işbirliği teşvik edilmelidir.",
-  "Çocuk hakları konusunda eğitim ve öğretim programları geliştirilmelidir.",
-  "Çocuk hakları ihlallerinin önlenmesi için stratejiler oluşturulmalıdır.",
-  "Bu Sözleşme, üye devletlerin onayı ile yürürlüğe girer ve taraf devletler için bağlayıcıdır."
-];
+      const maddeler = [
+        "Bu Sözleşme'ye göre 18 yaşına kadar her insan çocuktur.",
+        "Çocuk hakları, hiçbir ayrım gözetilmeksizin bütün çocuklar için geçerlidir.",
+        "Çocuğun her türlü faaliyette çocuğun yararı ilk düşüncedir.",
+        "Devletler, bu sözleşmede tanınan hakların uygulanmasını sağlamak için her türlü önlemi almalıdır.",
+        "Devletler, anne-baba ve aileyi çocuğun haklarının uygulanmasında desteklemelidir.",
+        "Çocuk, her zaman kendi ülkesinde vatandaş olarak tanınmalıdır.",
+        "Her çocuğun ismi ve kimliği vardır ve her çocuk koruma hakkına sahiptir.",
+        "Çocuklar, çocuğa özel ulusal yasalarla uygun şekilde koruma hakkına sahiptir.",
+        "Çocuk, yaşadığı ortamda aile çevresinden ayrılmamalıdır.",
+        "Çocuk, mecburi önlemler olmaksızın aile çevresinden ayrılmamalıdır.",
+        "Çocuk, yanlışlıkla sınır dışına çıkarılmamalı ve geri getirilmelidir.",
+        "Çocuk, kendisini ilgilendiren kararlarla ilgili görüş bildirme hakkına sahiptir.",
+        "Çocuk, ifade özgürlüğüne sahiptir.",
+        "Çocuk, eğitim hakkına sahiptir ve bu eğitim ücretsiz olmalıdır.",
+        "Çocuk, din ve vicdan özgürlüğüne sahiptir.",
+        "Çocuğun özel hayatına, aile hayatına ve gizliliğine saygı gösterilmelidir.",
+        "Çocuk, bilgiye erişim hakkına sahiptir.",
+        "Çocuk, çocuk olarak korunmalıdır ve yetişkin haklarına sahip olmamalıdır.",
+        "Çocuk, istismar, ihmalkarlık ve kötü muameleden korunmalıdır.",
+        "Çocuk, bakıma muhtaç olduğunda uygun bakım ve koruma hizmetlerine erişim hakkına sahiptir.",
+        "Çocuk, geçici bakım veya koruma gerektiren durumlarda korunmalıdır.",
+        "Engelli çocuklar, toplumun tüm alanlarında eşit haklara sahiptir.",
+        "Çocuklar, herhangi bir hastalık veya engellilik durumunda uygun sağlık hizmetlerine erişim hakkına sahiptir.",
+        "Çocuklar, en yüksek sağlık seviyesine ulaşma hakkına sahiptir.",
+        "Çocuklar, aile ve toplum içinde yaşam standartlarının korunmasını hak eder.",
+        "Çocuklar, eğitim hakkına sahiptir ve zorunlu eğitim almalıdır.",
+        "Çocuklar, eğitim aracılığıyla gelişimlerini tam olarak gerçekleştirme hakkına sahiptir.",
+        "Çocukların eğitim sistemi, çocukların haklarına uygun olmalıdır.",
+        "Eğitim, çocuğun kişisel gelişimini, saygılı davranışları ve sorumluluk duygusunu desteklemelidir.",
+        "Çocuklar, kendi toplulukları ve kültürleri içinde korunma hakkına sahiptir.",
+        "Çocuklar, oyun ve dinlenme hakkına sahiptir.",
+        "Çocuklar, bağımlılık yapıcı maddelerden korunmalıdır.",
+        "Çocuklar, zararlı alışkanlıklardan korunmalıdır.",
+        "Çocuklar, bilgiye erişim yoluyla zararlı bilgilere maruz kalmamalıdır.",
+        "Çocuklar, kaçırılma, ticaret ve istismardan korunmalıdır.",
+        "Çocuklar, işçiliğin kötüye kullanımından korunmalıdır.",
+        "Çocuklar, istismara maruz kaldıklarında uygun yasal koruma ve yardım almalıdır.",
+        "Çocuklar, mülteci durumunda korunmalıdır.",
+        "Çocuklar, mahkeme veya diğer resmi işlemler sırasında korunmalıdır.",
+        "Çocuklar, cezai sorumluluk yaşına ulaşmadıkça cezalandırılmamalıdır.",
+        "Çocukların haklarının ihlal edilmesi durumunda tazminat hakkı vardır.",
+        "Çocuk hakları ulusal, bölgesel ve uluslararası düzeyde tanınmalı ve korunmalıdır.",
+        "Devletler, Çocuk Hakları Sözleşmesi'nin uygulanmasını sağlamak için gerekli yasaları kabul etmelidir.",
+        "Çocuk hakları, uluslararası işbirliği yoluyla korunmalıdır.",
+        "Çocuk haklarının korunması için gerekli ulusal ve uluslararası mekanizmalar kurulmalıdır.",
+        "Çocuk haklarının korunması için gerekli finansal kaynaklar sağlanmalıdır.",
+        " Çocuk haklarının ihlal edilmesi durumunda etkili yasal yollar sağlanmalıdır.",
+        "Çocuk haklarının uygulanmasını izlemek için bağımsız kurumlar kurulmalıdır.",
+        "Çocuk hakları konusundaki araştırmalar desteklenmelidir.",
+        "Çocuk haklarının tanıtılması ve farkındalığın artırılması sağlanmalıdır.",
+        "Çocuk hakları ile ilgili ulusal ve uluslararası işbirliği teşvik edilmelidir.",
+        "Çocuk hakları konusunda eğitim ve öğretim programları geliştirilmelidir.",
+        "Çocuk hakları ihlallerinin önlenmesi için stratejiler oluşturulmalıdır.",
+        "Bu Sözleşme, üye devletlerin onayı ile yürürlüğe girer ve taraf devletler için bağlayıcıdır.",
+      ];
 
-// Mevcut gösterilen maddenin indexi (0 tabanlı sayım)
-let mevcutIndeks = 0;
+      // Mevcut gösterilen maddenin indexi (0 tabanlı sayım)
+      let mevcutIndeks = 0;
 
-// HTML’deki elementleri JS’e bağlıyoruz
-const sayacElement = document.getElementById("sayac");
-const maddeMetniElement = document.getElementById("madde-metni");
-const oncekiBtn = document.getElementById("oncekiBtn");
-const sonrakiBtn = document.getElementById("sonrakiBtn");
+      // HTML’deki elementleri JS’e bağlıyoruz
+      const sayacElement = document.getElementById("sayac");
+      const maddeMetniElement = document.getElementById("madde-metni");
+      const oncekiBtn = document.getElementById("oncekiBtn");
+      const sonrakiBtn = document.getElementById("sonrakiBtn");
 
-// Sayfada gösterilecek maddeyi güncelleyen fonksiyon
-function guncelleGosterim(index) {
-  // Madde sayısını (1'den başlayarak) gösteriyoruz
-  sayacElement.textContent = `Madde: ${index + 1}`;
-  // Dizideki madde metnini gösteriyoruz
-  maddeMetniElement.textContent = maddeler[index];
+      // Sayfada gösterilecek maddeyi güncelleyen fonksiyon
+      function guncelleGosterim(index) {
+        // Madde sayısını (1'den başlayarak) gösteriyoruz
+        sayacElement.textContent = `Madde: ${index + 1}`;
+        // Dizideki madde metnini gösteriyoruz
+        maddeMetniElement.textContent = maddeler[index];
 
-  // "Önceki" butonunu ilk maddede devre dışı bırak
-  oncekiBtn.disabled = (index === 0);
-  // "Sonraki" butonunu son maddede devre dışı bırak
-  sonrakiBtn.disabled = (index === maddeler.length - 1);
-}
+        // "Önceki" butonunu ilk maddede devre dışı bırak
+        oncekiBtn.disabled = index === 0;
+        // "Sonraki" butonunu son maddede devre dışı bırak
+        sonrakiBtn.disabled = index === maddeler.length - 1;
+      }
 
-// Butonlara tıklama olaylarını tanımlıyoruz
-oncekiBtn.addEventListener("click", () => {
-  if (mevcutIndeks > 0) {
-    mevcutIndeks--;
-    guncelleGosterim(mevcutIndeks);
-  }
-});
+      // Butonlara tıklama olaylarını tanımlıyoruz
+      oncekiBtn.addEventListener("click", () => {
+        if (mevcutIndeks > 0) {
+          mevcutIndeks--;
+          guncelleGosterim(mevcutIndeks);
+        }
+      });
 
-sonrakiBtn.addEventListener("click", () => {
-  if (mevcutIndeks < maddeler.length - 1) {
-    mevcutIndeks++;
-    guncelleGosterim(mevcutIndeks);
-  }
-});
+      sonrakiBtn.addEventListener("click", () => {
+        if (mevcutIndeks < maddeler.length - 1) {
+          mevcutIndeks++;
+          guncelleGosterim(mevcutIndeks);
+        }
+      });
 
-// Sayfa ilk yüklendiğinde ilk maddeyi göster
-guncelleGosterim(mevcutIndeks);
-
+      // Sayfa ilk yüklendiğinde ilk maddeyi göster
+      guncelleGosterim(mevcutIndeks);
     </script>
     <script>
       // Kart bilgilerini dinamik olarak güncelleme
@@ -2217,56 +2210,58 @@ guncelleGosterim(mevcutIndeks);
           }
         });
     </script>
-  <script>
-    // Sayfa yüklendiğinde modalı göster
-    window.onload = function() {
-      let modal = document.getElementById("bultenModal");
-      // Önce display: block
-      modal.style.display = "block";
-      // Biraz gecikmeyle .show ekleyerek animasyonu başlat
-      setTimeout(() => {
-        modal.classList.add("show");
-      }, 10);
-    };
+    <script>
+      // Sayfa yüklendiğinde modalı göster
+      window.onload = function () {
+        let modal = document.getElementById("bultenModal");
+        // Önce display: block
+        modal.style.display = "block";
+        // Biraz gecikmeyle .show ekleyerek animasyonu başlat
+        setTimeout(() => {
+          modal.classList.add("show");
+        }, 10);
+      };
 
-    // Kapatma butonu
-    const kapatBultenModal = document.getElementById("kapatBultenModal");
-    kapatBultenModal.onclick = function() {
-      closeModal();
-    };
-
-    // Modal dışına tıklayınca kapatma
-    window.onclick = function(event) {
-      const modal = document.getElementById("bultenModal");
-      if (event.target === modal) {
+      // Kapatma butonu
+      const kapatBultenModal = document.getElementById("kapatBultenModal");
+      kapatBultenModal.onclick = function () {
         closeModal();
+      };
+
+      // Modal dışına tıklayınca kapatma
+      window.onclick = function (event) {
+        const modal = document.getElementById("bultenModal");
+        if (event.target === modal) {
+          closeModal();
+        }
+      };
+
+      // Modal kapatma fonksiyonu (animasyonlu)
+      function closeModal() {
+        let modal = document.getElementById("bultenModal");
+        modal.classList.remove("show"); // show kaldırınca opacity/scale geri döner
+        // Animasyon bitince tamamen gizle
+        setTimeout(() => {
+          modal.style.display = "none";
+        }, 400); // transition süresiyle eşleştirin
       }
-    };
 
-    // Modal kapatma fonksiyonu (animasyonlu)
-    function closeModal() {
-      let modal = document.getElementById("bultenModal");
-      modal.classList.remove("show"); // show kaldırınca opacity/scale geri döner
-      // Animasyon bitince tamamen gizle
-      setTimeout(() => {
-        modal.style.display = "none";
-      }, 400); // transition süresiyle eşleştirin
-    }
+      // Form gönderim olayı
+      document
+        .getElementById("newsletter-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Sayfanın yeniden yüklenmesini engelle
 
-    // Form gönderim olayı
-    document.getElementById("newsletter-form").addEventListener("submit", function(event) {
-      event.preventDefault(); // Sayfanın yeniden yüklenmesini engelle
+          const emailInput = document.getElementById("email").value.trim();
+          if (emailInput === "") {
+          } else {
+            alert("Başarıyla kaydolundu!");
+            document.getElementById("newsletter-form").reset();
 
-      const emailInput = document.getElementById("email").value.trim();
-      if (emailInput === "") {
-      } else {
-        alert("Başarıyla kaydolundu!");
-        document.getElementById("newsletter-form").reset();
-        
-        // Otomatik olarak modalı kapat
-        closeModal();
-      }
-    });
-  </script>
+            // Otomatik olarak modalı kapat
+            closeModal();
+          }
+        });
+    </script>
   </body>
 </html>
