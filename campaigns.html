@@ -5,65 +5,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kampanyalar | Çocuk Hakları Platformu</title>
     <link rel="shortcut icon" href="/images/shortcut_icon.png" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
     <style>
-      /* Mobile Menu Styles */
-      @media (max-width: 768px) {
-        .nav-links {
-          display: none;
-          position: fixed;
-          top: 70px;
-          left: 0;
-          width: 100%;
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(10px);
-          flex-direction: column;
-          align-items: center;
-          padding: 2rem 0;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          z-index: 1000;
-        }
-
-        .nav-links.mobile-active {
-          display: flex;
-        }
-
-        .nav-links a {
-          margin: 1rem 0;
-          font-size: 1.2rem;
-        }
-
-        .mobile-menu-toggle {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          width: 30px;
-          height: 20px;
-          cursor: pointer;
-        }
-
-        .mobile-menu-toggle span {
-          width: 100%;
-          height: 3px;
-          background-color: var(--primary);
-          transition: all 0.3s ease;
-        }
-
-        .mobile-menu-toggle.active span:nth-child(1) {
-          transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .mobile-menu-toggle.active span:nth-child(2) {
-          opacity: 0;
-        }
-
-        .mobile-menu-toggle.active span:nth-child(3) {
-          transform: rotate(-45deg) translate(5px, -5px);
-        }
+      .turkey-map {
+        height: 500px;
+        border-radius: 10px;
+        z-index: 1;
       }
+
+      .leaflet-container {
+        border-radius: 10px;
+      }
+      .events-map-section {
+  padding: 4rem 2rem;
+  background-color: var(--background);
+}
+
+.events-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.events-title {
+  text-align: center;
+  color: var(--text);
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.events-filter {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.filter-select {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  background-color: var(--light);
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-select:hover {
+  border-color: var(--accent);
+}
+
+.map-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  background: var(--light);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.turkey-map {
+  height: 500px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  position: relative;
+}
+
+.map-point {
+  width: 12px;
+  height: 12px;
+  background-color: var(--primary);
+  border-radius: 50%;
+  position: absolute;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.map-point:hover {
+  transform: scale(1.5);
+  background-color: var(--accent);
+}
+
+.map-point.active {
+  background-color: var(--accent);
+  transform: scale(1.5);
+}
+
+.events-list {
+  background-color: var(--background);
+  padding: 1rem;
+  border-radius: 10px;
+  overflow-y: auto;
+  max-height: 500px;
+}
+
+.event-card {
+  background: var(--light);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.event-card h3 {
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.event-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.event-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--accent);
+  color: var(--light);
+  border-radius: 15px;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .map-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .turkey-map {
+    height: 300px;
+  }
+  
+  .events-filter {
+    flex-direction: column;
+  }
+}
       :root {
         --primary: #2563eb;
         --secondary: #3b82f6;
@@ -73,19 +165,18 @@
         --light: #ffffff;
         --dark: #1e40af;
       }
-
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         font-family: "Segoe UI", system-ui, sans-serif;
       }
-
       body {
         background-color: var(--background);
         color: var(--text);
         line-height: 1.6;
       }
+      /* Header, Navigation, Hero, Kampanya, Footer vs. için mevcut stiller */
       .header {
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
@@ -102,7 +193,6 @@
         justify-content: space-between;
         align-items: center;
       }
-
       .logo {
         font-size: 1.5rem;
         font-weight: bold;
@@ -112,13 +202,11 @@
         align-items: center;
         gap: 0.5rem;
       }
-
       .nav-links {
         display: flex;
         gap: 2rem;
         list-style: none;
       }
-
       .nav-links a {
         color: var(--text);
         text-decoration: none;
@@ -126,7 +214,6 @@
         transition: color 0.3s;
         position: relative;
       }
-
       .nav-links a:after {
         content: "";
         position: absolute;
@@ -137,12 +224,9 @@
         background-color: var(--primary);
         transition: width 0.3s;
       }
-
       .nav-links a:hover:after {
         width: 100%;
       }
-
-      /* Hero Section Styles */
       .hero {
         height: 100vh;
         position: relative;
@@ -152,7 +236,6 @@
         text-align: center;
         color: var(--light);
       }
-
       .video-bg {
         position: absolute;
         top: 0;
@@ -162,7 +245,6 @@
         object-fit: cover;
         z-index: -2;
       }
-
       .hero-overlay {
         position: absolute;
         top: 0;
@@ -172,13 +254,10 @@
         background: rgba(0, 0, 0, 0.5);
         z-index: -1;
       }
-
       .hero-content {
         max-width: 800px;
         padding: 0 1rem;
       }
-
-      /* Campaign Filter Styles */
       .campaign-filter {
         display: flex;
         justify-content: center;
@@ -186,7 +265,6 @@
         margin: 40px 0;
         flex-wrap: wrap;
       }
-
       .filter-btn {
         background-color: var(--light);
         border: 2px solid var(--primary);
@@ -196,14 +274,11 @@
         cursor: pointer;
         transition: all 0.3s;
       }
-
       .filter-btn:hover,
       .filter-btn.active {
         background-color: var(--primary);
         color: var(--light);
       }
-
-      /* Campaign Grid Styles */
       .campaign-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -212,7 +287,6 @@
         max-width: 1200px;
         margin: 0 auto;
       }
-
       .campaign-card {
         background: var(--light);
         border-radius: 15px;
@@ -221,21 +295,17 @@
         transition: transform 0.3s;
         position: relative;
       }
-
       .campaign-card:hover {
         transform: translateY(-5px);
       }
-
       .card-image {
         width: 100%;
         height: 200px;
         object-fit: cover;
       }
-
       .card-content {
         padding: 20px;
       }
-
       .campaign-stats {
         display: flex;
         justify-content: space-between;
@@ -244,21 +314,18 @@
         background-color: var(--background);
         border-radius: 8px;
       }
-
       .progress-bar {
         background-color: #e5e7eb;
         height: 10px;
         border-radius: 5px;
         margin: 10px 0;
       }
-
       .progress {
         background-color: var(--accent);
         height: 100%;
         border-radius: 5px;
         transition: width 0.3s;
       }
-
       .btn {
         display: inline-block;
         background-color: var(--accent);
@@ -269,11 +336,9 @@
         font-weight: bold;
         transition: transform 0.3s;
       }
-
       .btn:hover {
         transform: scale(1.05);
       }
-
       .campaign-tag {
         position: absolute;
         top: 10px;
@@ -284,8 +349,6 @@
         border-radius: 15px;
         font-size: 0.8rem;
       }
-
-      /* CTA Section Styles */
       .cta-section {
         background-color: var(--dark);
         color: var(--light);
@@ -293,20 +356,105 @@
         padding: 60px 20px;
         margin-top: 60px;
       }
-
-      /* Comments Section Styles */
+      .success-stories {
+        padding: 4rem 2rem;
+        background-color: var(--background);
+      }
+      .success-stories-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .success-stories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .story-card {
+        background: var(--light);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      .story-card:hover {
+        transform: translateY(-5px);
+      }
+      .story-image-container {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+      }
+      .story-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .story-campaign-tag {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background-color: var(--accent);
+        color: var(--light);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+      }
+      .story-content {
+        padding: 1.5rem;
+      }
+      .story-title {
+        color: var(--text);
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+      .story-text {
+        color: var(--text);
+        margin-bottom: 1rem;
+        line-height: 1.6;
+      }
+      .story-date {
+        color: var(--secondary);
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+      }
+      .story-impact {
+        background-color: var(--background);
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 1rem;
+      }
+      .impact-title {
+        color: var(--primary);
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+      .read-more-btn {
+        display: inline-block;
+        background-color: var(--primary);
+        color: var(--light);
+        padding: 0.75rem 1.5rem;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background-color 0.3s;
+        margin-top: 1rem;
+      }
+      .read-more-btn:hover {
+        background-color: var(--secondary);
+      }
       .comments-section {
         padding: 60px 20px;
         max-width: 1200px;
         margin: 0 auto;
       }
-
       .comments-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 30px;
       }
-
       .comment-card {
         background: var(--light);
         border-radius: 15px;
@@ -314,25 +462,21 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s;
       }
-
       .comment-card:hover {
         transform: translateY(-5px);
       }
-
       .comment-header {
         display: flex;
         align-items: center;
         gap: 15px;
         margin-bottom: 15px;
       }
-
       .commenter-image {
         width: 50px;
         height: 50px;
         border-radius: 50%;
         object-fit: cover;
       }
-
       .load-more-btn {
         display: block;
         width: fit-content;
@@ -345,17 +489,13 @@
         cursor: pointer;
         transition: transform 0.3s;
       }
-
       .load-more-btn:hover {
         transform: scale(1.05);
       }
-
-      /* Announcements Section Styles */
       .announcements {
         padding: 4rem 2rem;
         text-align: center;
       }
-
       .announcements-container {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -363,7 +503,6 @@
         max-width: 1200px;
         margin: 0 auto;
       }
-
       .announcement-card {
         background: white;
         border-radius: 12px;
@@ -371,18 +510,15 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
-
       .announcement-image {
         height: 200px;
         background-size: cover;
         background-position: center;
       }
-
       .announcement-content {
         padding: 1.5rem;
         text-align: left;
       }
-
       .details-button {
         display: inline-block;
         padding: 0.5rem 1.5rem;
@@ -393,18 +529,14 @@
         font-size: 1rem;
         transition: background-color 0.3s ease;
       }
-
       .details-button:hover {
         background-color: var(--secondary);
       }
-
-      /* Footer Styles */
       footer {
         background: var(--dark);
         color: var(--light);
         padding: 4rem 2rem;
       }
-
       .footer-content {
         max-width: 1200px;
         margin: 0 auto;
@@ -412,41 +544,32 @@
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 2rem;
       }
-
       .footer-column h4 {
         margin-bottom: 1.5rem;
         font-size: 1.2rem;
       }
-
       .footer-column ul {
         list-style: none;
       }
-
       .footer-column ul li {
         margin-bottom: 0.8rem;
       }
-
       .footer-column a {
         color: var(--light);
         text-decoration: none;
         transition: color 0.3s;
       }
-
       .footer-column a:hover {
         color: var(--accent);
       }
-
       .social-links {
         display: flex;
         gap: 1rem;
         margin-top: 1rem;
       }
-
       .social-links a {
         font-size: 1.5rem;
       }
-
-      /* Loader and Scroll to Top Styles */
       .loader {
         position: fixed;
         top: 0;
@@ -460,7 +583,6 @@
         align-items: center;
         z-index: 2000;
       }
-
       .loader-icon {
         width: 50px;
         height: 50px;
@@ -470,14 +592,16 @@
         border-radius: 50%;
         animation: spin 1s linear infinite;
       }
-
       .loader p {
         margin-top: 1rem;
         font-size: 1.2rem;
         font-weight: bold;
         color: #22577a;
       }
-
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
       .scroll-to-top {
         position: fixed;
         bottom: 20px;
@@ -499,33 +623,58 @@
         transition: opacity 0.3s, visibility 0.3s;
         z-index: 1000;
       }
-
       .scroll-to-top:hover {
         background-color: #3b82f6;
       }
-
       .scroll-to-top.show {
         opacity: 1;
         visibility: visible;
       }
-
-      /* Responsive Adjustments */
+      /* Mobile Menu Styles */
       @media (max-width: 768px) {
-        .nav-container {
-          flex-direction: row;
-          gap: 20px;
-        }
-
         .nav-links {
+          display: none;
+          position: fixed;
+          top: 70px;
+          left: 0;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
           flex-direction: column;
           align-items: center;
+          padding: 2rem 0;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          z-index: 1000;
         }
-
-        .campaign-grid,
-        .comments-grid,
-        .announcements-container,
-        .footer-content {
-          grid-template-columns: 1fr;
+        .nav-links.mobile-active {
+          display: flex;
+        }
+        .nav-links a {
+          margin: 1rem 0;
+          font-size: 1.2rem;
+        }
+        .mobile-menu-toggle {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          width: 30px;
+          height: 20px;
+          cursor: pointer;
+        }
+        .mobile-menu-toggle span {
+          width: 100%;
+          height: 3px;
+          background-color: var(--primary);
+          transition: all 0.3s ease;
+        }
+        .mobile-menu-toggle.active span:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
+        }
+        .mobile-menu-toggle.active span:nth-child(2) {
+          opacity: 0;
+        }
+        .mobile-menu-toggle.active span:nth-child(3) {
+          transform: rotate(-45deg) translate(5px, -5px);
         }
       }
       .banner {
@@ -534,12 +683,106 @@
         margin: 0 auto;
         text-align: center;
       }
-
       .banner-img {
         width: 100%;
         height: auto;
         max-height: 400px;
         object-fit: cover;
+      }
+      /* ============= Quiz Section Styles ============= */
+      .quiz-container {
+        background-color: var(--light);
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        margin: 2rem auto;
+      }
+      .quiz-container h1 {
+        color: var(--primary);
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+      }
+      .question-container {
+        margin-bottom: 2rem;
+      }
+      .question {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        color: var(--text);
+      }
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .option {
+        padding: 1rem;
+        border: 2px solid var(--accent);
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .option:hover {
+        background-color: var(--accent);
+        color: var(--light);
+      }
+      .option.selected {
+        background-color: var(--primary);
+        color: var(--light);
+        border-color: var(--primary);
+      }
+      .option.correct {
+        background-color: #22c55e;
+        color: var(--light);
+        border-color: #22c55e;
+      }
+      .option.wrong {
+        background-color: #ef4444;
+        color: var(--light);
+        border-color: #ef4444;
+      }
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+      }
+      .navigation button {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 0.5rem;
+        background-color: var(--primary);
+        color: var(--light);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .navigation button:hover {
+        background-color: var(--dark);
+      }
+      .navigation button:disabled {
+        background-color: #cbd5e1;
+        cursor: not-allowed;
+      }
+      .result {
+        text-align: center;
+        margin-top: 2rem;
+        font-size: 1.2rem;
+      }
+      /* Quiz progress bar – farklı sınıf adı ile kampanya progress’inden ayrıldı */
+      .progress-bar.quiz-progress {
+        width: 100%;
+        height: 10px;
+        background-color: #e2e8f0;
+        border-radius: 5px;
+        margin-bottom: 2rem;
+        overflow: hidden;
+      }
+      .progress.quiz-progress {
+        height: 100%;
+        background-color: var(--primary);
+        transition: width 0.3s ease;
       }
     </style>
   </head>
@@ -568,6 +811,7 @@
         </ul>
       </nav>
     </header>
+
     <div class="hero">
       <video class="video-bg" autoplay muted loop playsinline>
         <source src="/images/background_video3.mp4" type="video/mp4" />
@@ -582,6 +826,7 @@
         </div>
       </div>
     </div>
+
     <div>
       <br />
       <h1 style="text-align: center">Güncel Kampanyalarımız</h1>
@@ -597,7 +842,7 @@
       <button class="filter-btn">Acil Yardım</button>
     </div>
 
-    <!-- Kampanya kartları; her karta data-category özniteliği eklendi -->
+    <!-- Kampanya kartları -->
     <div class="campaign-grid">
       <div class="campaign-card" data-category="Eğitim">
         <span class="campaign-tag">Eğitim</span>
@@ -621,7 +866,6 @@
       </div>
 
       <div class="campaign-card" data-category="Sosyal Haklar">
-        <!-- Kampanya etiketini filtre butonuna uygun olacak şekilde güncelledik -->
         <span class="campaign-tag">Sosyal Haklar</span>
         <img
           src="/images/game.jpg"
@@ -667,7 +911,6 @@
       </div>
 
       <div class="campaign-card" data-category="Sağlık">
-        <!-- Bu kartın kategori olarak "Beslenme Hakkı" yerine "Sağlık" seçildi -->
         <span class="campaign-tag">Sağlık</span>
         <img
           src="/images/food_rights.png"
@@ -736,6 +979,75 @@
       <p>Kampanyalarımızda aktif rol alarak çocukların hayatına dokunun.</p>
       <br />
       <a href="volunteer.html" class="btn">Gönüllü Ol</a>
+    </section>
+
+    <section class="success-stories">
+      <div class="success-stories-header">
+        <h2 style="color: var(--text); font-size: 2.5rem; font-weight: bold;">Değişen Hayatlar</h2>
+        <p style="color: var(--text); font-size: 1.1rem;">Kampanyalarımız sayesinde hayatı değişen çocuklarımızın hikayeleri</p>
+      </div>
+      
+      <div class="success-stories-grid">
+        <div class="story-card">
+          <div class="story-image-container">
+            <img src="images/ayse.png" alt="Ayşe'nin Hikayesi" class="story-image">
+            <span class="story-campaign-tag">Eğitim</span>
+          </div>
+          <div class="story-content">
+            <div class="story-date">Mart 2025</div>
+            <h3 class="story-title">Ayşe'nin Eğitim Yolculuğu</h3>
+            <p class="story-text">
+              "Okula Dönüş Projesi sayesinde tüm okul malzemelerime kavuştum. Artık ben de arkadaşlarım gibi tam donanımlı olarak derslere katılabiliyorum. Büyüyünce öğretmen olmak istiyorum."
+            </p>
+            <div class="story-impact">
+              <div class="impact-title">Proje Etkisi</div>
+              <p>• Okul başarısında %40 artış</p>
+              <p>• Sosyal aktivitelere katılımda artış</p>
+            </div>
+            <a href="#" class="read-more-btn">Hikayenin Devamı</a>
+          </div>
+        </div>
+    
+        <div class="story-card">
+          <div class="story-image-container">
+            <img src="images/mehmet.png" alt="Mehmet'in Hikayesi" class="story-image">
+            <span class="story-campaign-tag">Sağlık</span>
+          </div>
+          <div class="story-content">
+            <div class="story-date">Şubat 2025</div>
+            <h3 class="story-title">Mehmet'in Sağlıklı Beslenme Hikayesi</h3>
+            <p class="story-text">
+              "Sağlıklı Beslenme Programı ile hem daha sağlıklı beslenmesini öğrendim hem de arkadaşlarımla birlikte yemek yemenin keyfini yaşadım. Artık kendimi daha enerjik hissediyorum."
+            </p>
+            <div class="story-impact">
+              <div class="impact-title">Proje Etkisi</div>
+              <p>• Dengeli beslenme alışkanlığı kazanımı</p>
+              <p>• Okul performansında artış</p>
+            </div>
+            <a href="#" class="read-more-btn">Hikayenin Devamı</a>
+          </div>
+        </div>
+    
+        <div class="story-card">
+          <div class="story-image-container">
+            <img src="images/can.png" alt="Can'ın Hikayesi" class="story-image">
+            <span class="story-campaign-tag">Sosyal Haklar</span>
+          </div>
+          <div class="story-content">
+            <div class="story-date">Ocak 2025</div>
+            <h3 class="story-title">Can'ın Oyun Parkı Deneyimi</h3>
+            <p class="story-text">
+              "Mahallemize kurulan yeni oyun parkı sayesinde artık güvenle oyun oynayabiliyorum. Burada yeni arkadaşlar edindim ve her gün farklı oyunlar oynuyoruz."
+            </p>
+            <div class="story-impact">
+              <div class="impact-title">Proje Etkisi</div>
+              <p>• Sosyal becerilerinde gelişme</p>
+              <p>• Fiziksel aktivite düzeyinde artış</p>
+            </div>
+            <a href="#" class="read-more-btn">Hikayenin Devamı</a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="comments-section">
@@ -867,6 +1179,61 @@
         </div>
       </div>
     </section>
+    <div class="banner">
+      <img
+        src="/images/quiz.png"
+        alt="Ayın Destekçisi"
+        class="banner-img"
+      />
+    </div>
+    <!-- ==================== Quiz Bölümü ==================== -->
+    <section id="quiz-section" style="padding: 2rem 0;">
+      <div class="quiz-container">
+        <h1>Çocuk Hakları Quiz</h1>
+        <div class="progress-bar quiz-progress">
+          <div class="progress quiz-progress" id="progress"></div>
+        </div>
+        <div id="question-container" class="question-container">
+          <p class="question" id="question"></p>
+          <div class="options" id="options"></div>
+        </div>
+        <div class="navigation">
+          <button id="prev-btn" disabled>Önceki</button>
+          <button id="next-btn">Sonraki</button>
+        </div>
+        <div class="result" id="result"></div>
+      </div>
+    </section>
+
+    <section class="events-map-section">
+      <div class="events-container">
+        <h2 class="events-title">Yerel Etkinlik Haritası</h2>
+        <div class="events-filter">
+          <select id="cityFilter" class="filter-select">
+            <option value="all">Tüm Şehirler</option>
+            <option value="istanbul">İstanbul</option>
+            <option value="ankara">Ankara</option>
+            <option value="izmir">İzmir</option>
+            <option value="antalya">Antalya</option>
+            <option value="bursa">Bursa</option>
+          </select>
+          <select id="categoryFilter" class="filter-select">
+            <option value="all">Tüm Kategoriler</option>
+            <option value="workshop">Atölye</option>
+            <option value="seminar">Seminer</option>
+            <option value="meeting">Toplantı</option>
+            <option value="activity">Aktivite</option>
+          </select>
+        </div>
+        
+        <div class="map-container">
+          <div id="turkeyMap" class="turkey-map"></div>
+          <div id="eventsList" class="events-list">
+            <!-- Events will be added dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
 
     <footer>
       <div class="footer-content">
@@ -899,26 +1266,24 @@
       </div>
     </footer>
 
+    <!-- Mevcut script dosyası -->
     <script src="/js/script.js"></script>
     <script>
-      // Mobil menü işlemleri
+      // Mobil menü işlemleri ve filtreleme kodları
       document.addEventListener("DOMContentLoaded", function () {
         const navContainer = document.querySelector(".nav-container");
         const navLinks = document.querySelector(".nav-links");
 
-        // Create mobile menu toggle
+        // Mobil menü toggle oluşturma
         const menuToggle = document.createElement("div");
         menuToggle.classList.add("mobile-menu-toggle");
         menuToggle.innerHTML = "<span></span><span></span><span></span>";
 
         function handleMobileMenu() {
           if (window.innerWidth <= 768) {
-            // Add toggle only if not already present
             if (!document.querySelector(".mobile-menu-toggle")) {
               navContainer.appendChild(menuToggle);
             }
-
-            // Ensure default mobile state
             navLinks.style.display = "none";
 
             menuToggle.addEventListener("click", function () {
@@ -936,7 +1301,6 @@
               }
             });
           } else {
-            // Desktop view
             if (document.querySelector(".mobile-menu-toggle")) {
               menuToggle.remove();
             }
@@ -945,11 +1309,9 @@
           }
         }
 
-        // Initial setup and resize listener
         handleMobileMenu();
         window.addEventListener("resize", handleMobileMenu);
 
-        // Close menu when a link is clicked
         navLinks.querySelectorAll("a").forEach((link) => {
           link.addEventListener("click", function () {
             if (window.innerWidth <= 768) {
@@ -960,7 +1322,6 @@
           });
         });
 
-        // Close menu when clicking outside
         document.addEventListener("click", function (event) {
           if (
             window.innerWidth <= 768 &&
@@ -973,24 +1334,21 @@
           }
         });
 
-        // Filtreleme işlemleri
+        // Kampanya filtreleme işlemleri
         const filterButtons = document.querySelectorAll(".filter-btn");
         const campaignCards = document.querySelectorAll(".campaign-card");
 
         filterButtons.forEach(btn => {
           btn.addEventListener("click", function () {
-            // Butonların aktif sınıfını güncelle
             filterButtons.forEach(button => button.classList.remove("active"));
             this.classList.add("active");
 
             const filterValue = this.textContent.trim();
 
             campaignCards.forEach(card => {
-              // "Tümü" seçiliyse tüm kartlar gösterilsin
               if(filterValue === "Tümü") {
                 card.style.display = "block";
               } else {
-                // Kartın data-category değeri ile filtre değeri eşleşiyorsa göster, aksi halde gizle
                 if(card.getAttribute("data-category") === filterValue) {
                   card.style.display = "block";
                 } else {
@@ -1001,6 +1359,250 @@
           });
         });
       });
+
+      // ============== Çocuk Hakları Quiz Scripti ==============
+      const questions = [
+        {
+          question: "Çocuk Hakları Sözleşmesi'ne göre kaç yaşına kadar her birey çocuk sayılır?",
+          options: ["16", "17", "18", "21"],
+          correct: 2
+        },
+        {
+          question: "Aşağıdakilerden hangisi temel çocuk haklarından biri değildir?",
+          options: ["Eğitim hakkı", "Sağlık hakkı", "Araba kullanma hakkı", "Oyun oynama hakkı"],
+          correct: 2
+        },
+        {
+          question: "Çocuk Hakları Sözleşmesi hangi yıl kabul edilmiştir?",
+          options: ["1989", "1990", "1995", "2000"],
+          correct: 0
+        },
+        {
+          question: "Hangi kuruluş çocuk haklarını korumak için özel olarak kurulmuştur?",
+          options: ["WHO", "UNICEF", "UNESCO", "NATO"],
+          correct: 1
+        },
+        {
+          question: "Çocukların korunma hakları arasında aşağıdakilerden hangisi yer almaz?",
+          options: [
+            "Şiddetten korunma",
+            "İstismardan korunma",
+            "Savaştan korunma",
+            "Yüksek nottan korunma"
+          ],
+          correct: 3
+        }
+      ];
+
+      let currentQuestion = 0;
+      let score = 0;
+      let answered = new Array(questions.length).fill(false);
+
+      const questionElement = document.getElementById('question');
+      const optionsElement = document.getElementById('options');
+      const prevButton = document.getElementById('prev-btn');
+      const nextButton = document.getElementById('next-btn');
+      const resultElement = document.getElementById('result');
+      const progressElement = document.getElementById('progress');
+
+      function showQuestion(index) {
+          const question = questions[index];
+          questionElement.textContent = question.question;
+          optionsElement.innerHTML = '';
+
+          question.options.forEach((option, i) => {
+              const button = document.createElement('div');
+              button.className = 'option';
+              if (answered[index] && i === question.correct) {
+                  button.classList.add('correct');
+              }
+              button.textContent = option;
+              button.addEventListener('click', () => selectOption(i));
+              optionsElement.appendChild(button);
+          });
+
+          updateNavigation();
+          updateProgress();
+      }
+
+      function selectOption(optionIndex) {
+          if (answered[currentQuestion]) return;
+
+          const options = document.querySelectorAll('.option');
+          const correctIndex = questions[currentQuestion].correct;
+
+          options[optionIndex].classList.add(optionIndex === correctIndex ? 'correct' : 'wrong');
+          if (optionIndex === correctIndex) {
+              score++;
+          }
+
+          answered[currentQuestion] = true;
+          updateResult();
+          updateNavigation();
+      }
+
+      function updateNavigation() {
+          prevButton.disabled = currentQuestion === 0;
+          nextButton.textContent = currentQuestion === questions.length - 1 ? 'Sonuçları Gör' : 'Sonraki';
+      }
+
+      function updateProgress() {
+          const progress = ((currentQuestion + 1) / questions.length) * 100;
+          progressElement.style.width = `${progress}%`;
+      }
+
+      function updateResult() {
+          if (answered.every(a => a)) {
+              const percentage = (score / questions.length) * 100;
+              resultElement.textContent = `Quiz tamamlandı! Skorunuz: ${score}/${questions.length} (${percentage}%)`;
+          }
+      }
+
+      prevButton.addEventListener('click', () => {
+          if (currentQuestion > 0) {
+              currentQuestion--;
+              showQuestion(currentQuestion);
+          }
+      });
+
+      nextButton.addEventListener('click', () => {
+          if (currentQuestion < questions.length - 1) {
+              currentQuestion++;
+              showQuestion(currentQuestion);
+          } else if (answered.every(a => a)) {
+              updateResult();
+          }
+      });
+
+      // İlk soruyu göster
+      showQuestion(0);
     </script>
+   <script>
+    // Example event data with real coordinates
+    const events = [
+  { "id": 1, "title": "Çocuk Hakları Atölyesi", "city": "istanbul", "location": "Kadıköy Halk Eğitim Merkezi", "date": "15 Şubat 2025", "category": "workshop", "coordinates": [41.0082, 28.9784] },
+  { "id": 2, "title": "Eğitim Hakları Semineri", "city": "stanbul", "location": "Çankaya Belediyesi Konferans Salonu", "date": "20 Şubat 2025", "category": "seminar", "coordinates": [39.9334, 32.8597] },
+  { "id": 3, "title": "Çocuk Meclisi Toplantısı", "city": "izmir", "location": "İzmir Büyükşehir Belediyesi", "date": "1 Mart 2025", "category": "meeting", "coordinates": [38.4192, 27.1287] },
+  { "id": 4, "title": "Sokak Oyunları Şenliği", "city": "antalya", "location": "Konyaaltı Sahili", "date": "10 Mart 2025", "category": "activity", "coordinates": [36.8969, 30.7133] },
+  { "id": 5, "title": "Çocuk Kitapları Festivali", "city": "bursa", "location": "Beşiktaş Kültür Merkezi", "date": "5 Mart 2025", "category": "activity", "coordinates": [40.1885, 29.0610] },
+  { "id": 7, "title": "Dijital Güvenlik Eğitimi", "city": "bursa", "location": "Nilüfer Belediyesi Kültür Merkezi", "date": "18 Mart 2025", "category": "workshop", "coordinates": [40.1885, 29.0610] },
+  { "id": 8, "title": "Çocuk ve Doğa Buluşması", "city": "izmir", "location": "Kültürpark", "date": "25 Mart 2025", "category": "activity", "coordinates": [38.4322, 27.1362] },
+  { "id": 9, "title": "Ebeveyn-Çocuk İletişimi Semineri", "city": "antalya", "location": "Muratpaşa Belediyesi Kültür Salonu", "date": "8 Mart 2025", "category": "seminar", "coordinates": [36.8875, 30.7029] },
+  { "id": 11, "title": "Çocuk Hakları Savunucuları Toplantısı", "city": "bursa", "location": "TOBB ETÜ Konferans Salonu", "date": "22 Mart 2025", "category": "meeting", "coordinates": [40.1885, 29.0610] },
+  { "id": 12, "title": "Oyun Tasarımı Atölyesi", "city": "istanbul", "location": "Merinos AKKM", "date": "28 Mart 2025", "category": "workshop", "coordinates": [41.0082, 28.9784] }
+
+
+    ];
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize the map
+      const map = L.map('turkeyMap').setView([39.9334, 32.8597], 6); // Center on Turkey
+      
+      // Add OpenStreetMap tiles
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
+      
+      // Create markers for each event
+      const markers = events.map(event => {
+        const marker = L.marker(event.coordinates)
+          .bindPopup(`
+            <strong>${event.title}</strong><br>
+            ${event.location}<br>
+            ${event.date}
+          `)
+          .addTo(map);
+          
+        marker.eventId = event.id;
+        marker.eventCity = event.city;
+        marker.eventCategory = event.category;
+        
+        marker.on('click', () => {
+          showEventDetails(event);
+        });
+        
+        return marker;
+      });
+      
+      function showEventDetails(event) {
+        const card = document.createElement('div');
+        card.className = 'event-card';
+        
+        card.innerHTML = `
+          <span class="event-tag">${getCategoryName(event.category)}</span>
+          <h3>${event.title}</h3>
+          <div class="event-details">
+            <p><i class="fas fa-map-marker-alt"></i> ${event.location}</p>
+            <p><i class="fas fa-calendar-alt"></i> ${event.date}</p>
+          </div>
+        `;
+        
+        eventsList.innerHTML = '';
+        eventsList.appendChild(card);
+      }
+      
+      function filterEvents() {
+        const selectedCity = cityFilter.value;
+        const selectedCategory = categoryFilter.value;
+        
+        markers.forEach(marker => {
+          const cityMatch = selectedCity === 'all' || marker.eventCity === selectedCity;
+          const categoryMatch = selectedCategory === 'all' || marker.eventCategory === selectedCategory;
+          
+          if (cityMatch && categoryMatch) {
+            marker.addTo(map);
+          } else {
+            marker.remove();
+          }
+        });
+        
+        updateEventsList(selectedCity, selectedCategory);
+      }
+      
+      function updateEventsList(city, category) {
+        eventsList.innerHTML = '';
+        
+        const filteredEvents = events.filter(event => {
+          const cityMatch = city === 'all' || event.city === city;
+          const categoryMatch = category === 'all' || event.category === category;
+          return cityMatch && categoryMatch;
+        });
+        
+        filteredEvents.forEach(event => {
+          const card = document.createElement('div');
+          card.className = 'event-card';
+          
+          card.innerHTML = `
+            <span class="event-tag">${getCategoryName(event.category)}</span>
+            <h3>${event.title}</h3>
+            <div class="event-details">
+              <p><i class="fas fa-map-marker-alt"></i> ${event.location}</p>
+              <p><i class="fas fa-calendar-alt"></i> ${event.date}</p>
+            </div>
+          `;
+          
+          eventsList.appendChild(card);
+        });
+      }
+      
+      function getCategoryName(category) {
+        const categories = {
+          workshop: 'Atölye',
+          seminar: 'Seminer',
+          meeting: 'Toplantı',
+          activity: 'Aktivite'
+        };
+        return categories[category] || category;
+      }
+      
+      // Event listeners
+      cityFilter.addEventListener('change', filterEvents);
+      categoryFilter.addEventListener('change', filterEvents);
+      
+      // Initial load
+      updateEventsList('all', 'all');
+    });
+  </script>
   </body>
 </html>
