@@ -6,1038 +6,1088 @@
     <title>Hakkımızda | Çocuk Hakları Platformu</title>
 
     <!-- AOS ve FontAwesome CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"rel="stylesheet"/>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
     <link rel="shortcut icon" href="/images/shortcut_icon.png" />
     <style>
-.cr-container {
-    background-color: var(--cr-light);
-    padding: 30px 50px;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 600px;
-    width: 90%;
-    margin: 40px auto; /* Yatay ortalama ve üst/alt boşluk ekleme */
-    transition: transform 0.3s;
-}
+      /* Mobile Menu Styles */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          position: fixed;
+          top: 70px;
+          left: 0;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          flex-direction: column;
+          align-items: center;
+          padding: 2rem 0;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          z-index: 1000;
+        }
 
-.cr-container:hover {
-    transform: translateY(-5px);
-}
+        .nav-links.mobile-active {
+          display: flex;
+        }
 
-.cr-container h1 {
-    color: var(--cr-primary);
-    margin-bottom: 25px;
-    font-size: 2.5rem;
-}
+        .nav-links a {
+          margin: 1rem 0;
+          font-size: 1.2rem;
+        }
 
-.cr-counter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 30px;
-}
+        .mobile-menu-toggle {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          width: 30px;
+          height: 20px;
+          cursor: pointer;
+        }
 
-.cr-btn {
-    background-color: var(--cr-secondary);
-    color: var(--cr-light);
-    border: none;
-    padding: 15px 25px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    border-radius: 50%;
-    margin: 0 15px;
-    transition: background-color 0.3s, transform 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        .mobile-menu-toggle span {
+          width: 100%;
+          height: 3px;
+          background-color: var(--primary);
+          transition: all 0.3s ease;
+        }
 
-.cr-btn:hover {
-    background-color: var(--cr-dark);
-    transform: scale(1.1);
-}
+        .mobile-menu-toggle.active span:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
+        }
 
-#cr-count {
-    font-size: 2.5rem;
-    width: 60px;
-    display: inline-block;
-}
+        .mobile-menu-toggle.active span:nth-child(2) {
+          opacity: 0;
+        }
 
-.cr-rights-display h2 {
-    color: var(--cr-primary);
-    margin-bottom: 20px;
-    font-size: 2rem;
-}
+        .mobile-menu-toggle.active span:nth-child(3) {
+          transform: rotate(-45deg) translate(5px, -5px);
+        }
+      }
 
-.cr-right-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--cr-accent);
-    color: var(--cr-light);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, transform 0.3s;
-}
+      /* Diğer CSS kodları... (cr-container, hero, banner, footer, loader, scroll-to-top, vb.) */
 
-.cr-right-item:hover {
-    background-color: var(--cr-secondary);
-    transform: scale(1.02);
-}
+      .cr-container {
+        background-color: var(--cr-light);
+        padding: 30px 50px;
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 600px;
+        width: 90%;
+        margin: 40px auto;
+        transition: transform 0.3s;
+      }
 
-.cr-right-item i {
-    font-size: 2rem;
-    margin-right: 15px;
-}
+      .cr-container:hover {
+        transform: translateY(-5px);
+      }
 
-.cr-right-item p {
-    font-size: 1.2rem;
-    text-align: left;
-}
+      .cr-container h1 {
+        color: var(--cr-primary);
+        margin-bottom: 25px;
+        font-size: 2.5rem;
+      }
+
+      .cr-counter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .cr-btn {
+        background-color: var(--cr-secondary);
+        color: var(--cr-light);
+        border: none;
+        padding: 15px 25px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        border-radius: 50%;
+        margin: 0 15px;
+        transition: background-color 0.3s, transform 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .cr-btn:hover {
+        background-color: var(--cr-dark);
+        transform: scale(1.1);
+      }
+
+      #cr-count {
+        font-size: 2.5rem;
+        width: 60px;
+        display: inline-block;
+      }
+
+      .cr-rights-display h2 {
+        color: var(--cr-primary);
+        margin-bottom: 20px;
+        font-size: 2rem;
+      }
+
+      .cr-right-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--cr-accent);
+        color: var(--cr-light);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      .cr-right-item:hover {
+        background-color: var(--cr-secondary);
+        transform: scale(1.02);
+      }
+
+      .cr-right-item i {
+        font-size: 2rem;
+        margin-right: 15px;
+      }
+
+      .cr-right-item p {
+        font-size: 1.2rem;
+        text-align: left;
+      }
+
       #modal-bio {
-    font-size: 16px;
-    color: var(--dark);
-    margin-top: 10px;
-    line-height: 1.6;
-    text-align: justify;
-    padding: 10px;
-    border-top: 1px solid var(--primary);
-}
+        font-size: 16px;
+        color: var(--dark);
+        margin-top: 10px;
+        line-height: 1.6;
+        text-align: justify;
+        padding: 10px;
+        border-top: 1px solid var(--primary);
+      }
 
       .hizmetler-section {
-    background: var(--background);
-    padding: 100px 0;
-    text-align: center;
-}
-
-.gallery-container {
-    position: relative;
-    max-width: 90%;
-    margin: auto;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-}
-
-.gallery-track {
-    display: flex;
-    gap: 20px;
-    transition: transform 0.5s ease;
-    will-change: transform;
-}
-
-.gallery-item {
-    flex: 0 0 calc(100% / 3); /* 3 sütunlu görünüm */
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.1);
-}
-
-.gallery-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 10px;
-    text-align: center;
-    font-size: 18px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.gallery-item:hover .gallery-overlay {
-    opacity: 1;
-}
-
-/* Butonlar */
-.gallery-prev,
-.gallery-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--primary);
-    color: var(--light);
-    border: none;
-    font-size: 24px;
-    padding: 10px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-    z-index: 10;
-}
-
-.gallery-prev:hover, .gallery-next:hover {
-    background: var(--accent);
-    transform: scale(1.1);
-}
-
-.gallery-prev {
-    left: 10px;
-}
-
-.gallery-next {
-    right: 10px;
-}
-
-/* Mobil Uyumluluk */
-@media (max-width: 1024px) {
-    .gallery-item {
-        flex: 0 0 50%;
-    }
-}
-
-@media (max-width: 768px) {
-    .gallery-item {
-        flex: 0 0 100%;
-    }
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.3s ease;
-}
-
-.modal.show {
-    display: flex; /* Modal açıldığında aktif olacak */
-    opacity: 1;
-}
-
-.modal-content {
-    background: var(--light);
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-    position: relative;
-    transform: translateY(-20px);
-    transition: transform 0.3s ease;
-}
-
-.modal img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-    border: 3px solid var(--primary);
-}
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-/* Açılma Animasyonu */
-.modal.show {
-    display: flex;
-    opacity: 1;
-}
-
-.modal-content.show {
-    transform: translateY(0);
-}
-
-/* Hover Efektleri */
-.team-card {
-    background: var(--light);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.team-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-#mapid {
-  width: 1000px;          /* Haritanın genişliği */
-  height: 400px;         /* Haritanın yüksekliği */
-  border-radius: 20px;   /* Köşeleri yuvarlatma */
-  margin: 0 auto;        /* Ortalamak için */
-  overflow: hidden;      /* Köşeler dışına taşmaması için */
-  border: 2px solid #ccc; /* İsteğe bağlı çerçeve */
-}
-
-.slider-container {
-    position: relative;
-    max-width: 90%;
-    margin: auto;
-    overflow: hidden;
-    background: var(--background);
-    padding: 20px 0;
-}
-
-.slider-wrapper {
-    display: flex;
-    gap: 20px;
-    transition: transform 0.5s ease;
-    will-change: transform; /* Performansı artırır */
-}
-
-/* Kart Tasarımı */
-.testimonial-card {
-    flex: 0 0 300px;
-    background: var(--light);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.testimonial-card:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-/* Ünlülerin Fotoğrafları */
-.testimonial-card img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 15px;
-    border: 3px solid var(--primary);
-}
-
-/* Metinler */
-.testimonial-card h3 {
-    font-size: 20px;
-    color: var(--text);
-    margin-bottom: 5px;
-}
-
-.testimonial-card p {
-    font-size: 16px;
-    color: var(--dark);
-    margin-bottom: 10px;
-    opacity: 0.8;
-}
-
-.testimonial-card blockquote {
-    font-size: 16px;
-    color: var(--text);
-    font-style: italic;
-}
-
-/* Ok Butonları */
-.prev-btn, .next-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--primary);
-    color: var(--light);
-    border: none;
-    font-size: 24px;
-    padding: 10px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-    z-index: 10;
-}
-
-.prev-btn:hover, .next-btn:hover {
-    background: var(--accent);
-    transform: scale(1.1);
-}
-
-.prev-btn {
-    left: 10px;
-}
-
-.next-btn {
-    right: 10px;
-}
-
-/* Mobil Uyumluluk */
-@media (max-width: 768px) {
-    .slider-wrapper {
-        gap: 10px;
-    }
-
-    .testimonial-card {
-        flex: 0 0 80%;
-        margin: auto;
-    }
-}
-.istatistikler-section {
-    background: var(--background);
-    padding: 100px 0;
-    text-align: center;
-}
-
-.section-title {
-    font-size: 36px;
-    color: var(--text);
-    margin-bottom: 10px;
-}
-
-.section-subtitle {
-    font-size: 20px;
-    color: var(--dark);
-    margin-bottom: 40px;
-    opacity: 0.8;
-}
-
-.istatistikler-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    max-width: 1200px;
-    margin: auto;
-}
-
-.istatistik-card {
-    background: var(--light);
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.istatistik-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.istatistik-card i {
-    font-size: 40px;
-    color: var(--primary);
-    margin-bottom: 10px;
-}
-
-.istatistik-card h3 {
-    font-size: 32px;
-    font-weight: bold;
-    color: var(--dark);
-}
-
-.istatistik-card p {
-    font-size: 18px;
-    color: var(--text);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .istatistikler-content {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .istatistikler-content {
-        grid-template-columns: 1fr;
-    }
-}
-/* Başlık ve Açıklama */
-.cta-overlay h2 {
-    font-size: 36px;
-    margin-bottom: 15px;
-    font-weight: bold;
-}
-
-.cta-overlay p {
-    font-size: 18px;
-    max-width: 600px;
-    margin: 0 auto 20px;
-    line-height: 1.6;
-}
-@media (max-width: 600px) {
-    .gallery-item {
-        flex: 0 0 100%; /* Küçük ekranlarda tek resim */
-    }
-}
-
-
-/* CTA Butonu */
-.cta-button {
-    background: var(--primary);
-    color: var(--light);
-    padding: 14px 32px;
-    font-size: 18px;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-radius: 8px;
-    transition: background 0.3s ease, transform 0.2s;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.cta-button:hover {
-    background: var(--secondary);
-    transform: scale(1.05);
-}
-
-/* Mobil Uyumluluk */
-@media (max-width: 768px) {
-    .cta-section {
-        height: auto;
-        padding: 60px 20px;
-    }
-
-    .cta-overlay h2 {
-        font-size: 28px;
-    }
-
-    .cta-overlay p {
-        font-size: 16px;
-    }
-
-    .cta-button {
-        font-size: 16px;
-        padding: 12px 24px;
-    }
-}
-
-.ekibimiz-section {
-    background: var(--background);
-    padding: 100px 0;
-    text-align: center;
-}
-
-.section-title {
-    font-size: 36px;
-    color: var(--text);
-    margin-bottom: 10px;
-}
-
-.section-subtitle {
-    font-size: 20px;
-    color: var(--dark);
-    margin-bottom: 40px;
-    opacity: 0.8;
-}
-
-.ekibimiz-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    max-width: 1200px;
-    margin: auto;
-}
-
-/* Takım Kartları */
-.team-card {
-    background: var(--light);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.team-card:hover {
-    transform: translateY(-8px);
-    background: var(--secondary);
-    color: var(--light);
-}
-
-/* Profil Fotoğrafı */
-.team-image {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin: auto;
-    margin-bottom: 15px;
-    border: 4px solid var(--primary);
-    transition: border-color 0.3s;
-}
-
-.team-card:hover .team-image {
-    border-color: var(--light);
-}
-
-.team-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* İsim ve Görev */
-.team-card h3 {
-    font-size: 22px;
-    margin-bottom: 5px;
-    color: var(--text);
-    transition: color 0.3s;
-}
-
-.team-card p {
-    font-size: 18px;
-    color: var(--dark);
-    opacity: 0.8;
-    transition: color 0.3s;
-}
-
-.team-card:hover h3,
-.team-card:hover p {
-    color: var(--light);
-}
-
-/* Sosyal Medya İkonları */
-.social-icons {
-    margin-top: 15px;
-}
-
-.social-icons a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: var(--primary);
-    color: var(--light);
-    border-radius: 50%;
-    margin: 0 5px;
-    transition: background 0.3s ease, transform 0.2s;
-    text-decoration: none; /* Alt çizgiyi kaldırır */
-    font-size: 18px; /* İkon boyutunu ayarladık */
-}
-
-.social-icons a:hover {
-    background: var(--accent);
-    transform: scale(1.1);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .ekibimiz-content {
-        grid-template-columns: 1fr;
-    }
-}
-
-.degerlerimiz-section {
-    background: var(--background);
-    padding: 100px 0;
-    text-align: center;
-}
-
-.section-title {
-    font-size: 36px;
-    color: var(--text);
-    margin-bottom: 10px;
-}
-
-.section-subtitle {
-    font-size: 20px;
-    color: var(--dark);
-    margin-bottom: 40px;
-    opacity: 0.8;
-}
-
-.degerlerimiz-content {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Varsayılan: 4 sütun */
-    gap: 30px;
-    max-width: 1200px;
-    margin: auto;
-}
-/* Tabletler için (2 sütunlu yapı) */
-@media (max-width: 1024px) {
-    .degerlerimiz-content {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Mobil için (1 sütunlu yapı) */
-@media (max-width: 768px) {
-    .degerlerimiz-content {
-        grid-template-columns: 1fr;
-    }
-}
-
-.card {
-    background: var(--light);
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.card .icon {
-    width: 80px;
-    height: 80px;
-    background: var(--primary);
-    color: var(--light);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 36px;
-    margin: 0 auto 20px;
-    transition: background 0.3s ease;
-}
-
-.card:hover .icon {
-    background: var(--secondary);
-}
-
-.card h3 {
-    font-size: 24px;
-    color: var(--dark);
-    margin-bottom: 10px;
-}
-
-.card p {
-    font-size: 18px;
-    color: var(--text);
-    line-height: 1.6;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .degerlerimiz-content {
-        grid-template-columns: 1fr;
-    }
-}
-
-.misyon-vizyon-section {
-    background: var(--background);
-    padding: 100px 0;
-    color: var(--light);
-    text-align: center;
-    position: relative;
-}
-
-.misyon-vizyon-section .section-title {
-    font-size: 36px;
-    margin-bottom: 40px;
-    color: var(--text);
-}
-
-.misyon-vizyon-content {
-    display: flex;
-    gap: 40px;
-    justify-content: center;
-}
-
-.card {
-    background: var(--secondary);
-    padding: 30px;
-    border-radius: 10px;
-    flex: 1;
-    max-width: 500px;
-    transition: transform 0.3s ease-in-out, background 0.3s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    background: var(--accent);
-}
-
-.card .icon {
-    font-size: 40px;
-    margin-bottom: 15px;
-}
-
-.card h3 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: var(--light);
-}
-
-.card p {
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--light);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .misyon-vizyon-content {
-        flex-direction: column;
-    }
-
-    .card {
-        max-width: 100%;
-    }
-}
-
-.hakkimizda-section {
-    background: var(--background);
-    padding: 80px 0;
-}
-
-.hakkimizda-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: auto;
-    gap: 40px;
-}
-
-.hakkimizda-content .text {
-    flex: 1;
-}
-
-.hakkimizda-content .text h2 {
-    font-size: 36px;
-    color: var(--text);
-    margin-bottom: 15px;
-}
-
-.hakkimizda-content .text p {
-    font-size: 18px;
-    color: var(--dark);
-    line-height: 1.6;
-}
-
-.hakkimizda-content .image {
-    flex: 1;
-    text-align: center;
-}
-
-.hakkimizda-content .image img {
-    width: 100%;
-    max-width: 500px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .hakkimizda-content {
-        flex-direction: column;
+        background: var(--background);
+        padding: 100px 0;
         text-align: center;
-    }
-}
-:root {
-  --primary: #2563eb;
-  --secondary: #3b82f6;
-  --accent: #60a5fa;
-  --background: #f0f9ff;
-  --text: #1e3a8a;
-  --light: #ffffff;
-  --dark: #1e40af;
-}
+      }
 
+      .gallery-container {
+        position: relative;
+        max-width: 90%;
+        margin: auto;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+      }
 
+      .gallery-track {
+        display: flex;
+        gap: 20px;
+        transition: transform 0.5s ease;
+        will-change: transform;
+      }
 
-/* Hero Section */
-.hero {
-  position: relative;
-  height: 80vh;
-  min-height: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
+      .gallery-item {
+        flex: 0 0 calc(100% / 3);
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      }
 
-.video-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+      .gallery-item img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
 
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-}
+      .gallery-item:hover img {
+        transform: scale(1.1);
+      }
 
-.hero-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  padding: 0 2rem;
-  max-width: 900px;
-}
+      .gallery-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 10px;
+        text-align: center;
+        font-size: 18px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
 
-.hero h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-  color: var(--light);
-}
+      .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+      }
 
-.hero p {
-  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-  color: var(--light);
-  margin-bottom: 2rem;
-}
+      .gallery-prev,
+      .gallery-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--primary);
+        color: var(--light);
+        border: none;
+        font-size: 24px;
+        padding: 10px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        z-index: 10;
+      }
 
-/* Banner Section */
-.bannerrr {
-  margin: 4rem auto;
-  max-width: 1920px;
-  overflow: hidden;
-  border-radius: 15px;
-}
+      .gallery-prev:hover,
+      .gallery-next:hover {
+        background: var(--accent);
+        transform: scale(1.1);
+      }
 
-.banner-img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-@media (max-width: 1200px) {
-  .bannerrr {
-    max-width: 90%;
-    border-radius: 10px;
-  }
-  
-  .banner-img {
-    height: 250px;
-  }
-}
+      .gallery-prev {
+        left: 10px;
+      }
 
-@media (max-width: 768px) {
-  .bannerrr {
-    max-width: 95%;
-    margin: 2rem auto;
-  }
+      .gallery-next {
+        right: 10px;
+      }
 
-  .banner-img {
-    height: 200px;
-  }
-}
+      @media (max-width: 1024px) {
+        .gallery-item {
+          flex: 0 0 50%;
+        }
+      }
 
-@media (max-width: 480px) {
-  .bannerrr {
-    max-width: 100%;
-    border-radius: 5px;
-    margin: 1.5rem auto;
-  }
+      @media (max-width: 768px) {
+        .gallery-item {
+          flex: 0 0 100%;
+        }
+      }
 
-  .banner-img {
-    height: 150px;
-  }
-}
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 10;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.3s ease;
+      }
 
+      .modal.show {
+        display: flex;
+        opacity: 1;
+      }
 
+      .modal-content {
+        background: var(--light);
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        max-width: 400px;
+        width: 90%;
+        position: relative;
+        transform: translateY(-20px);
+        transition: transform 0.3s ease;
+      }
 
-/* Footer */
-footer {
-  background: var(--dark);
-  color: var(--light);
-  padding: 4rem 2rem;
-  margin-top: 4rem;
-}
+      .modal img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 10px;
+        border: 3px solid var(--primary);
+      }
 
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 3rem;
-}
-/* Loader */
-.loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--background);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-}
+      .close {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 24px;
+        cursor: pointer;
+      }
 
-.loader-icon {
-  width: 50px;
-  height: 50px;
-  border: 5px solid transparent;
-  border-top: 5px solid var(--primary);
-  border-right: 5px solid var(--secondary);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
+      .modal.show {
+        display: flex;
+        opacity: 1;
+      }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-.scroll-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  background-color: #60a5fa;
-  color: #1e3a8a;
-  border: none;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
-  z-index: 1000;
-}
+      .modal-content.show {
+        transform: translateY(0);
+      }
 
-.scroll-to-top:hover {
-  background-color: #3b82f6;
-}
+      .team-card {
+        background: var(--light);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
 
-.scroll-to-top.show {
-  opacity: 1;
-  visibility: visible;
-}
+      .team-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
 
+      #mapid {
+        width: 1000px;
+        height: 400px;
+        border-radius: 20px;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 2px solid #ccc;
+      }
+
+      .slider-container {
+        position: relative;
+        max-width: 90%;
+        margin: auto;
+        overflow: hidden;
+        background: var(--background);
+        padding: 20px 0;
+      }
+
+      .slider-wrapper {
+        display: flex;
+        gap: 20px;
+        transition: transform 0.5s ease;
+        will-change: transform;
+      }
+
+      .testimonial-card {
+        flex: 0 0 300px;
+        background: var(--light);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .testimonial-card img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+        border: 3px solid var(--primary);
+      }
+
+      .testimonial-card h3 {
+        font-size: 20px;
+        color: var(--text);
+        margin-bottom: 5px;
+      }
+
+      .testimonial-card p {
+        font-size: 16px;
+        color: var(--dark);
+        margin-bottom: 10px;
+        opacity: 0.8;
+      }
+
+      .testimonial-card blockquote {
+        font-size: 16px;
+        color: var(--text);
+        font-style: italic;
+      }
+
+      .prev-btn,
+      .next-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--primary);
+        color: var(--light);
+        border: none;
+        font-size: 24px;
+        padding: 10px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        z-index: 10;
+      }
+
+      .prev-btn:hover,
+      .next-btn:hover {
+        background: var(--accent);
+        transform: scale(1.1);
+      }
+
+      .prev-btn {
+        left: 10px;
+      }
+
+      .next-btn {
+        right: 10px;
+      }
+
+      @media (max-width: 768px) {
+        .slider-wrapper {
+          gap: 10px;
+        }
+
+        .testimonial-card {
+          flex: 0 0 80%;
+          margin: auto;
+        }
+      }
+
+      .istatistikler-section {
+        background: var(--background);
+        padding: 100px 0;
+        text-align: center;
+      }
+
+      .section-title {
+        font-size: 36px;
+        color: var(--text);
+        margin-bottom: 10px;
+      }
+
+      .section-subtitle {
+        font-size: 20px;
+        color: var(--dark);
+        margin-bottom: 40px;
+        opacity: 0.8;
+      }
+
+      .istatistikler-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      .istatistik-card {
+        background: var(--light);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .istatistik-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .istatistik-card i {
+        font-size: 40px;
+        color: var(--primary);
+        margin-bottom: 10px;
+      }
+
+      .istatistik-card h3 {
+        font-size: 32px;
+        font-weight: bold;
+        color: var(--dark);
+      }
+
+      .istatistik-card p {
+        font-size: 18px;
+        color: var(--text);
+      }
+
+      @media (max-width: 768px) {
+        .istatistikler-content {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .istatistikler-content {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .cta-overlay h2 {
+        font-size: 36px;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+
+      .cta-overlay p {
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto 20px;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 600px) {
+        .gallery-item {
+          flex: 0 0 100%;
+        }
+      }
+
+      .cta-button {
+        background: var(--primary);
+        color: var(--light);
+        padding: 14px 32px;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        border-radius: 8px;
+        transition: background 0.3s ease, transform 0.2s;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .cta-button:hover {
+        background: var(--secondary);
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 768px) {
+        .cta-section {
+          height: auto;
+          padding: 60px 20px;
+        }
+
+        .cta-overlay h2 {
+          font-size: 28px;
+        }
+
+        .cta-overlay p {
+          font-size: 16px;
+        }
+
+        .cta-button {
+          font-size: 16px;
+          padding: 12px 24px;
+        }
+      }
+
+      .ekibimiz-section {
+        background: var(--background);
+        padding: 100px 0;
+        text-align: center;
+      }
+
+      .section-title {
+        font-size: 36px;
+        color: var(--text);
+        margin-bottom: 10px;
+      }
+
+      .section-subtitle {
+        font-size: 20px;
+        color: var(--dark);
+        margin-bottom: 40px;
+        opacity: 0.8;
+      }
+
+      .ekibimiz-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      .team-card {
+        background: var(--light);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .team-card:hover {
+        transform: translateY(-8px);
+        background: var(--secondary);
+        color: var(--light);
+      }
+
+      .team-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: auto;
+        margin-bottom: 15px;
+        border: 4px solid var(--primary);
+        transition: border-color 0.3s;
+      }
+
+      .team-card:hover .team-image {
+        border-color: var(--light);
+      }
+
+      .team-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .team-card h3 {
+        font-size: 22px;
+        margin-bottom: 5px;
+        color: var(--text);
+        transition: color 0.3s;
+      }
+
+      .team-card p {
+        font-size: 18px;
+        color: var(--dark);
+        opacity: 0.8;
+        transition: color 0.3s;
+      }
+
+      .team-card:hover h3,
+      .team-card:hover p {
+        color: var(--light);
+      }
+
+      .social-icons {
+        margin-top: 15px;
+      }
+
+      .social-icons a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: var(--primary);
+        color: var(--light);
+        border-radius: 50%;
+        margin: 0 5px;
+        transition: background 0.3s ease, transform 0.2s;
+        text-decoration: none;
+        font-size: 18px;
+      }
+
+      .social-icons a:hover {
+        background: var(--accent);
+        transform: scale(1.1);
+      }
+
+      @media (max-width: 768px) {
+        .ekibimiz-content {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .degerlerimiz-section {
+        background: var(--background);
+        padding: 100px 0;
+        text-align: center;
+      }
+
+      .section-title {
+        font-size: 36px;
+        color: var(--text);
+        margin-bottom: 10px;
+      }
+
+      .section-subtitle {
+        font-size: 20px;
+        color: var(--dark);
+        margin-bottom: 40px;
+        opacity: 0.8;
+      }
+
+      .degerlerimiz-content {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      @media (max-width: 1024px) {
+        .degerlerimiz-content {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .degerlerimiz-content {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: var(--light);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .card .icon {
+        width: 80px;
+        height: 80px;
+        background: var(--primary);
+        color: var(--light);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 36px;
+        margin: 0 auto 20px;
+        transition: background 0.3s ease;
+      }
+
+      .card:hover .icon {
+        background: var(--secondary);
+      }
+
+      .card h3 {
+        font-size: 24px;
+        color: var(--dark);
+        margin-bottom: 10px;
+      }
+
+      .card p {
+        font-size: 18px;
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      @media (max-width: 768px) {
+        .degerlerimiz-content {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .misyon-vizyon-section {
+        background: var(--background);
+        padding: 100px 0;
+        color: var(--light);
+        text-align: center;
+        position: relative;
+      }
+
+      .misyon-vizyon-section .section-title {
+        font-size: 36px;
+        margin-bottom: 40px;
+        color: var(--text);
+      }
+
+      .misyon-vizyon-content {
+        display: flex;
+        gap: 40px;
+        justify-content: center;
+      }
+
+      .card {
+        background: var(--secondary);
+        padding: 30px;
+        border-radius: 10px;
+        flex: 1;
+        max-width: 500px;
+        transition: transform 0.3s ease-in-out, background 0.3s;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .card:hover {
+        transform: translateY(-10px);
+        background: var(--accent);
+      }
+
+      .card .icon {
+        font-size: 40px;
+        margin-bottom: 15px;
+      }
+
+      .card h3 {
+        font-size: 24px;
+        margin-bottom: 15px;
+        color: var(--light);
+      }
+
+      .card p {
+        font-size: 18px;
+        line-height: 1.6;
+        color: var(--light);
+      }
+
+      @media (max-width: 768px) {
+        .misyon-vizyon-content {
+          flex-direction: column;
+        }
+
+        .card {
+          max-width: 100%;
+        }
+      }
+
+      .hakkimizda-section {
+        background: var(--background);
+        padding: 80px 0;
+      }
+
+      .hakkimizda-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: auto;
+        gap: 40px;
+      }
+
+      .hakkimizda-content .text {
+        flex: 1;
+      }
+
+      .hakkimizda-content .text h2 {
+        font-size: 36px;
+        color: var(--text);
+        margin-bottom: 15px;
+      }
+
+      .hakkimizda-content .text p {
+        font-size: 18px;
+        color: var(--dark);
+        line-height: 1.6;
+      }
+
+      .hakkimizda-content .image {
+        flex: 1;
+        text-align: center;
+      }
+
+      .hakkimizda-content .image img {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      @media (max-width: 768px) {
+        .hakkimizda-content {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+
+      :root {
+        --primary: #2563eb;
+        --secondary: #3b82f6;
+        --accent: #60a5fa;
+        --background: #f0f9ff;
+        --text: #1e3a8a;
+        --light: #ffffff;
+        --dark: #1e40af;
+      }
+
+      /* Hero Section */
+      .hero {
+        position: relative;
+        height: 80vh;
+        min-height: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .video-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding: 0 2rem;
+        max-width: 900px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        color: var(--light);
+      }
+
+      .hero p {
+        font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+        color: var(--light);
+        margin-bottom: 2rem;
+      }
+
+      /* Banner Section */
+      .bannerrr {
+        margin: 4rem auto;
+        max-width: 1920px;
+        overflow: hidden;
+        border-radius: 15px;
+      }
+
+      .banner-img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      @media (max-width: 1200px) {
+        .bannerrr {
+          max-width: 90%;
+          border-radius: 10px;
+        }
+
+        .banner-img {
+          height: 250px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .bannerrr {
+          max-width: 95%;
+          margin: 2rem auto;
+        }
+
+        .banner-img {
+          height: 200px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .bannerrr {
+          max-width: 100%;
+          border-radius: 5px;
+          margin: 1.5rem auto;
+        }
+
+        .banner-img {
+          height: 150px;
+        }
+      }
+
+      /* Footer */
+      footer {
+        background: var(--dark);
+        color: var(--light);
+        padding: 4rem 2rem;
+        margin-top: 4rem;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+      }
+
+      /* Loader */
+      .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--background);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+      }
+
+      .loader-icon {
+        width: 50px;
+        height: 50px;
+        border: 5px solid transparent;
+        border-top: 5px solid var(--primary);
+        border-right: 5px solid var(--secondary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .scroll-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background-color: #60a5fa;
+        color: #1e3a8a;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s, visibility 0.3s;
+        z-index: 1000;
+      }
+
+      .scroll-to-top:hover {
+        background-color: #3b82f6;
+      }
+
+      .scroll-to-top.show {
+        opacity: 1;
+        visibility: visible;
+      }
     </style>
   </head>
   <body>
@@ -1070,359 +1120,386 @@ footer {
     </header>
 
     <div class="hero">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="/images/background_video5.mp4" type="video/mp4" />
-        </video>
-        <div class="hero-overlay"></div>
-        <div class="container">
-          <div class="hero-content">
-            <h1 style="font-size: 60px">Hakkımızda</h1>
-            <p style="font-size: 30px">
-              Herkes için eşit haklar, adil bir dünya için temel taşlardır.
+      <video class="video-bg" autoplay muted loop playsinline>
+        <source src="/images/background_video5.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="container">
+        <div class="hero-content">
+          <h1 style="font-size: 60px">Hakkımızda</h1>
+          <p style="font-size: 30px">
+            Herkes için eşit haklar, adil bir dünya için temel taşlardır.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <section id="hakkimizda" class="hakkimizda-section">
+      <div class="container">
+        <div class="hakkimizda-content">
+          <div class="text">
+            <h2>Biz Kimiz?</h2>
+            <p>
+              Çocuk hakları ve insan hakları konusunda farkındalık yaratmak için
+              çalışan bağımsız bir oluşumuz. Amacımız, bireyleri bilinçlendirmek,
+              haklarını öğrenmelerini sağlamak ve adil bir dünya için ilham vermektir.
+            </p>
+            <p>
+              Projelerimiz, eğitim programlarımız ve etkinliklerimizle dünya çapında
+              birçok insana ulaşıyoruz.
+            </p>
+          </div>
+          <div class="image">
+            <img src="images/platform.png" alt="Hakkımızda" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="misyon-vizyon" class="misyon-vizyon-section">
+      <div class="container">
+        <h2 class="section-title">Misyonumuz & Vizyonumuz</h2>
+        <div class="misyon-vizyon-content">
+          <div class="card misyon">
+            <div class="icon"><i class="fas fa-hand-holding-heart"></i></div>
+            <h3>Misyonumuz</h3>
+            <p>
+              Çocuk hakları ve insan hakları konusunda bilinç oluşturarak, sürdürülebilir
+              bir farkındalık yaratmayı amaçlıyoruz. Eğitim, savunuculuk ve projelerimizle
+              daha adil bir dünya inşa ediyoruz.
+            </p>
+          </div>
+          <div class="card vizyon">
+            <div class="icon"><i class="fas fa-globe"></i></div>
+            <h3>Vizyonumuz</h3>
+            <p>
+              Gelecek nesillere daha adil, eşit ve sürdürülebilir bir dünya bırakmak için
+              çalışıyoruz. Evrensel insan haklarını herkes için erişilebilir hale getirmeyi
+              hedefliyoruz.
             </p>
           </div>
         </div>
       </div>
-
-      <section id="hakkimizda" class="hakkimizda-section">
-        <div class="container">
-            <div class="hakkimizda-content">
-                <div class="text">
-                    <h2>Biz Kimiz?</h2>
-                    <p>Çocuk hakları ve insan hakları konusunda farkındalık yaratmak için çalışan bağımsız bir oluşumuz. 
-                       Amacımız, bireyleri bilinçlendirmek, haklarını öğrenmelerini sağlamak ve adil bir dünya için ilham vermektir.</p>
-                    <p>Projelerimiz, eğitim programlarımız ve etkinliklerimizle dünya çapında birçok insana ulaşıyoruz.</p>
-                </div>
-                <div class="image">
-                    <img src="images/platform.png" alt="Hakkımızda">
-                </div>
-            </div>
-        </div>
     </section>
-    <section id="misyon-vizyon" class="misyon-vizyon-section">
+
+    <section id="degerlerimiz" class="degerlerimiz-section">
       <div class="container">
-          <h2 class="section-title">Misyonumuz & Vizyonumuz</h2>
-          <div class="misyon-vizyon-content">
-              <div class="card misyon">
-                  <div class="icon"><i class="fas fa-hand-holding-heart"></i></div>
-                  <h3>Misyonumuz</h3>
-                  <p>Çocuk hakları ve insan hakları konusunda bilinç oluşturarak, sürdürülebilir bir farkındalık yaratmayı amaçlıyoruz. 
-                     Eğitim, savunuculuk ve projelerimizle daha adil bir dünya inşa ediyoruz.</p>
-              </div>
-              <div class="card vizyon">
-                  <div class="icon"><i class="fas fa-globe"></i></div>
-                  <h3>Vizyonumuz</h3>
-                  <p>Gelecek nesillere daha adil, eşit ve sürdürülebilir bir dünya bırakmak için çalışıyoruz. 
-                     Evrensel insan haklarını herkes için erişilebilir hale getirmeyi hedefliyoruz.</p>
-              </div>
-          </div>
-      </div>
-  </section>
-  <section id="degerlerimiz" class="degerlerimiz-section">
-    <div class="container">
         <h2 class="section-title">Değerlerimiz</h2>
-        <p class="section-subtitle">Bizim için önemli olan temel değerlerimiz.</p>
+        <p class="section-subtitle">
+          Bizim için önemli olan temel değerlerimiz.
+        </p>
         <div class="degerlerimiz-content">
-            <div class="card">
-                <div class="icon"><i class="fas fa-balance-scale"></i></div>
-                <h3>Adalet</h3>
-                <p>Herkes için eşit fırsatlar sunarak, insan haklarını en iyi şekilde savunuyoruz.</p>
-            </div>
-            <div class="card">
-                <div class="icon"><i class="fas fa-handshake"></i></div>
-                <h3>İş Birliği</h3>
-                <p>Güçlü ortaklıklarla daha büyük değişimler yaratıyoruz.</p>
-            </div>
-            <div class="card">
-                <div class="icon"><i class="fas fa-seedling"></i></div>
-                <h3>Sürdürülebilirlik</h3>
-                <p>Uzun vadeli çözümler geliştirerek gelecek nesillere daha iyi bir dünya bırakıyoruz.</p>
-            </div>
-            <div class="card">
-                <div class="icon"><i class="fas fa-heart"></i></div>
-                <h3>Empati</h3>
-                <p>İnsan haklarına duyarlı yaklaşarak toplumları bilinçlendiriyoruz.</p>
-            </div>
+          <div class="card">
+            <div class="icon"><i class="fas fa-balance-scale"></i></div>
+            <h3>Adalet</h3>
+            <p>
+              Herkes için eşit fırsatlar sunarak, insan haklarını en iyi şekilde savunuyoruz.
+            </p>
+          </div>
+          <div class="card">
+            <div class="icon"><i class="fas fa-handshake"></i></div>
+            <h3>İş Birliği</h3>
+            <p>Güçlü ortaklıklarla daha büyük değişimler yaratıyoruz.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><i class="fas fa-seedling"></i></div>
+            <h3>Sürdürülebilirlik</h3>
+            <p>
+              Uzun vadeli çözümler geliştirerek gelecek nesillere daha iyi bir dünya bırakıyoruz.
+            </p>
+          </div>
+          <div class="card">
+            <div class="icon"><i class="fas fa-heart"></i></div>
+            <h3>Empati</h3>
+            <p>
+              İnsan haklarına duyarlı yaklaşarak toplumları bilinçlendiriyoruz.
+            </p>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <div class="bannerrr">
+      <img src="/images/cansu.png" alt="Ayın Destekçisi" class="banner-img" />
     </div>
-</section>
-<div class="bannerrr">
-  <img
-    src="/images/cansu.png"
-    alt="Ayın Destekçisi"
-    class="banner-img"
-  />
-</div>
-<section id="map-section" style="padding: 80px 0;">
-  <div class="container">
-    <h2 class="section-title">Türkiye'de Desteklediğimiz Bölgeler</h2>
-    <p style="text-align: center;">Platformumuzdan yararlanan kişileri harita üzerinde görebilirsiniz.</p><br>
-    <div id="mapid"></div>
-  </div>
-</section>
-<section id="ekibimiz" class="ekibimiz-section">
-  <div class="container">
-      <h2 class="section-title">Ekibimiz</h2>
-      <p class="section-subtitle">Alanında uzman ve tutkulu ekibimizle tanışın.</p>
-      
-      <div class="ekibimiz-content">
+
+    <section id="map-section" style="padding: 80px 0;">
+      <div class="container">
+        <h2 class="section-title">Türkiye'de Desteklediğimiz Bölgeler</h2>
+        <p style="text-align: center;">
+          Platformumuzdan yararlanan kişileri harita üzerinde görebilirsiniz.
+        </p>
+        <br />
+        <div id="mapid"></div>
+      </div>
+    </section>
+
+    <section id="ekibimiz" class="ekibimiz-section">
+      <div class="container">
+        <h2 class="section-title">Ekibimiz</h2>
+        <p class="section-subtitle">
+          Alanında uzman ve tutkulu ekibimizle tanışın.
+        </p>
+
+        <div class="ekibimiz-content">
           <!-- Takım Üyesi 1 -->
-          <div class="team-card" 
-               data-name="Kerem Erkengel" 
-               data-role="Kurucu & CEO" 
-               data-desc="Çocuk hakları konusunda uzman bir liderdir." 
-               data-image="images/kerem.png"
-               data-bio="Kerem Erkengel, 22 yaşında bir Bilişim Sistemleri ve Teknolojileri öğrencisidir. Teknolojiye olan ilgisinin yanı sıra sosyal projelere gönül vermiştir ve özellikle çocuk hakları konusunda farkındalık yaratmayı amaçlamaktadır.">
-              <div class="team-image">
-                  <img src="images/kerem.png" alt="Kerem Erkengel">
-              </div>
-              <h3>Kerem Erkengel</h3>
-              <p>Kurucu & CEO</p>
+          <div
+            class="team-card"
+            data-name="Kerem Erkengel"
+            data-role="Kurucu & CEO"
+            data-desc="Çocuk hakları konusunda uzman bir liderdir."
+            data-image="images/kerem.png"
+            data-bio="Kerem Erkengel, 22 yaşında bir Bilişim Sistemleri ve Teknolojileri öğrencisidir. Teknolojiye olan ilgisinin yanı sıra sosyal projelere gönül vermiştir ve özellikle çocuk hakları konusunda farkındalık yaratmayı amaçlamaktadır."
+          >
+            <div class="team-image">
+              <img src="images/kerem.png" alt="Kerem Erkengel" />
+            </div>
+            <h3>Kerem Erkengel</h3>
+            <p>Kurucu & CEO</p>
           </div>
 
           <!-- Takım Üyesi 2 -->
-          <div class="team-card" 
-               data-name="Sema Nur Ata" 
-               data-role="Proje Yöneticisi" 
-               data-desc="Projeleri başarıyla yöneten, organizasyonel yetenekleri güçlü bir isimdir." 
-               data-image="images/sema.png"
-               data-bio="Sema Nur Ata, 23 yaşında bir Bilgisayar Mühendisidir. Teknolojiye olan ilgisinin yanı sıra seyahat etmeyi ve kitap okumayı seven Sema, sosyal projelere gönül vermiş ve özellikle kadınların teknoloji alanında daha fazla yer alması konusunda farkındalık yaratmayı amaçlamaktadır.">
-              <div class="team-image">
-                  <img src="images/sema.png" alt="Sema Nur Ata">
-              </div>
-              <h3>Sema Nur Ata</h3>
-              <p>Proje Yöneticisi</p>
+          <div
+            class="team-card"
+            data-name="Sema Nur Ata"
+            data-role="Proje Yöneticisi"
+            data-desc="Projeleri başarıyla yöneten, organizasyonel yetenekleri güçlü bir isimdir."
+            data-image="images/sema.png"
+            data-bio="Sema Nur Ata, 23 yaşında bir Bilgisayar Mühendisidir. Teknolojiye olan ilgisinin yanı sıra seyahat etmeyi ve kitap okumayı seven Sema, sosyal projelere gönül vermiş ve özellikle kadınların teknoloji alanında daha fazla yer alması konusunda farkındalık yaratmayı amaçlamaktadır."
+          >
+            <div class="team-image">
+              <img src="images/sema.png" alt="Sema Nur Ata" />
+            </div>
+            <h3>Sema Nur Ata</h3>
+            <p>Proje Yöneticisi</p>
           </div>
 
           <!-- Takım Üyesi 3 -->
-          <div class="team-card" 
-               data-name="Ahmet Demir" 
-               data-role="İletişim Uzmanı" 
-               data-desc="Halkla ilişkiler, medya ve kampanya süreçlerinde deneyimlidir." 
-               data-image="images/ahmet.png"
-               data-bio="Ahmet Demir, Fırat Üniversitesi Bilgisayar Programcılığı mezunudur. Teknolojiye olan ilgisinin yanı sıra seyahat etmeyi ve doğa sporlarıyla ilgilenmeyi seven Ahmet, sosyal projelere gönül vermiş ve özellikle eğitimde fırsat eşitliği konusunda farkındalık yaratmayı amaçlamaktadır.">
-              <div class="team-image">
-                  <img src="images/ahmet.png" alt="Ahmet Demir">
-              </div>
-              <h3>Ahmet Demir</h3>
-              <p>İletişim Uzmanı</p>
+          <div
+            class="team-card"
+            data-name="Ahmet Demir"
+            data-role="İletişim Uzmanı"
+            data-desc="Halkla ilişkiler, medya ve kampanya süreçlerinde deneyimlidir."
+            data-image="images/ahmet.png"
+            data-bio="Ahmet Demir, Fırat Üniversitesi Bilgisayar Programcılığı mezunudur. Teknolojiye olan ilgisinin yanı sıra seyahat etmeyi ve doğa sporlarıyla ilgilenmeyi seven Ahmet, sosyal projelere gönül vermiş ve özellikle eğitimde fırsat eşitliği konusunda farkındalık yaratmayı amaçlamaktadır."
+          >
+            <div class="team-image">
+              <img src="images/ahmet.png" alt="Ahmet Demir" />
+            </div>
+            <h3>Ahmet Demir</h3>
+            <p>İletişim Uzmanı</p>
           </div>
 
           <!-- Takım Üyesi 4 -->
-          <div class="team-card" 
-               data-name="Elif Özbay" 
-               data-role="Grafik Tasarımcı" 
-               data-desc="Görsel tasarımlarla projelere estetik ve etkileyici bir dokunuş katar." 
-               data-image="images/eliff.png"
-               data-bio="Elif Özbay, 24 yaşında bir Bilgisayar Mühendisi olarak Karadeniz Teknik Üniversitesi'nden mezun olmuştur. Teknolojiye olan ilgisinin yanı sıra seyahat etmeyi ve at binmeyi seven Elif, sosyal projelere gönül vermiş ve özellikle çocuk hakları konusunda farkındalık yaratmayı amaçlamaktadır.">
-              <div class="team-image">
-                  <img src="images/eliff.png" alt="Elif Özbay">
-              </div>
-              <h3>Elif Özbay</h3>
-              <p>Grafik Tasarımcı</p>
+          <div
+            class="team-card"
+            data-name="Elif Özbay"
+            data-role="Grafik Tasarımcı"
+            data-desc="Görsel tasarımlarla projelere estetik ve etkileyici bir dokunuş katar."
+            data-image="images/eliff.png"
+            data-bio="Elif Özbay, 24 yaşında bir Bilgisayar Mühendisi olarak Karadeniz Teknik Üniversitesi'nden mezun olmuştur. Teknolojiye olan ilgisinin yanı sıra seyahat etmeyi ve at binmeyi seven Elif, sosyal projelere gönül vermiş ve özellikle çocuk hakları konusunda farkındalık yaratmayı amaçlamaktadır."
+          >
+            <div class="team-image">
+              <img src="images/eliff.png" alt="Elif Özbay" />
+            </div>
+            <h3>Elif Özbay</h3>
+            <p>Grafik Tasarımcı</p>
           </div>
+        </div>
       </div>
-  </div>
-</section>
+    </section>
 
-<!-- Modal Yapısı -->
-<div id="team-modal" class="modal">
-  <div class="modal-content">
-      <span class="close">&times;</span>
-      <img id="modal-image" src="" alt="Takım Üyesi">
-      <h3 id="modal-name"></h3>
-      <p id="modal-role"></p>
-      <p id="modal-desc"></p>
-      <p id="modal-bio"></p>
-  </div>
-</div>
-<section id="hizmetler" class="hizmetler-section">
-  <div class="container">
-      <h2 class="section-title">Hizmetlerimiz</h2>
-      <p class="section-subtitle">Sunduğumuz hizmetler ve gerçekleştirdiğimiz projeler</p>
+    <!-- Modal Yapısı -->
+    <div id="team-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <img id="modal-image" src="" alt="Takım Üyesi" />
+        <h3 id="modal-name"></h3>
+        <p id="modal-role"></p>
+        <p id="modal-desc"></p>
+        <p id="modal-bio"></p>
+      </div>
+    </div>
 
-      <div class="gallery-container">
+    <section id="hizmetler" class="hizmetler-section">
+      <div class="container">
+        <h2 class="section-title">Hizmetlerimiz</h2>
+        <p class="section-subtitle">
+          Sunduğumuz hizmetler ve gerçekleştirdiğimiz projeler
+        </p>
+
+        <div class="gallery-container">
           <button class="gallery-prev">&#10094;</button>
           <div class="gallery-track">
-              <div class="gallery-item">
-                  <img src="images/etkinlik1.png" alt="Hizmet 1">
-                  <div class="gallery-overlay">Eğitim Desteği</div>
-              </div>
-              <div class="gallery-item">
-                  <img src="images/etkinlik2.png" alt="Hizmet 2">
-                  <div class="gallery-overlay">Sosyal Yardımlar</div>
-              </div>
-              <div class="gallery-item">
-                  <img src="images/etkinlik3.png" alt="Hizmet 3">
-                  <div class="gallery-overlay">Sağlık Hizmetleri</div>
-              </div>
-              <div class="gallery-item">
-                  <img src="images/etkinlik4.png" alt="Hizmet 4">
-                  <div class="gallery-overlay">Farkındalık Kampanyaları</div>
-              </div>
-              <div class="gallery-item">
-                  <img src="images/etkinlik5.png" alt="Hizmet 5">
-                  <div class="gallery-overlay">Psikolojik Destek</div>
-              </div>
+            <div class="gallery-item">
+              <img src="images/etkinlik1.png" alt="Hizmet 1" />
+              <div class="gallery-overlay">Eğitim Desteği</div>
+            </div>
+            <div class="gallery-item">
+              <img src="images/etkinlik2.png" alt="Hizmet 2" />
+              <div class="gallery-overlay">Sosyal Yardımlar</div>
+            </div>
+            <div class="gallery-item">
+              <img src="images/etkinlik3.png" alt="Hizmet 3" />
+              <div class="gallery-overlay">Sağlık Hizmetleri</div>
+            </div>
+            <div class="gallery-item">
+              <img src="images/etkinlik4.png" alt="Hizmet 4" />
+              <div class="gallery-overlay">Farkındalık Kampanyaları</div>
+            </div>
+            <div class="gallery-item">
+              <img src="images/etkinlik5.png" alt="Hizmet 5" />
+              <div class="gallery-overlay">Psikolojik Destek</div>
+            </div>
           </div>
           <button class="gallery-next">&#10095;</button>
+        </div>
       </div>
-  </div>
-</section>
+    </section>
 
+    <!-- Modal Yapısı (tekrar edilen modal kodu kaldırıldı, sadece ilk modal kullanılıyor) -->
 
-<!-- Modal Yapısı -->
-<div id="team-modal" class="modal">
-  <div class="modal-content">
-      <span class="close">&times;</span>
-      <img id="modal-image" src="" alt="Takım Üyesi">
-      <h3 id="modal-name"></h3>
-      <p id="modal-role"></p>
-      <p id="modal-desc"></p>
-  </div>
-</div>
-
-
-<section id="istatistikler" class="istatistikler-section">
-  <div class="container">
-      <h2 class="section-title">Başarılarımız</h2>
-      <p class="section-subtitle">Bugüne kadar yaptığımız çalışmalarla birçok insanın hayatına dokunduk.</p>
-      <div class="istatistikler-content">
-          
+    <section id="istatistikler" class="istatistikler-section">
+      <div class="container">
+        <h2 class="section-title">Başarılarımız</h2>
+        <p class="section-subtitle">
+          Bugüne kadar yaptığımız çalışmalarla birçok insanın hayatına dokunduk.
+        </p>
+        <div class="istatistikler-content">
           <div class="istatistik-card">
-              <i class="fas fa-child"></i>
-              <h3><span class="counter" data-target="5000">0</span>+</h3>
-              <p>Eğitilen Çocuk</p>
+            <i class="fas fa-child"></i>
+            <h3><span class="counter" data-target="5000">0</span>+</h3>
+            <p>Eğitilen Çocuk</p>
           </div>
-
           <div class="istatistik-card">
-              <i class="fas fa-users"></i>
-              <h3><span class="counter" data-target="100">0</span>+</h3>
-              <p>Gönüllü Sayısı</p>
+            <i class="fas fa-users"></i>
+            <h3><span class="counter" data-target="100">0</span>+</h3>
+            <p>Gönüllü Sayısı</p>
           </div>
-
           <div class="istatistik-card">
-              <i class="fas fa-hand-holding-heart"></i>
-              <h3><span class="counter" data-target="200">0</span>+</h3>
-              <p>Etkinlik Düzenlendi</p>
+            <i class="fas fa-hand-holding-heart"></i>
+            <h3><span class="counter" data-target="200">0</span>+</h3>
+            <p>Etkinlik Düzenlendi</p>
           </div>
-
           <div class="istatistik-card">
-              <i class="fas fa-globe"></i>
-              <h3><span class="counter" data-target="50">0</span></h3>
-              <p>Ülkeye Ulaşıldı</p>
+            <i class="fas fa-globe"></i>
+            <h3><span class="counter" data-target="50">0</span></h3>
+            <p>Ülkeye Ulaşıldı</p>
           </div>
-
+        </div>
       </div>
-  </div>
-</section>
-<div class="cr-container">
-  <h1>Çocuk Hakları Sayacı</h1>
-  <div class="cr-counter">
-      <button id="cr-decrease" class="cr-btn"><i class="fas fa-minus"></i></button>
-      <span id="cr-count">0</span>
-      <button id="cr-increase" class="cr-btn"><i class="fas fa-plus"></i></button>
-  </div>
-  <div class="cr-rights-display">
-      <h2>Hak:</h2>
-      <div id="cr-right-display" class="cr-right-item">
+    </section>
+
+    <div class="cr-container">
+      <h1>Çocuk Hakları Sayacı</h1>
+      <div class="cr-counter">
+        <button id="cr-decrease" class="cr-btn">
+          <i class="fas fa-minus"></i>
+        </button>
+        <span id="cr-count">0</span>
+        <button id="cr-increase" class="cr-btn">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+      <div class="cr-rights-display">
+        <h2>Hak:</h2>
+        <div id="cr-right-display" class="cr-right-item">
           <!-- Dinamik olarak hak burada görünecek -->
+        </div>
       </div>
-  </div>
-</div>
-<section id="unluler" class="unluler-section">
-  <div class="container">
-      <h2 class="section-title">Galatasaray Efsaneleri Bizim Hakkımızda Ne Diyor?</h2>
-      <p style="text-align: center;">Kulübümüzün efsaneleri, kampanyamız hakkında görüşlerini paylaşıyor.</p>
+    </div>
 
-      <div class="slider-container">
+    <section id="unluler" class="unluler-section">
+      <div class="container">
+        <h2 class="section-title">
+          Galatasaray Efsaneleri Bizim Hakkımızda Ne Diyor?
+        </h2>
+        <p style="text-align: center;">
+        Galatasaray efsaneleri, kampanyalarımız hakkında görüşlerini paylaşıyor.
+        </p>
+        <div class="slider-container">
           <button class="prev-btn">&#10094;</button>
           <div class="slider">
-              <div class="slider-wrapper">
-
-                  <div class="testimonial-card">
-                      <img src="images/fatih-terim.png" alt="Fatih Terim">
-                      <h3>Fatih Terim</h3>
-                      <p>Teknik Direktör</p>
-                      <blockquote>
-                          “Galatasaray, her zaman sosyal sorumluluk projelerinde öncü olmuştur. Bu kampanya da bunun en güzel örneklerinden biri.”
-                      </blockquote>
-                  </div>
-
-                  <div class="testimonial-card">
-                      <img src="images/muslera.png" alt="Fernando Muslera">
-                      <h3>Fernando Muslera</h3>
-                      <p>Kaleci & Kaptan</p>
-                      <blockquote>
-                          “Sahada yaptığımız gibi, saha dışında da birlik olmalıyız. Çocuklarımızın geleceği için destek zamanı!”
-                      </blockquote>
-                  </div>
-
-
-                  <div class="testimonial-card">
-                      <img src="images/arda-turan.png" alt="Arda Turan">
-                      <h3>Arda Turan</h3>
-                      <p>Eski Futbolcu & Teknik Direktör</p>
-                      <blockquote>
-                          “Ben de bir zamanlar bir çocuktum. Bu tür projelerin önemi çok büyük. Destek vermek gurur verici!”
-                      </blockquote>
-                  </div>
-
-                    <div class="testimonial-card">
-                      <img src="images/drogba.png" alt="Didier Drogba">
-                      <h3>Didier Drogba</h3>
-                      <p>Eski Forvet</p>
-                      <blockquote>
-                          “Futbol sadece sahada değil, toplumda da etki yaratmalı. Bu harika bir girişim!”
-                      </blockquote>
-                  </div>
-
-       
-                  <div class="testimonial-card">
-                      <img src="images/hagi.png" alt="Gheorghe Hagi">
-                      <h3>Gheorghe Hagi</h3>
-                      <p>Eski Futbolcu & Teknik Direktör</p>
-                      <blockquote>
-                          “Galatasaray ruhu, her zaman insanlara yardım etmeyi içerir. Bu proje de bunun bir yansıması.”
-                      </blockquote>
-                  </div>
-
-              
-                  <div class="testimonial-card">
-                      <img src="images/gomis.png" alt="Bafetimbi Gomis">
-                      <h3>Bafetimbi Gomis</h3>
-                      <p>Eski Forvet</p>
-                      <blockquote>
-                          “Ben Galatasaray’da büyük bir aile gördüm. Şimdi bu ailenin çocuklar için bir araya geldiğini görmek harika!”
-                      </blockquote>
-                  </div>
-
-        
-                  <div class="testimonial-card">
-                      <img src="images/melo.png" alt="Burak Yılmaz">
-                      <h3>Felipe Melo</h3>
-                      <p>Eski Kaptan</p>
-                      <blockquote>
-                          “Sahada olduğu gibi saha dışında da kazanmalıyız. Bu tür projeleri desteklemek görevimiz.”
-                      </blockquote>
-                  </div>
-
-                 
-                  <div class="testimonial-card">
-                      <img src="images/dursun-ozbek.png" alt="Ünal Aysal">
-                      <h3>Ünal Aysal</h3>
-                      <p>Eski Başkan</p>
-                      <blockquote>
-                          “Galatasaray sadece bir futbol kulübü değil, aynı zamanda toplumsal sorumluluğun öncüsüdür.”
-                      </blockquote>
-                  </div>
-
+            <div class="slider-wrapper">
+              <div class="testimonial-card">
+                <img src="images/fatih-terim.png" alt="Fatih Terim" />
+                <h3>Fatih Terim</h3>
+                <p>Teknik Direktör</p>
+                <blockquote>
+                  “Galatasaray, her zaman sosyal sorumluluk projelerinde öncü
+                  olmuştur. Bu kampanya da bunun en güzel örneklerinden biri.”
+                </blockquote>
               </div>
+              <div class="testimonial-card">
+                <img src="images/muslera.png" alt="Fernando Muslera" />
+                <h3>Fernando Muslera</h3>
+                <p>Kaleci & Kaptan</p>
+                <blockquote>
+                  “Sahada yaptığımız gibi, saha dışında da birlik olmalıyız.
+                  Çocuklarımızın geleceği için destek zamanı!”
+                </blockquote>
+              </div>
+              <div class="testimonial-card">
+                <img src="images/arda-turan.png" alt="Arda Turan" />
+                <h3>Arda Turan</h3>
+                <p>Eski Futbolcu & Teknik Direktör</p>
+                <blockquote>
+                  “Ben de bir zamanlar bir çocuktum. Bu tür projelerin önemi çok
+                  büyük. Destek vermek gurur verici!”
+                </blockquote>
+              </div>
+              <div class="testimonial-card">
+                <img src="images/drogba.png" alt="Didier Drogba" />
+                <h3>Didier Drogba</h3>
+                <p>Eski Forvet</p>
+                <blockquote>
+                  “Futbol sadece sahada değil, toplumda da etki yaratmalı. Bu
+                  harika bir girişim!”
+                </blockquote>
+              </div>
+              <div class="testimonial-card">
+                <img src="images/hagi.png" alt="Gheorghe Hagi" />
+                <h3>Gheorghe Hagi</h3>
+                <p>Eski Futbolcu & Teknik Direktör</p>
+                <blockquote>
+                  “Galatasaray ruhu, her zaman insanlara yardım etmeyi içerir.
+                  Bu proje de bunun bir yansıması.”
+                </blockquote>
+              </div>
+              <div class="testimonial-card">
+                <img src="images/gomis.png" alt="Bafetimbi Gomis" />
+                <h3>Bafetimbi Gomis</h3>
+                <p>Eski Forvet</p>
+                <blockquote>
+                  “Ben Galatasaray’da büyük bir aile gördüm. Şimdi bu ailenin
+                  çocuklar için bir araya geldiğini görmek harika!”
+                </blockquote>
+              </div>
+              <div class="testimonial-card">
+                <img src="images/melo.png" alt="Burak Yılmaz" />
+                <h3>Felipe Melo</h3>
+                <p>Eski Kaptan</p>
+                <blockquote>
+                  “Sahada olduğu gibi saha dışında da kazanmalıyız. Bu tür projeleri
+                  desteklemek görevimiz.”
+                </blockquote>
+              </div>
+              <div class="testimonial-card">
+                <img src="images/dursun-ozbek.png" alt="Ünal Aysal" />
+                <h3>Ünal Aysal</h3>
+                <p>Eski Başkan</p>
+                <blockquote>
+                  “Galatasaray sadece bir futbol kulübü değil, aynı zamanda
+                  toplumsal sorumluluğun öncüsüdür.”
+                </blockquote>
+              </div>
+            </div>
           </div>
-          <button class="next-btn">&#10095;</button> 
+          <button class="next-btn">&#10095;</button>
+        </div>
       </div>
-  </div>
-</section>
+    </section>
+
     <footer>
       <div class="footer-content">
         <div class="footer-column">
@@ -1453,221 +1530,244 @@ footer {
         </div>
       </div>
     </footer>
-    <script>const cr_rights = [
-      "Yaşama hakkı",
-      "Kimlik hakkı",
-      "Aile yaşama ve koruma hakkı",
-      "Eğitim hakkı",
-      "Sağlık hizmetlerine erişim hakkı",
-      "Oyun ve dinlenme hakkı",
-      "Güvenli bir ortamda büyüme hakkı",
-      "Görüş bildirme hakkı",
-      "Ayrımcılık olmaksızın haklara erişim hakkı",
-      "Dinlenme ve eğlence hakkı",
-      "Çalışma koşullarından korunma hakkı",
-      "Bilgi edinme hakkı",
-      "Adil yargılanma hakkı",
-      "Gizlilik hakkı",
-      "Özgürlük hakkı",
-      "Düşünce ve ifade özgürlüğü",
-      "Toplanma ve dernek kurma hakkı",
-      "Kültürel yaşama katılma hakkı",
-      "Doğa ve çevreyi koruma hakkı",
-      "Ebeveynlerin bakımına erişim hakkı",
-      "Aile içi şiddetten korunma hakkı",
-      "Sığınma hakkı",
-      "Mülkiyet hakkı",
-      "Eşitlik hakkı",
-      "Çalışma hakkı",
-      "Din ve inanç özgürlüğü",
-      "Toplumsal katılım hakkı",
-      "Yararlanma hakkı",
-      "Bilimsel gelişmelerden yararlanma hakkı",
-      "Medya ve bilgiye erişim hakkı",
-      "Ekonomik yardım hakkı",
-      "Sosyal güvenlik hakkı",
-      "Hukuki temsil hakkı",
-      "Mahremiyet hakkı",
-      "Cinsiyet eşitliği hakkı",
-      "Engellilik durumunda destek hakkı",
-      "Dil ve iletişim hakkı",
-      "Hukuki koruma hakkı",
-      "Dinlenme ve serbest zaman hakkı",
-      "Taşıma ve seyahat özgürlüğü",
-      "Fikirlerin serbestçe ifade edilmesi hakkı",
-      "Siyasi katılım hakkı",
-      "Eğitim materyallerine erişim hakkı",
-      "Sosyal hizmetlerden yararlanma hakkı",
-      "Kişisel gelişim hakkı",
-      "Toplum içindeki rol ve sorumluluk hakkı",
-      "Çevresel sağlıktan yararlanma hakkı",
-      "Doğal kaynaklardan yararlanma hakkı",
-      "Toplumla etkileşim hakkı",
-      "Sanat ve kültür faaliyetlerine katılma hakkı",
-      "Fiziksel güvenlik hakkı",
-      "Psikolojik güvenlik hakkı",
-      "Ekonomik kaynaklara erişim hakkı",
-      "Sevilme Hakkı"
-  ];
-  
-  let cr_count = 0;
-  const cr_maxCount = 54;
-  
-  const cr_countSpan = document.getElementById('cr-count');
-  const cr_increaseBtn = document.getElementById('cr-increase');
-  const cr_decreaseBtn = document.getElementById('cr-decrease');
-  const cr_rightDisplay = document.getElementById('cr-right-display');
-  
-  // İkonlar dizisi (Font Awesome ikon sınıfları)
-  const cr_icons = [
-      "fas fa-heart",
-      "fas fa-id-badge",
-      "fas fa-home",
-      "fas fa-book",
-      "fas fa-stethoscope",
-      "fas fa-gamepad",
-      "fas fa-shield-alt",
-      "fas fa-comment",
-      "fas fa-balance-scale",
-      "fas fa-music",
-      "fas fa-briefcase",
-      "fas fa-info-circle",
-      "fas fa-gavel",
-      "fas fa-lock",
-      "fas fa-umbrella",
-      "fas fa-pen-fancy",
-      "fas fa-users",
-      "fas fa-paint-brush",
-      "fas fa-tree",
-      "fas fa-hand-holding-heart",
-      "fas fa-hand-paper",
-      "fas fa-umbrella-beach",
-      "fas fa-handshake",
-      "fas fa-equality",
-      "fas fa-briefcase",
-      "fas fa-praying-hands",
-      "fas fa-user-group",
-      "fas fa-leaf",
-      "fas fa-flask",
-      "fas fa-newspaper",
-      "fas fa-hand-holding-usd",
-      "fas fa-shield-virus",
-      "fas fa-balance-scale-left",
-      "fas fa-transgender",
-      "fas fa-wheelchair",
-      "fas fa-language",
-      "fas fa-user-shield",
-      "fas fa-bed",
-      "fas fa-car",
-      "fas fa-lightbulb",
-      "fas fa-bullhorn",
-      "fas fa-book-open",
-      "fas fa-hands-helping",
-      "fas fa-user-graduate",
-      "fas fa-tasks",
-      "fas fa-water",
-      "fas fa-seedling",
-      "fas fa-users",
-      "fas fa-palette",
-      "fas fa-shield-alt",
-      "fas fa-brain",
-      "fas fa-coins"
-  ];
-  
-  cr_increaseBtn.addEventListener('click', () => {
-      if (cr_count < cr_maxCount) {
+
+    <!-- Proje Scriptleri -->
+    <script>
+      const cr_rights = [
+        "Yaşama hakkı",
+        "Kimlik hakkı",
+        "Aile yaşama ve koruma hakkı",
+        "Eğitim hakkı",
+        "Sağlık hizmetlerine erişim hakkı",
+        "Oyun ve dinlenme hakkı",
+        "Güvenli bir ortamda büyüme hakkı",
+        "Görüş bildirme hakkı",
+        "Ayrımcılık olmaksızın haklara erişim hakkı",
+        "Dinlenme ve eğlence hakkı",
+        "Çalışma koşullarından korunma hakkı",
+        "Bilgi edinme hakkı",
+        "Adil yargılanma hakkı",
+        "Gizlilik hakkı",
+        "Özgürlük hakkı",
+        "Düşünce ve ifade özgürlüğü",
+        "Toplanma ve dernek kurma hakkı",
+        "Kültürel yaşama katılma hakkı",
+        "Doğa ve çevreyi koruma hakkı",
+        "Ebeveynlerin bakımına erişim hakkı",
+        "Aile içi şiddetten korunma hakkı",
+        "Sığınma hakkı",
+        "Mülkiyet hakkı",
+        "Eşitlik hakkı",
+        "Çalışma hakkı",
+        "Din ve inanç özgürlüğü",
+        "Toplumsal katılım hakkı",
+        "Yararlanma hakkı",
+        "Bilimsel gelişmelerden yararlanma hakkı",
+        "Medya ve bilgiye erişim hakkı",
+        "Ekonomik yardım hakkı",
+        "Sosyal güvenlik hakkı",
+        "Hukuki temsil hakkı",
+        "Mahremiyet hakkı",
+        "Cinsiyet eşitliği hakkı",
+        "Engellilik durumunda destek hakkı",
+        "Dil ve iletişim hakkı",
+        "Hukuki koruma hakkı",
+        "Dinlenme ve serbest zaman hakkı",
+        "Taşıma ve seyahat özgürlüğü",
+        "Fikirlerin serbestçe ifade edilmesi hakkı",
+        "Siyasi katılım hakkı",
+        "Eğitim materyallerine erişim hakkı",
+        "Sosyal hizmetlerden yararlanma hakkı",
+        "Kişisel gelişim hakkı",
+        "Toplum içindeki rol ve sorumluluk hakkı",
+        "Çevresel sağlıktan yararlanma hakkı",
+        "Doğal kaynaklardan yararlanma hakkı",
+        "Toplumla etkileşim hakkı",
+        "Sanat ve kültür faaliyetlerine katılma hakkı",
+        "Fiziksel güvenlik hakkı",
+        "Psikolojik güvenlik hakkı",
+        "Ekonomik kaynaklara erişim hakkı",
+        "Sevilme Hakkı"
+      ];
+
+      let cr_count = 0;
+      const cr_maxCount = 54;
+
+      const cr_countSpan = document.getElementById("cr-count");
+      const cr_increaseBtn = document.getElementById("cr-increase");
+      const cr_decreaseBtn = document.getElementById("cr-decrease");
+      const cr_rightDisplay = document.getElementById("cr-right-display");
+
+      const cr_icons = [
+        "fas fa-heart",
+        "fas fa-id-badge",
+        "fas fa-home",
+        "fas fa-book",
+        "fas fa-stethoscope",
+        "fas fa-gamepad",
+        "fas fa-shield-alt",
+        "fas fa-comment",
+        "fas fa-balance-scale",
+        "fas fa-music",
+        "fas fa-briefcase",
+        "fas fa-info-circle",
+        "fas fa-gavel",
+        "fas fa-lock",
+        "fas fa-umbrella",
+        "fas fa-pen-fancy",
+        "fas fa-users",
+        "fas fa-paint-brush",
+        "fas fa-tree",
+        "fas fa-hand-holding-heart",
+        "fas fa-hand-paper",
+        "fas fa-umbrella-beach",
+        "fas fa-handshake",
+        "fas fa-equality",
+        "fas fa-briefcase",
+        "fas fa-praying-hands",
+        "fas fa-user-group",
+        "fas fa-leaf",
+        "fas fa-flask",
+        "fas fa-newspaper",
+        "fas fa-hand-holding-usd",
+        "fas fa-shield-virus",
+        "fas fa-balance-scale-left",
+        "fas fa-transgender",
+        "fas fa-wheelchair",
+        "fas fa-language",
+        "fas fa-user-shield",
+        "fas fa-bed",
+        "fas fa-car",
+        "fas fa-lightbulb",
+        "fas fa-bullhorn",
+        "fas fa-book-open",
+        "fas fa-hands-helping",
+        "fas fa-user-graduate",
+        "fas fa-tasks",
+        "fas fa-water",
+        "fas fa-seedling",
+        "fas fa-users",
+        "fas fa-palette",
+        "fas fa-shield-alt",
+        "fas fa-brain",
+        "fas fa-coins"
+      ];
+
+      cr_increaseBtn.addEventListener("click", () => {
+        if (cr_count < cr_maxCount) {
           cr_count++;
           cr_updateCounter();
-      }
-  });
-  
-  cr_decreaseBtn.addEventListener('click', () => {
-      if (cr_count > 0) {
+        }
+      });
+
+      cr_decreaseBtn.addEventListener("click", () => {
+        if (cr_count > 0) {
           cr_count--;
           cr_updateCounter();
-      }
-  });
-  
-  function cr_updateCounter() {
-      cr_countSpan.textContent = cr_count;
-  
-      if (cr_count === 0) {
-          cr_rightDisplay.innerHTML = ''; // Hiç hak gösterilmez
+        }
+      });
+
+      function cr_updateCounter() {
+        cr_countSpan.textContent = cr_count;
+
+        if (cr_count === 0) {
+          cr_rightDisplay.innerHTML = "";
           return;
-      }
-  
-      const currentRight = cr_rights[cr_count - 1];
-      const currentIcon = cr_icons[(cr_count - 1) % cr_icons.length];
-  
-      cr_rightDisplay.innerHTML = `
+        }
+
+        const currentRight = cr_rights[cr_count - 1];
+        const currentIcon = cr_icons[(cr_count - 1) % cr_icons.length];
+
+        cr_rightDisplay.innerHTML = `
           <i class="${currentIcon}"></i>
           <p>${cr_count}. Hak: ${currentRight}</p>
-      `;
-  }
-  </script>
-    <!-- AOS ve Proje Scriptleri -->
+        `;
+      }
+    </script>
+
+    <!-- AOS ve Harita -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-
-        var map = L.map('mapid').setView([38.9637, 35.2433], 6);
-    
-        // 2) Harita katmanı (Örnek: OpenStreetMap)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      document.addEventListener("DOMContentLoaded", function () {
+        var map = L.map("mapid").setView([38.9637, 35.2433], 6);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 18,
-          attribution: '© OpenStreetMap',
+          attribution: "© OpenStreetMap",
         }).addTo(map);
-    
-        // 3) Örnek veri: Platformdan yararlanan kişi sayısı (veya farklı bilgiler) - Koordinatlar örnektir
+
         var beneficiaries = [
-  { city: "İstanbul", lat: 41.0082, lng: 28.9784, count: 1200 },
-  { city: "Ankara", lat: 39.9208, lng: 32.8541, count: 800 },
-  { city: "İzmir", lat: 38.4237, lng: 27.1428, count: 500 },
-  { city: "Bursa", lat: 40.1828, lng: 29.0669, count: 300 },
-  { city: "Antalya", lat: 36.8969, lng: 30.7133, count: 450 },
-  { city: "Adana", lat: 36.9914, lng: 35.3308, count: 350 },
-  { city: "Gaziantep", lat: 37.0662, lng: 37.3833, count: 620 },
-  { city: "Diyarbakır", lat: 37.9144, lng: 40.2306, count: 280 },
-  { city: "Konya", lat: 37.8713, lng: 32.4846, count: 410 },
-  { city: "Kayseri", lat: 38.7225, lng: 35.4875, count: 200 },
-  { city: "Samsun", lat: 41.2797, lng: 36.3361, count: 330 },
-  { city: "Trabzon", lat: 41.0015, lng: 39.7178, count: 220 },
-  { city: "Mersin", lat: 36.8121, lng: 34.6415, count: 450 },
-];
-    
-        // 4) Her şehre Marker ekleyerek popup oluşturma
-        beneficiaries.forEach(function(location) {
+          {
+            city: "İstanbul",
+            lat: 41.0082,
+            lng: 28.9784,
+            count: 1200,
+          },
+          { city: "Ankara", lat: 39.9208, lng: 32.8541, count: 800 },
+          { city: "İzmir", lat: 38.4237, lng: 27.1428, count: 500 },
+          { city: "Bursa", lat: 40.1828, lng: 29.0669, count: 300 },
+          {
+            city: "Antalya",
+            lat: 36.8969,
+            lng: 30.7133,
+            count: 450,
+          },
+          { city: "Adana", lat: 36.9914, lng: 35.3308, count: 350 },
+          {
+            city: "Gaziantep",
+            lat: 37.0662,
+            lng: 37.3833,
+            count: 620,
+          },
+          {
+            city: "Diyarbakır",
+            lat: 37.9144,
+            lng: 40.2306,
+            count: 280,
+          },
+          { city: "Konya", lat: 37.8713, lng: 32.4846, count: 410 },
+          { city: "Kayseri", lat: 38.7225, lng: 35.4875, count: 200 },
+          { city: "Samsun", lat: 41.2797, lng: 36.3361, count: 330 },
+          { city: "Trabzon", lat: 41.0015, lng: 39.7178, count: 220 },
+          { city: "Mersin", lat: 36.8121, lng: 34.6415, count: 450 },
+        ];
+
+        beneficiaries.forEach(function (location) {
           L.marker([location.lat, location.lng])
             .addTo(map)
             .bindPopup(
-              "<b>" + location.city + "</b><br>" +
-              "Yararlanan Kişi: " + location.count
+              "<b>" +
+                location.city +
+                "</b><br>" +
+                "Yararlanan Kişi: " +
+                location.count
             );
         });
       });
     </script>
-    <script>
-      // AOS Init
-      AOS.init();
 
-      // Mobile Menu Toggle
+    <!-- Mobile Menu Toggle (Tek seferlik) -->
+    <script>
       document.addEventListener("DOMContentLoaded", function () {
+        // Mobil menü toggle simgesini oluştur
         const menuToggle = document.createElement("div");
         menuToggle.classList.add("mobile-menu-toggle");
         menuToggle.innerHTML = "<span></span><span></span><span></span>";
 
+        // Navigasyon konteyneri ve menü linklerini seç
         const navContainer = document.querySelector(".nav-container");
         const navLinks = document.querySelector(".nav-links");
 
+        // Menü toggle simgesini, navLinks'in önüne ekle
         navContainer.insertBefore(menuToggle, navLinks);
 
+        // Toggle tıklama olayını ayarla
         menuToggle.addEventListener("click", function () {
           navLinks.classList.toggle("mobile-active");
           menuToggle.classList.toggle("active");
         });
 
-        // Menüden bir linke tıklanınca kapansın
+        // Bir menü linkine tıklanınca menüyü kapat
         navLinks.querySelectorAll("a").forEach((link) => {
           link.addEventListener("click", function () {
             navLinks.classList.remove("mobile-active");
@@ -1675,7 +1775,7 @@ footer {
           });
         });
 
-        // Menünün dışında bir yere tıklanırsa kapansın
+        // Menü dışına tıklanınca menüyü kapat
         document.addEventListener("click", function (event) {
           if (!navContainer.contains(event.target)) {
             navLinks.classList.remove("mobile-active");
@@ -1684,205 +1784,202 @@ footer {
         });
       });
     </script>
+
     <script src="/js/script.js"></script>
-    <script>document.addEventListener("DOMContentLoaded", function () {
-      const counters = document.querySelectorAll(".counter");
-      const options = {
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const counters = document.querySelectorAll(".counter");
+        const options = {
           root: null,
-          threshold: 0.5, // Sayfa kaydırılırken %50 göründüğünde animasyon başlasın
-      };
-  
-      const observer = new IntersectionObserver((entries, observer) => {
+          threshold: 0.5,
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
           entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                  const counter = entry.target;
-                  const target = +counter.getAttribute("data-target");
-                  let count = 0;
-                  const increment = target / 100; // Animasyon hızını belirle
-  
-                  const updateCounter = () => {
-                      count += increment;
-                      if (count < target) {
-                          counter.innerText = Math.ceil(count);
-                          requestAnimationFrame(updateCounter);
-                      } else {
-                          counter.innerText = target; // Hedef sayıya ulaştığında dur
-                      }
-                  };
-  
-                  updateCounter();
-                  observer.unobserve(counter);
-              }
+            if (entry.isIntersecting) {
+              const counter = entry.target;
+              const target = +counter.getAttribute("data-target");
+              let count = 0;
+              const increment = target / 100;
+
+              const updateCounter = () => {
+                count += increment;
+                if (count < target) {
+                  counter.innerText = Math.ceil(count);
+                  requestAnimationFrame(updateCounter);
+                } else {
+                  counter.innerText = target;
+                }
+              };
+
+              updateCounter();
+              observer.unobserve(counter);
+            }
           });
-      }, options);
-  
-      counters.forEach((counter) => {
+        }, options);
+
+        counters.forEach((counter) => {
           observer.observe(counter);
+        });
       });
-  });
-  </script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const slider = document.querySelector(".slider-wrapper");
-    const prevBtn = document.querySelector(".prev-btn");
-    const nextBtn = document.querySelector(".next-btn");
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const slider = document.querySelector(".slider-wrapper");
+        const prevBtn = document.querySelector(".prev-btn");
+        const nextBtn = document.querySelector(".next-btn");
 
-    let scrollAmount = 0;
-    let autoSlideTimer;
+        let scrollAmount = 0;
+        let autoSlideTimer;
 
-    function moveSlide(dir) {
-        const cardWidth = document.querySelector(".testimonial-card").offsetWidth + 20;
-        scrollAmount += dir * cardWidth;
+        function moveSlide(dir) {
+          const cardWidth =
+            document.querySelector(".testimonial-card").offsetWidth + 20;
+          scrollAmount += dir * cardWidth;
 
-        if (scrollAmount < 0) {
+          if (scrollAmount < 0) {
             scrollAmount = slider.scrollWidth - slider.clientWidth;
-        } else if (scrollAmount > slider.scrollWidth - slider.clientWidth) {
+          } else if (scrollAmount > slider.scrollWidth - slider.clientWidth) {
             scrollAmount = 0;
+          }
+
+          slider.style.transform = `translateX(-${scrollAmount}px)`;
         }
 
-        slider.style.transform = `translateX(-${scrollAmount}px)`;
+        function startAutoSlide() {
+          autoSlideTimer = setInterval(() => moveSlide(1), 3000);
+        }
 
-    }
+        function stopAutoSlide() {
+          clearInterval(autoSlideTimer);
+        }
 
-    function startAutoSlide() {
-        autoSlideTimer = setInterval(() => moveSlide(1), 3000);
-    }
+        prevBtn.addEventListener("click", () => {
+          stopAutoSlide();
+          moveSlide(-1);
+          startAutoSlide();
+        });
 
-    function stopAutoSlide() {
-        clearInterval(autoSlideTimer);
-    }
+        nextBtn.addEventListener("click", () => {
+          stopAutoSlide();
+          moveSlide(1);
+          startAutoSlide();
+        });
 
-    prevBtn.addEventListener("click", () => {
-        stopAutoSlide();
-        moveSlide(-1);
+        slider.addEventListener("mouseenter", () => clearInterval(autoSlideTimer));
+        slider.addEventListener("mouseleave", startAutoSlide);
+
+        slider.addEventListener("touchstart", stopAutoSlide);
+        slider.addEventListener("touchend", startAutoSlide);
+
         startAutoSlide();
-    });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const teamCards = document.querySelectorAll(".team-card");
+        const modal = document.getElementById("team-modal");
+        const modalImage = document.getElementById("modal-image");
+        const modalName = document.getElementById("modal-name");
+        const modalRole = document.getElementById("modal-role");
+        const modalDesc = document.getElementById("modal-desc");
+        const modalBio = document.getElementById("modal-bio");
+        const closeModal = document.querySelector(".close");
 
-    nextBtn.addEventListener("click", () => {
-        stopAutoSlide();
-        moveSlide(1);
-        startAutoSlide();
-    });
-
-    slider.addEventListener("mouseenter", () => clearInterval(autoSlideTimer));
-slider.addEventListener("mouseleave", startAutoSlide);
-
-
-    // Dokunmatik Destek (Mobil)
-    slider.addEventListener("touchstart", stopAutoSlide);
-    slider.addEventListener("touchend", startAutoSlide);
-
-    startAutoSlide(); // Sayfa yüklendiğinde otomatik başlat
-});
-
-  </script>
-  <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const teamCards = document.querySelectorAll(".team-card");
-    const modal = document.getElementById("team-modal");
-    const modalImage = document.getElementById("modal-image");
-    const modalName = document.getElementById("modal-name");
-    const modalRole = document.getElementById("modal-role");
-    const modalDesc = document.getElementById("modal-desc");
-    const modalBio = document.getElementById("modal-bio"); // Biyografi için yeni alan
-    const closeModal = document.querySelector(".close");
-
-    teamCards.forEach((card) => {
-        card.addEventListener("click", function () {
+        teamCards.forEach((card) => {
+          card.addEventListener("click", function () {
             modalImage.src = this.getAttribute("data-image");
             modalName.innerText = this.getAttribute("data-name");
             modalRole.innerText = this.getAttribute("data-role");
             modalDesc.innerText = this.getAttribute("data-desc");
-            modalBio.innerText = this.getAttribute("data-bio"); // Biyografi ekleme
+            modalBio.innerText = this.getAttribute("data-bio");
 
             modal.classList.add("show");
-            document.body.style.overflow = "hidden"; // Scroll kapat
+            document.body.style.overflow = "hidden";
+          });
         });
-    });
 
-    function closeModalFunc() {
-        modal.classList.remove("show");
-        document.body.style.overflow = "auto"; // Scroll aç
-    }
-
-    closeModal.addEventListener("click", closeModalFunc);
-
-    // Modal dışında bir yere tıklanınca kapansın
-    window.addEventListener("click", function (event) {
-        if (event.target === modal) {
-            closeModalFunc();
+        function closeModalFunc() {
+          modal.classList.remove("show");
+          document.body.style.overflow = "auto";
         }
-    });
 
-    // ESC tuşuna basınca modal kapansın
-    document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") {
+        closeModal.addEventListener("click", closeModalFunc);
+
+        window.addEventListener("click", function (event) {
+          if (event.target === modal) {
             closeModalFunc();
+          }
+        });
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") {
+            closeModalFunc();
+          }
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sliderTrack = document.querySelector(".gallery-track");
+        const prevBtn = document.querySelector(".gallery-prev");
+        const nextBtn = document.querySelector(".gallery-next");
+
+        let scrollAmount = 0;
+        let maxScroll = sliderTrack.scrollWidth - sliderTrack.clientWidth;
+        let autoSlideTimer;
+
+        function moveSlide(dir) {
+          const cardWidth =
+            document.querySelector(".gallery-item").offsetWidth + 20;
+          scrollAmount += dir * cardWidth;
+
+          if (scrollAmount >= maxScroll) {
+            scrollAmount = 0;
+          } else if (scrollAmount <= 0) {
+            scrollAmount = maxScroll;
+          }
+
+          sliderTrack.style.transform = `translateX(-${scrollAmount}px)`;
         }
-    });
-});
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const sliderTrack = document.querySelector(".gallery-track");
-    const prevBtn = document.querySelector(".gallery-prev");
-    const nextBtn = document.querySelector(".gallery-next");
 
-    let scrollAmount = 0;
-    let maxScroll = sliderTrack.scrollWidth - sliderTrack.clientWidth;
-    let autoSlideTimer;
+        function startAutoSlide() {
+          autoSlideTimer = setInterval(() => moveSlide(1), 3000);
+        }
 
-    function moveSlide(dir) {
-        const cardWidth = document.querySelector(".gallery-item").offsetWidth + 20;
-        scrollAmount += dir * cardWidth;
+        function stopAutoSlide() {
+          clearInterval(autoSlideTimer);
+        }
 
-        // Eğer son resme ulaştıysa başa sar
-        if (scrollAmount >= maxScroll) {
-    scrollAmount = 0;  // Baştan başlasın
-} else if (scrollAmount <= 0) {
-    scrollAmount = maxScroll;  // Başa dön
-}
+        prevBtn.addEventListener("click", () => {
+          stopAutoSlide();
+          moveSlide(-1);
+          startAutoSlide();
+        });
 
+        nextBtn.addEventListener("click", () => {
+          stopAutoSlide();
+          moveSlide(1);
+          startAutoSlide();
+        });
 
-        sliderTrack.style.transform = `translateX(-${scrollAmount}px)`;
-    }
+        sliderTrack.addEventListener("mouseenter", stopAutoSlide);
+        sliderTrack.addEventListener("mouseleave", startAutoSlide);
 
-    function startAutoSlide() {
-        autoSlideTimer = setInterval(() => moveSlide(1), 3000);
-    }
+        sliderTrack.addEventListener("touchstart", stopAutoSlide);
+        sliderTrack.addEventListener("touchend", startAutoSlide);
 
-    function stopAutoSlide() {
-        clearInterval(autoSlideTimer);
-    }
-
-    prevBtn.addEventListener("click", () => {
-        stopAutoSlide();
-        moveSlide(-1);
         startAutoSlide();
-    });
+      });
 
-    nextBtn.addEventListener("click", () => {
-        stopAutoSlide();
-        moveSlide(1);
-        startAutoSlide();
-    });
-
-    sliderTrack.addEventListener("mouseenter", stopAutoSlide);
-    sliderTrack.addEventListener("mouseleave", startAutoSlide);
-
-    // Dokunmatik Destek (Mobil)
-    sliderTrack.addEventListener("touchstart", stopAutoSlide);
-    sliderTrack.addEventListener("touchend", startAutoSlide);
-
-    startAutoSlide(); // Sayfa yüklendiğinde otomatik başlat
-});
-window.addEventListener("click", function (event) {
-    if (event.target === modal || event.target === closeModal) {
-        modal.classList.remove("show");
-        document.body.style.overflow = "auto"; // Scroll geri aç
-    }
-});
-
-</script>
+      window.addEventListener("click", function (event) {
+        const modal = document.getElementById("team-modal");
+        const closeModal = document.querySelector(".close");
+        if (event.target === modal || event.target === closeModal) {
+          modal.classList.remove("show");
+          document.body.style.overflow = "auto";
+        }
+      });
+    </script>
   </body>
 </html>
