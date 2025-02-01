@@ -576,7 +576,7 @@
       <div class="container">
         <div class="hero-content">
           <h1 style="font-size: 60px">Birlikte Mücadele, Ortak Gelecek!</h1>
-          <p style="font-size: 20p">
+          <p style="font-size: 20px">
             İnsan ve Çocuk Hakları için Harekete Geç!
           </p>
         </div>
@@ -588,6 +588,7 @@
       <p style="text-align: center">Destekçilerimizin katıldığı kampanyalar</p>
       <br />
     </div>
+    <!-- Kampanya filtre butonları -->
     <div class="campaign-filter">
       <button class="filter-btn active">Tümü</button>
       <button class="filter-btn">Eğitim</button>
@@ -596,8 +597,9 @@
       <button class="filter-btn">Acil Yardım</button>
     </div>
 
+    <!-- Kampanya kartları; her karta data-category özniteliği eklendi -->
     <div class="campaign-grid">
-      <div class="campaign-card">
+      <div class="campaign-card" data-category="Eğitim">
         <span class="campaign-tag">Eğitim</span>
         <img
           src="/images/educate.jpg"
@@ -618,18 +620,19 @@
         </div>
       </div>
 
-      <div class="campaign-card">
-        <span class="campaign-tag">Oyun Hakkı</span>
+      <div class="campaign-card" data-category="Sosyal Haklar">
+        <!-- Kampanya etiketini filtre butonuna uygun olacak şekilde güncelledik -->
+        <span class="campaign-tag">Sosyal Haklar</span>
         <img
           src="/images/game.jpg"
-          alt="Sağlık Kampanyası"
+          alt="Sosyal Haklar Kampanyası"
           class="card-image"
         />
         <div class="card-content">
           <h3>Herkese Oyun Hakkı</h3>
           <p>
             Dezavantajlı bölgelerde yaşayan çocuklar için oyun alanları kurarak
-            onların fiziksel ve zihinsel gelişimlerini destekliyoruz
+            onların fiziksel ve zihinsel gelişimlerini destekliyoruz.
           </p>
           <div class="campaign-stats">
             <span>Hedef: 80.000₺</span>
@@ -642,7 +645,7 @@
         </div>
       </div>
 
-      <div class="campaign-card">
+      <div class="campaign-card" data-category="Sağlık">
         <span class="campaign-tag">Sağlık</span>
         <img
           src="/images/health.jpg"
@@ -663,8 +666,9 @@
         </div>
       </div>
 
-      <div class="campaign-card">
-        <span class="campaign-tag">Beslenme</span>
+      <div class="campaign-card" data-category="Sağlık">
+        <!-- Bu kartın kategori olarak "Beslenme Hakkı" yerine "Sağlık" seçildi -->
+        <span class="campaign-tag">Sağlık</span>
         <img
           src="/images/food_rights.png"
           alt="Sağlık Kampanyası"
@@ -684,7 +688,7 @@
         </div>
       </div>
 
-      <div class="campaign-card">
+      <div class="campaign-card" data-category="Acil Yardım">
         <span class="campaign-tag">Acil Yardım</span>
         <img
           src="/images/childrens.png"
@@ -705,7 +709,7 @@
         </div>
       </div>
 
-      <div class="campaign-card">
+      <div class="campaign-card" data-category="Sosyal Haklar">
         <span class="campaign-tag">Sosyal Haklar</span>
         <img
           src="/images/rights.jpg"
@@ -897,6 +901,7 @@
 
     <script src="/js/script.js"></script>
     <script>
+      // Mobil menü işlemleri
       document.addEventListener("DOMContentLoaded", function () {
         const navContainer = document.querySelector(".nav-container");
         const navLinks = document.querySelector(".nav-links");
@@ -966,6 +971,34 @@
             navLinks.classList.remove("mobile-active");
             menuToggle.classList.remove("active");
           }
+        });
+
+        // Filtreleme işlemleri
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const campaignCards = document.querySelectorAll(".campaign-card");
+
+        filterButtons.forEach(btn => {
+          btn.addEventListener("click", function () {
+            // Butonların aktif sınıfını güncelle
+            filterButtons.forEach(button => button.classList.remove("active"));
+            this.classList.add("active");
+
+            const filterValue = this.textContent.trim();
+
+            campaignCards.forEach(card => {
+              // "Tümü" seçiliyse tüm kartlar gösterilsin
+              if(filterValue === "Tümü") {
+                card.style.display = "block";
+              } else {
+                // Kartın data-category değeri ile filtre değeri eşleşiyorsa göster, aksi halde gizle
+                if(card.getAttribute("data-category") === filterValue) {
+                  card.style.display = "block";
+                } else {
+                  card.style.display = "none";
+                }
+              }
+            });
+          });
         });
       });
     </script>
