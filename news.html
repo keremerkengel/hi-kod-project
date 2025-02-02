@@ -16,7 +16,7 @@
 
         .comments-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 30px;
         }
 
@@ -69,17 +69,34 @@
     text-align: center;
 }
 .donation-section {
-    max-width: 1000px;
-    margin: 60px auto;
-    background: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    text-align: center;
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
+        max-width: 1000px;
+        margin: 60px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        display: flex;
+        align-items: center;
+        gap: 40px;
+      }
+
+      @media screen and (max-width: 768px) {
+        .donation-section {
+          flex-direction: column;
+        }
+        .card-preview {
+          max-width: 100% !important;
+        }
+
+        form {
+          max-width: 100% !important;
+        }
+
+        .input-row {
+          flex-direction: column;
+        }
+      }
 
 .card-preview {
     background: #2563eb;
@@ -230,6 +247,7 @@ form {
             border-radius: 1rem;
             overflow: hidden;
             margin-bottom: 2rem;
+            margin-top: 120px;
         }
 
         .featured-image {
@@ -573,7 +591,7 @@ form {
             }
 
             .featured-image {
-                height: 300px;
+                height: 330px;
             }
 
             .content-grid {
@@ -728,7 +746,7 @@ form {
                 <li><a href="/contact.html">İletişim</a></li>
             </ul>
         </nav>
-    </header><br><br>
+    </header>
 
     <div class="container">
         <!-- Öne Çıkan İçerik -->

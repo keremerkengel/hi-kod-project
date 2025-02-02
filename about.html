@@ -76,6 +76,38 @@
 
       /* Diğer CSS kodları... (cr-container, hero, banner, footer, loader, scroll-to-top, vb.) */
 
+      .hero {
+        height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--light);
+      }
+      .video-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -2;
+      }
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+      }
+      .hero-content {
+        max-width: 800px;
+        padding: 0 1rem;
+      }
+
       .cr-container {
         background-color: var(--cr-light);
         padding: 30px 50px;
@@ -251,7 +283,6 @@
       .gallery-prev:hover,
       .gallery-next:hover {
         background: var(--accent);
-        transform: scale(1.1);
       }
 
       .gallery-prev {
@@ -291,6 +322,8 @@
       .modal.show {
         display: flex;
         opacity: 1;
+        z-index: 9999;
+        padding-top: 40px;
       }
 
       .modal-content {
@@ -353,6 +386,41 @@
         margin: 0 auto;
         overflow: hidden;
         border: 2px solid #ccc;
+        z-index: 1;
+      }
+
+      @media screen and (max-width: 768px) {
+        #mapid {
+          width: 100% !important;
+        }
+
+        .hero-content h1 {
+          font-size: 50px !important;
+        }
+
+        .hakkimizda-section {
+          margin: 20px;
+        }
+
+        .misyon-vizyon-section {
+          margin: 20px;
+        }
+
+        .degerlerimiz-section {
+          margin: 20px;
+        }
+
+        #map-section {
+          margin: 20px;
+        }
+
+        .ekibimiz-section {
+          margin: 20px;
+        }
+
+        .istatistikler-section {
+          margin: 20px;
+        }
       }
 
       .slider-container {
@@ -432,7 +500,6 @@
       .prev-btn:hover,
       .next-btn:hover {
         background: var(--accent);
-        transform: scale(1.1);
       }
 
       .prev-btn {
@@ -912,7 +979,7 @@
       /* Hero Section */
       .hero {
         position: relative;
-        height: 80vh;
+        height: 100vh;
         min-height: 600px;
         display: flex;
         align-items: center;
@@ -961,51 +1028,17 @@
 
       /* Banner Section */
       .bannerrr {
-        margin: 4rem auto;
+        width: 100%;
         max-width: 1920px;
-        overflow: hidden;
-        border-radius: 15px;
+        margin: 0 auto;
+        text-align: center;
       }
 
       .banner-img {
         width: 100%;
-        height: 300px;
+        height: auto;
+        max-height: 400px;
         object-fit: cover;
-        transition: transform 0.3s ease;
-      }
-
-      @media (max-width: 1200px) {
-        .bannerrr {
-          max-width: 90%;
-          border-radius: 10px;
-        }
-
-        .banner-img {
-          height: 250px;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .bannerrr {
-          max-width: 95%;
-          margin: 2rem auto;
-        }
-
-        .banner-img {
-          height: 200px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .bannerrr {
-          max-width: 100%;
-          border-radius: 5px;
-          margin: 1.5rem auto;
-        }
-
-        .banner-img {
-          height: 150px;
-        }
       }
 
       /* Footer */
@@ -1141,12 +1174,13 @@
             <h2>Biz Kimiz?</h2>
             <p>
               Çocuk hakları ve insan hakları konusunda farkındalık yaratmak için
-              çalışan bağımsız bir oluşumuz. Amacımız, bireyleri bilinçlendirmek,
-              haklarını öğrenmelerini sağlamak ve adil bir dünya için ilham vermektir.
+              çalışan bağımsız bir oluşumuz. Amacımız, bireyleri
+              bilinçlendirmek, haklarını öğrenmelerini sağlamak ve adil bir
+              dünya için ilham vermektir.
             </p>
             <p>
-              Projelerimiz, eğitim programlarımız ve etkinliklerimizle dünya çapında
-              birçok insana ulaşıyoruz.
+              Projelerimiz, eğitim programlarımız ve etkinliklerimizle dünya
+              çapında birçok insana ulaşıyoruz.
             </p>
           </div>
           <div class="image">
@@ -1164,18 +1198,18 @@
             <div class="icon"><i class="fas fa-hand-holding-heart"></i></div>
             <h3>Misyonumuz</h3>
             <p>
-              Çocuk hakları ve insan hakları konusunda bilinç oluşturarak, sürdürülebilir
-              bir farkındalık yaratmayı amaçlıyoruz. Eğitim, savunuculuk ve projelerimizle
-              daha adil bir dünya inşa ediyoruz.
+              Çocuk hakları ve insan hakları konusunda bilinç oluşturarak,
+              sürdürülebilir bir farkındalık yaratmayı amaçlıyoruz. Eğitim,
+              savunuculuk ve projelerimizle daha adil bir dünya inşa ediyoruz.
             </p>
           </div>
           <div class="card vizyon">
             <div class="icon"><i class="fas fa-globe"></i></div>
             <h3>Vizyonumuz</h3>
             <p>
-              Gelecek nesillere daha adil, eşit ve sürdürülebilir bir dünya bırakmak için
-              çalışıyoruz. Evrensel insan haklarını herkes için erişilebilir hale getirmeyi
-              hedefliyoruz.
+              Gelecek nesillere daha adil, eşit ve sürdürülebilir bir dünya
+              bırakmak için çalışıyoruz. Evrensel insan haklarını herkes için
+              erişilebilir hale getirmeyi hedefliyoruz.
             </p>
           </div>
         </div>
@@ -1193,7 +1227,8 @@
             <div class="icon"><i class="fas fa-balance-scale"></i></div>
             <h3>Adalet</h3>
             <p>
-              Herkes için eşit fırsatlar sunarak, insan haklarını en iyi şekilde savunuyoruz.
+              Herkes için eşit fırsatlar sunarak, insan haklarını en iyi şekilde
+              savunuyoruz.
             </p>
           </div>
           <div class="card">
@@ -1205,7 +1240,8 @@
             <div class="icon"><i class="fas fa-seedling"></i></div>
             <h3>Sürdürülebilirlik</h3>
             <p>
-              Uzun vadeli çözümler geliştirerek gelecek nesillere daha iyi bir dünya bırakıyoruz.
+              Uzun vadeli çözümler geliştirerek gelecek nesillere daha iyi bir
+              dünya bırakıyoruz.
             </p>
           </div>
           <div class="card">
@@ -1223,10 +1259,10 @@
       <img src="/images/cansu.png" alt="Ayın Destekçisi" class="banner-img" />
     </div>
 
-    <section id="map-section" style="padding: 80px 0;">
+    <section id="map-section" style="padding: 80px 0">
       <div class="container">
         <h2 class="section-title">Türkiye'de Desteklediğimiz Bölgeler</h2>
-        <p style="text-align: center;">
+        <p style="text-align: center">
           Platformumuzdan yararlanan kişileri harita üzerinde görebilirsiniz.
         </p>
         <br />
@@ -1414,8 +1450,9 @@
         <h2 class="section-title">
           Galatasaray Efsaneleri Bizim Hakkımızda Ne Diyor?
         </h2>
-        <p style="text-align: center;">
-        Galatasaray efsaneleri, kampanyalarımız hakkında görüşlerini paylaşıyor.
+        <p style="text-align: center">
+          Galatasaray efsaneleri, kampanyalarımız hakkında görüşlerini
+          paylaşıyor.
         </p>
         <div class="slider-container">
           <button class="prev-btn">&#10094;</button>
@@ -1480,8 +1517,8 @@
                 <h3>Felipe Melo</h3>
                 <p>Eski Kaptan</p>
                 <blockquote>
-                  “Sahada olduğu gibi saha dışında da kazanmalıyız. Bu tür projeleri
-                  desteklemek görevimiz.”
+                  “Sahada olduğu gibi saha dışında da kazanmalıyız. Bu tür
+                  projeleri desteklemek görevimiz.”
                 </blockquote>
               </div>
               <div class="testimonial-card">
@@ -1587,7 +1624,7 @@
         "Fiziksel güvenlik hakkı",
         "Psikolojik güvenlik hakkı",
         "Ekonomik kaynaklara erişim hakkı",
-        "Sevilme Hakkı"
+        "Sevilme Hakkı",
       ];
 
       let cr_count = 0;
@@ -1650,7 +1687,7 @@
         "fas fa-palette",
         "fas fa-shield-alt",
         "fas fa-brain",
-        "fas fa-coins"
+        "fas fa-coins",
       ];
 
       cr_increaseBtn.addEventListener("click", () => {
@@ -1866,7 +1903,9 @@
           startAutoSlide();
         });
 
-        slider.addEventListener("mouseenter", () => clearInterval(autoSlideTimer));
+        slider.addEventListener("mouseenter", () =>
+          clearInterval(autoSlideTimer)
+        );
         slider.addEventListener("mouseleave", startAutoSlide);
 
         slider.addEventListener("touchstart", stopAutoSlide);
