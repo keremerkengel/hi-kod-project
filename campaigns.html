@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kampanyalar | Çocuk Hakları Platformu</title>
     <link rel="shortcut icon" href="/images/shortcut_icon.png" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <link
@@ -23,139 +26,139 @@
         border-radius: 10px;
       }
       .events-map-section {
-  padding: 4rem 2rem;
-  background-color: var(--background);
-}
+        padding: 4rem 2rem;
+        background-color: var(--background);
+      }
 
-.events-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
+      .events-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
 
-.events-title {
-  text-align: center;
-  color: var(--text);
-  font-size: 2rem;
-  margin-bottom: 2rem;
-}
+      .events-title {
+        text-align: center;
+        color: var(--text);
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
 
-.events-filter {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
+      .events-filter {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
 
-.filter-select {
-  padding: 0.5rem 1rem;
-  border: 2px solid var(--primary);
-  border-radius: 8px;
-  background-color: var(--light);
-  color: var(--text);
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+      .filter-select {
+        padding: 0.5rem 1rem;
+        border: 2px solid var(--primary);
+        border-radius: 8px;
+        background-color: var(--light);
+        color: var(--text);
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
 
-.filter-select:hover {
-  border-color: var(--accent);
-}
+      .filter-select:hover {
+        border-color: var(--accent);
+      }
 
-.map-container {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 2rem;
-  background: var(--light);
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+      .map-container {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 2rem;
+        background: var(--light);
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
 
-.turkey-map {
-  height: 500px;
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  position: relative;
-}
+      .turkey-map {
+        height: 500px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        position: relative;
+      }
 
-.map-point {
-  width: 12px;
-  height: 12px;
-  background-color: var(--primary);
-  border-radius: 50%;
-  position: absolute;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+      .map-point {
+        width: 12px;
+        height: 12px;
+        background-color: var(--primary);
+        border-radius: 50%;
+        position: absolute;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
 
-.map-point:hover {
-  transform: scale(1.5);
-  background-color: var(--accent);
-}
+      .map-point:hover {
+        transform: scale(1.5);
+        background-color: var(--accent);
+      }
 
-.map-point.active {
-  background-color: var(--accent);
-  transform: scale(1.5);
-}
+      .map-point.active {
+        background-color: var(--accent);
+        transform: scale(1.5);
+      }
 
-.events-list {
-  background-color: var(--background);
-  padding: 1rem;
-  border-radius: 10px;
-  overflow-y: auto;
-  max-height: 500px;
-}
+      .events-list {
+        background-color: var(--background);
+        padding: 1rem;
+        border-radius: 10px;
+        overflow-y: auto;
+        max-height: 500px;
+      }
 
-.event-card {
-  background: var(--light);
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+      .event-card {
+        background: var(--light);
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
 
-.event-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+      .event-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
 
-.event-card h3 {
-  color: var(--primary);
-  margin-bottom: 0.5rem;
-}
+      .event-card h3 {
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+      }
 
-.event-details {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  color: var(--text);
-}
+      .event-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--text);
+      }
 
-.event-tag {
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  background-color: var(--accent);
-  color: var(--light);
-  border-radius: 15px;
-  font-size: 0.8rem;
-  margin-bottom: 0.5rem;
-}
+      .event-tag {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background-color: var(--accent);
+        color: var(--light);
+        border-radius: 15px;
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+      }
 
-@media (max-width: 768px) {
-  .map-container {
-    grid-template-columns: 1fr;
-  }
-  
-  .turkey-map {
-    height: 300px;
-  }
-  
-  .events-filter {
-    flex-direction: column;
-  }
-}
+      @media (max-width: 768px) {
+        .map-container {
+          grid-template-columns: 1fr;
+        }
+
+        .turkey-map {
+          height: 300px;
+        }
+
+        .events-filter {
+          flex-direction: column;
+        }
+      }
       :root {
         --primary: #2563eb;
         --secondary: #3b82f6;
@@ -281,9 +284,9 @@
       }
       .campaign-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 30px;
-        padding: 40px;
+        padding: 30px;
         max-width: 1200px;
         margin: 0 auto;
       }
@@ -366,7 +369,7 @@
       }
       .success-stories-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 2rem;
         max-width: 1200px;
         margin: 0 auto;
@@ -452,7 +455,7 @@
       }
       .comments-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 30px;
       }
       .comment-card {
@@ -498,7 +501,7 @@
       }
       .announcements-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 2rem;
         max-width: 1200px;
         margin: 0 auto;
@@ -599,8 +602,12 @@
         color: #22577a;
       }
       @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
       }
       .scroll-to-top {
         position: fixed;
@@ -783,6 +790,16 @@
         height: 100%;
         background-color: var(--primary);
         transition: width 0.3s ease;
+      }
+
+      @media screen and (max-width: 768px) {
+        #quiz-section {
+          margin: 20px;
+        }
+
+        .events-map-section {
+          padding: 2rem 1rem;
+        }
       }
     </style>
   </head>
@@ -983,21 +1000,31 @@
 
     <section class="success-stories">
       <div class="success-stories-header">
-        <h2 style="color: var(--text); font-size: 2.5rem; font-weight: bold;">Değişen Hayatlar</h2>
-        <p style="color: var(--text); font-size: 1.1rem;">Kampanyalarımız sayesinde hayatı değişen çocuklarımızın hikayeleri</p>
+        <h2 style="color: var(--text); font-size: 2.5rem; font-weight: bold">
+          Değişen Hayatlar
+        </h2>
+        <p style="color: var(--text); font-size: 1.1rem">
+          Kampanyalarımız sayesinde hayatı değişen çocuklarımızın hikayeleri
+        </p>
       </div>
-      
+
       <div class="success-stories-grid">
         <div class="story-card">
           <div class="story-image-container">
-            <img src="images/ayse.png" alt="Ayşe'nin Hikayesi" class="story-image">
+            <img
+              src="images/ayse.png"
+              alt="Ayşe'nin Hikayesi"
+              class="story-image"
+            />
             <span class="story-campaign-tag">Eğitim</span>
           </div>
           <div class="story-content">
             <div class="story-date">Mart 2025</div>
             <h3 class="story-title">Ayşe'nin Eğitim Yolculuğu</h3>
             <p class="story-text">
-              "Okula Dönüş Projesi sayesinde tüm okul malzemelerime kavuştum. Artık ben de arkadaşlarım gibi tam donanımlı olarak derslere katılabiliyorum. Büyüyünce öğretmen olmak istiyorum."
+              "Okula Dönüş Projesi sayesinde tüm okul malzemelerime kavuştum.
+              Artık ben de arkadaşlarım gibi tam donanımlı olarak derslere
+              katılabiliyorum. Büyüyünce öğretmen olmak istiyorum."
             </p>
             <div class="story-impact">
               <div class="impact-title">Proje Etkisi</div>
@@ -1007,17 +1034,23 @@
             <a href="#" class="read-more-btn">Hikayenin Devamı</a>
           </div>
         </div>
-    
+
         <div class="story-card">
           <div class="story-image-container">
-            <img src="images/mehmet.png" alt="Mehmet'in Hikayesi" class="story-image">
+            <img
+              src="images/mehmet.png"
+              alt="Mehmet'in Hikayesi"
+              class="story-image"
+            />
             <span class="story-campaign-tag">Sağlık</span>
           </div>
           <div class="story-content">
             <div class="story-date">Şubat 2025</div>
             <h3 class="story-title">Mehmet'in Sağlıklı Beslenme Hikayesi</h3>
             <p class="story-text">
-              "Sağlıklı Beslenme Programı ile hem daha sağlıklı beslenmesini öğrendim hem de arkadaşlarımla birlikte yemek yemenin keyfini yaşadım. Artık kendimi daha enerjik hissediyorum."
+              "Sağlıklı Beslenme Programı ile hem daha sağlıklı beslenmesini
+              öğrendim hem de arkadaşlarımla birlikte yemek yemenin keyfini
+              yaşadım. Artık kendimi daha enerjik hissediyorum."
             </p>
             <div class="story-impact">
               <div class="impact-title">Proje Etkisi</div>
@@ -1027,17 +1060,23 @@
             <a href="#" class="read-more-btn">Hikayenin Devamı</a>
           </div>
         </div>
-    
+
         <div class="story-card">
           <div class="story-image-container">
-            <img src="images/can.png" alt="Can'ın Hikayesi" class="story-image">
+            <img
+              src="images/can.png"
+              alt="Can'ın Hikayesi"
+              class="story-image"
+            />
             <span class="story-campaign-tag">Sosyal Haklar</span>
           </div>
           <div class="story-content">
             <div class="story-date">Ocak 2025</div>
             <h3 class="story-title">Can'ın Oyun Parkı Deneyimi</h3>
             <p class="story-text">
-              "Mahallemize kurulan yeni oyun parkı sayesinde artık güvenle oyun oynayabiliyorum. Burada yeni arkadaşlar edindim ve her gün farklı oyunlar oynuyoruz."
+              "Mahallemize kurulan yeni oyun parkı sayesinde artık güvenle oyun
+              oynayabiliyorum. Burada yeni arkadaşlar edindim ve her gün farklı
+              oyunlar oynuyoruz."
             </p>
             <div class="story-impact">
               <div class="impact-title">Proje Etkisi</div>
@@ -1180,14 +1219,10 @@
       </div>
     </section>
     <div class="banner">
-      <img
-        src="/images/quiz.png"
-        alt="Ayın Destekçisi"
-        class="banner-img"
-      />
+      <img src="/images/quiz.png" alt="Ayın Destekçisi" class="banner-img" />
     </div>
     <!-- ==================== Quiz Bölümü ==================== -->
-    <section id="quiz-section" style="padding: 2rem 0;">
+    <section id="quiz-section" style="padding: 2rem 0">
       <div class="quiz-container">
         <h1>Çocuk Hakları Quiz</h1>
         <div class="progress-bar quiz-progress">
@@ -1225,7 +1260,7 @@
             <option value="activity">Aktivite</option>
           </select>
         </div>
-        
+
         <div class="map-container">
           <div id="turkeyMap" class="turkey-map"></div>
           <div id="eventsList" class="events-list">
@@ -1338,18 +1373,20 @@
         const filterButtons = document.querySelectorAll(".filter-btn");
         const campaignCards = document.querySelectorAll(".campaign-card");
 
-        filterButtons.forEach(btn => {
+        filterButtons.forEach((btn) => {
           btn.addEventListener("click", function () {
-            filterButtons.forEach(button => button.classList.remove("active"));
+            filterButtons.forEach((button) =>
+              button.classList.remove("active")
+            );
             this.classList.add("active");
 
             const filterValue = this.textContent.trim();
 
-            campaignCards.forEach(card => {
-              if(filterValue === "Tümü") {
+            campaignCards.forEach((card) => {
+              if (filterValue === "Tümü") {
                 card.style.display = "block";
               } else {
-                if(card.getAttribute("data-category") === filterValue) {
+                if (card.getAttribute("data-category") === filterValue) {
                   card.style.display = "block";
                 } else {
                   card.style.display = "none";
@@ -1363,173 +1400,267 @@
       // ============== Çocuk Hakları Quiz Scripti ==============
       const questions = [
         {
-          question: "Çocuk Hakları Sözleşmesi'ne göre kaç yaşına kadar her birey çocuk sayılır?",
+          question:
+            "Çocuk Hakları Sözleşmesi'ne göre kaç yaşına kadar her birey çocuk sayılır?",
           options: ["16", "17", "18", "21"],
-          correct: 2
+          correct: 2,
         },
         {
-          question: "Aşağıdakilerden hangisi temel çocuk haklarından biri değildir?",
-          options: ["Eğitim hakkı", "Sağlık hakkı", "Araba kullanma hakkı", "Oyun oynama hakkı"],
-          correct: 2
+          question:
+            "Aşağıdakilerden hangisi temel çocuk haklarından biri değildir?",
+          options: [
+            "Eğitim hakkı",
+            "Sağlık hakkı",
+            "Araba kullanma hakkı",
+            "Oyun oynama hakkı",
+          ],
+          correct: 2,
         },
         {
           question: "Çocuk Hakları Sözleşmesi hangi yıl kabul edilmiştir?",
           options: ["1989", "1990", "1995", "2000"],
-          correct: 0
+          correct: 0,
         },
         {
-          question: "Hangi kuruluş çocuk haklarını korumak için özel olarak kurulmuştur?",
+          question:
+            "Hangi kuruluş çocuk haklarını korumak için özel olarak kurulmuştur?",
           options: ["WHO", "UNICEF", "UNESCO", "NATO"],
-          correct: 1
+          correct: 1,
         },
         {
-          question: "Çocukların korunma hakları arasında aşağıdakilerden hangisi yer almaz?",
+          question:
+            "Çocukların korunma hakları arasında aşağıdakilerden hangisi yer almaz?",
           options: [
             "Şiddetten korunma",
             "İstismardan korunma",
             "Savaştan korunma",
-            "Yüksek nottan korunma"
+            "Yüksek nottan korunma",
           ],
-          correct: 3
-        }
+          correct: 3,
+        },
       ];
 
       let currentQuestion = 0;
       let score = 0;
       let answered = new Array(questions.length).fill(false);
 
-      const questionElement = document.getElementById('question');
-      const optionsElement = document.getElementById('options');
-      const prevButton = document.getElementById('prev-btn');
-      const nextButton = document.getElementById('next-btn');
-      const resultElement = document.getElementById('result');
-      const progressElement = document.getElementById('progress');
+      const questionElement = document.getElementById("question");
+      const optionsElement = document.getElementById("options");
+      const prevButton = document.getElementById("prev-btn");
+      const nextButton = document.getElementById("next-btn");
+      const resultElement = document.getElementById("result");
+      const progressElement = document.getElementById("progress");
 
       function showQuestion(index) {
-          const question = questions[index];
-          questionElement.textContent = question.question;
-          optionsElement.innerHTML = '';
+        const question = questions[index];
+        questionElement.textContent = question.question;
+        optionsElement.innerHTML = "";
 
-          question.options.forEach((option, i) => {
-              const button = document.createElement('div');
-              button.className = 'option';
-              if (answered[index] && i === question.correct) {
-                  button.classList.add('correct');
-              }
-              button.textContent = option;
-              button.addEventListener('click', () => selectOption(i));
-              optionsElement.appendChild(button);
-          });
+        question.options.forEach((option, i) => {
+          const button = document.createElement("div");
+          button.className = "option";
+          if (answered[index] && i === question.correct) {
+            button.classList.add("correct");
+          }
+          button.textContent = option;
+          button.addEventListener("click", () => selectOption(i));
+          optionsElement.appendChild(button);
+        });
 
-          updateNavigation();
-          updateProgress();
+        updateNavigation();
+        updateProgress();
       }
 
       function selectOption(optionIndex) {
-          if (answered[currentQuestion]) return;
+        if (answered[currentQuestion]) return;
 
-          const options = document.querySelectorAll('.option');
-          const correctIndex = questions[currentQuestion].correct;
+        const options = document.querySelectorAll(".option");
+        const correctIndex = questions[currentQuestion].correct;
 
-          options[optionIndex].classList.add(optionIndex === correctIndex ? 'correct' : 'wrong');
-          if (optionIndex === correctIndex) {
-              score++;
-          }
+        options[optionIndex].classList.add(
+          optionIndex === correctIndex ? "correct" : "wrong"
+        );
+        if (optionIndex === correctIndex) {
+          score++;
+        }
 
-          answered[currentQuestion] = true;
-          updateResult();
-          updateNavigation();
+        answered[currentQuestion] = true;
+        updateResult();
+        updateNavigation();
       }
 
       function updateNavigation() {
-          prevButton.disabled = currentQuestion === 0;
-          nextButton.textContent = currentQuestion === questions.length - 1 ? 'Sonuçları Gör' : 'Sonraki';
+        prevButton.disabled = currentQuestion === 0;
+        nextButton.textContent =
+          currentQuestion === questions.length - 1
+            ? "Sonuçları Gör"
+            : "Sonraki";
       }
 
       function updateProgress() {
-          const progress = ((currentQuestion + 1) / questions.length) * 100;
-          progressElement.style.width = `${progress}%`;
+        const progress = ((currentQuestion + 1) / questions.length) * 100;
+        progressElement.style.width = `${progress}%`;
       }
 
       function updateResult() {
-          if (answered.every(a => a)) {
-              const percentage = (score / questions.length) * 100;
-              resultElement.textContent = `Quiz tamamlandı! Skorunuz: ${score}/${questions.length} (${percentage}%)`;
-          }
+        if (answered.every((a) => a)) {
+          const percentage = (score / questions.length) * 100;
+          resultElement.textContent = `Quiz tamamlandı! Skorunuz: ${score}/${questions.length} (${percentage}%)`;
+        }
       }
 
-      prevButton.addEventListener('click', () => {
-          if (currentQuestion > 0) {
-              currentQuestion--;
-              showQuestion(currentQuestion);
-          }
+      prevButton.addEventListener("click", () => {
+        if (currentQuestion > 0) {
+          currentQuestion--;
+          showQuestion(currentQuestion);
+        }
       });
 
-      nextButton.addEventListener('click', () => {
-          if (currentQuestion < questions.length - 1) {
-              currentQuestion++;
-              showQuestion(currentQuestion);
-          } else if (answered.every(a => a)) {
-              updateResult();
-          }
+      nextButton.addEventListener("click", () => {
+        if (currentQuestion < questions.length - 1) {
+          currentQuestion++;
+          showQuestion(currentQuestion);
+        } else if (answered.every((a) => a)) {
+          updateResult();
+        }
       });
 
       // İlk soruyu göster
       showQuestion(0);
     </script>
-   <script>
-    // Example event data with real coordinates
-    const events = [
-  { "id": 1, "title": "Çocuk Hakları Atölyesi", "city": "istanbul", "location": "Kadıköy Halk Eğitim Merkezi", "date": "15 Şubat 2025", "category": "workshop", "coordinates": [41.0082, 28.9784] },
-  { "id": 2, "title": "Eğitim Hakları Semineri", "city": "stanbul", "location": "Çankaya Belediyesi Konferans Salonu", "date": "20 Şubat 2025", "category": "seminar", "coordinates": [39.9334, 32.8597] },
-  { "id": 3, "title": "Çocuk Meclisi Toplantısı", "city": "izmir", "location": "İzmir Büyükşehir Belediyesi", "date": "1 Mart 2025", "category": "meeting", "coordinates": [38.4192, 27.1287] },
-  { "id": 4, "title": "Sokak Oyunları Şenliği", "city": "antalya", "location": "Konyaaltı Sahili", "date": "10 Mart 2025", "category": "activity", "coordinates": [36.8969, 30.7133] },
-  { "id": 5, "title": "Çocuk Kitapları Festivali", "city": "bursa", "location": "Beşiktaş Kültür Merkezi", "date": "5 Mart 2025", "category": "activity", "coordinates": [40.1885, 29.0610] },
-  { "id": 7, "title": "Dijital Güvenlik Eğitimi", "city": "bursa", "location": "Nilüfer Belediyesi Kültür Merkezi", "date": "18 Mart 2025", "category": "workshop", "coordinates": [40.1885, 29.0610] },
-  { "id": 8, "title": "Çocuk ve Doğa Buluşması", "city": "izmir", "location": "Kültürpark", "date": "25 Mart 2025", "category": "activity", "coordinates": [38.4322, 27.1362] },
-  { "id": 9, "title": "Ebeveyn-Çocuk İletişimi Semineri", "city": "antalya", "location": "Muratpaşa Belediyesi Kültür Salonu", "date": "8 Mart 2025", "category": "seminar", "coordinates": [36.8875, 30.7029] },
-  { "id": 11, "title": "Çocuk Hakları Savunucuları Toplantısı", "city": "bursa", "location": "TOBB ETÜ Konferans Salonu", "date": "22 Mart 2025", "category": "meeting", "coordinates": [40.1885, 29.0610] },
-  { "id": 12, "title": "Oyun Tasarımı Atölyesi", "city": "istanbul", "location": "Merinos AKKM", "date": "28 Mart 2025", "category": "workshop", "coordinates": [41.0082, 28.9784] }
+    <script>
+      // Example event data with real coordinates
+      const events = [
+        {
+          id: 1,
+          title: "Çocuk Hakları Atölyesi",
+          city: "istanbul",
+          location: "Kadıköy Halk Eğitim Merkezi",
+          date: "15 Şubat 2025",
+          category: "workshop",
+          coordinates: [41.0082, 28.9784],
+        },
+        {
+          id: 2,
+          title: "Eğitim Hakları Semineri",
+          city: "stanbul",
+          location: "Çankaya Belediyesi Konferans Salonu",
+          date: "20 Şubat 2025",
+          category: "seminar",
+          coordinates: [39.9334, 32.8597],
+        },
+        {
+          id: 3,
+          title: "Çocuk Meclisi Toplantısı",
+          city: "izmir",
+          location: "İzmir Büyükşehir Belediyesi",
+          date: "1 Mart 2025",
+          category: "meeting",
+          coordinates: [38.4192, 27.1287],
+        },
+        {
+          id: 4,
+          title: "Sokak Oyunları Şenliği",
+          city: "antalya",
+          location: "Konyaaltı Sahili",
+          date: "10 Mart 2025",
+          category: "activity",
+          coordinates: [36.8969, 30.7133],
+        },
+        {
+          id: 5,
+          title: "Çocuk Kitapları Festivali",
+          city: "bursa",
+          location: "Beşiktaş Kültür Merkezi",
+          date: "5 Mart 2025",
+          category: "activity",
+          coordinates: [40.1885, 29.061],
+        },
+        {
+          id: 7,
+          title: "Dijital Güvenlik Eğitimi",
+          city: "bursa",
+          location: "Nilüfer Belediyesi Kültür Merkezi",
+          date: "18 Mart 2025",
+          category: "workshop",
+          coordinates: [40.1885, 29.061],
+        },
+        {
+          id: 8,
+          title: "Çocuk ve Doğa Buluşması",
+          city: "izmir",
+          location: "Kültürpark",
+          date: "25 Mart 2025",
+          category: "activity",
+          coordinates: [38.4322, 27.1362],
+        },
+        {
+          id: 9,
+          title: "Ebeveyn-Çocuk İletişimi Semineri",
+          city: "antalya",
+          location: "Muratpaşa Belediyesi Kültür Salonu",
+          date: "8 Mart 2025",
+          category: "seminar",
+          coordinates: [36.8875, 30.7029],
+        },
+        {
+          id: 11,
+          title: "Çocuk Hakları Savunucuları Toplantısı",
+          city: "bursa",
+          location: "TOBB ETÜ Konferans Salonu",
+          date: "22 Mart 2025",
+          category: "meeting",
+          coordinates: [40.1885, 29.061],
+        },
+        {
+          id: 12,
+          title: "Oyun Tasarımı Atölyesi",
+          city: "istanbul",
+          location: "Merinos AKKM",
+          date: "28 Mart 2025",
+          category: "workshop",
+          coordinates: [41.0082, 28.9784],
+        },
+      ];
 
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize the map
+        const map = L.map("turkeyMap").setView([39.9334, 32.8597], 6); // Center on Turkey
 
-    ];
-    
-    document.addEventListener('DOMContentLoaded', function() {
-      // Initialize the map
-      const map = L.map('turkeyMap').setView([39.9334, 32.8597], 6); // Center on Turkey
-      
-      // Add OpenStreetMap tiles
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap contributors'
-      }).addTo(map);
-      
-      // Create markers for each event
-      const markers = events.map(event => {
-        const marker = L.marker(event.coordinates)
-          .bindPopup(`
+        // Add OpenStreetMap tiles
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: "© OpenStreetMap contributors",
+        }).addTo(map);
+
+        // Create markers for each event
+        const markers = events.map((event) => {
+          const marker = L.marker(event.coordinates)
+            .bindPopup(
+              `
             <strong>${event.title}</strong><br>
             ${event.location}<br>
             ${event.date}
-          `)
-          .addTo(map);
-          
-        marker.eventId = event.id;
-        marker.eventCity = event.city;
-        marker.eventCategory = event.category;
-        
-        marker.on('click', () => {
-          showEventDetails(event);
+          `
+            )
+            .addTo(map);
+
+          marker.eventId = event.id;
+          marker.eventCity = event.city;
+          marker.eventCategory = event.category;
+
+          marker.on("click", () => {
+            showEventDetails(event);
+          });
+
+          return marker;
         });
-        
-        return marker;
-      });
-      
-      function showEventDetails(event) {
-        const card = document.createElement('div');
-        card.className = 'event-card';
-        
-        card.innerHTML = `
+
+        function showEventDetails(event) {
+          const card = document.createElement("div");
+          card.className = "event-card";
+
+          card.innerHTML = `
           <span class="event-tag">${getCategoryName(event.category)}</span>
           <h3>${event.title}</h3>
           <div class="event-details">
@@ -1537,43 +1668,47 @@
             <p><i class="fas fa-calendar-alt"></i> ${event.date}</p>
           </div>
         `;
-        
-        eventsList.innerHTML = '';
-        eventsList.appendChild(card);
-      }
-      
-      function filterEvents() {
-        const selectedCity = cityFilter.value;
-        const selectedCategory = categoryFilter.value;
-        
-        markers.forEach(marker => {
-          const cityMatch = selectedCity === 'all' || marker.eventCity === selectedCity;
-          const categoryMatch = selectedCategory === 'all' || marker.eventCategory === selectedCategory;
-          
-          if (cityMatch && categoryMatch) {
-            marker.addTo(map);
-          } else {
-            marker.remove();
-          }
-        });
-        
-        updateEventsList(selectedCity, selectedCategory);
-      }
-      
-      function updateEventsList(city, category) {
-        eventsList.innerHTML = '';
-        
-        const filteredEvents = events.filter(event => {
-          const cityMatch = city === 'all' || event.city === city;
-          const categoryMatch = category === 'all' || event.category === category;
-          return cityMatch && categoryMatch;
-        });
-        
-        filteredEvents.forEach(event => {
-          const card = document.createElement('div');
-          card.className = 'event-card';
-          
-          card.innerHTML = `
+
+          eventsList.innerHTML = "";
+          eventsList.appendChild(card);
+        }
+
+        function filterEvents() {
+          const selectedCity = cityFilter.value;
+          const selectedCategory = categoryFilter.value;
+
+          markers.forEach((marker) => {
+            const cityMatch =
+              selectedCity === "all" || marker.eventCity === selectedCity;
+            const categoryMatch =
+              selectedCategory === "all" ||
+              marker.eventCategory === selectedCategory;
+
+            if (cityMatch && categoryMatch) {
+              marker.addTo(map);
+            } else {
+              marker.remove();
+            }
+          });
+
+          updateEventsList(selectedCity, selectedCategory);
+        }
+
+        function updateEventsList(city, category) {
+          eventsList.innerHTML = "";
+
+          const filteredEvents = events.filter((event) => {
+            const cityMatch = city === "all" || event.city === city;
+            const categoryMatch =
+              category === "all" || event.category === category;
+            return cityMatch && categoryMatch;
+          });
+
+          filteredEvents.forEach((event) => {
+            const card = document.createElement("div");
+            card.className = "event-card";
+
+            card.innerHTML = `
             <span class="event-tag">${getCategoryName(event.category)}</span>
             <h3>${event.title}</h3>
             <div class="event-details">
@@ -1581,28 +1716,28 @@
               <p><i class="fas fa-calendar-alt"></i> ${event.date}</p>
             </div>
           `;
-          
-          eventsList.appendChild(card);
-        });
-      }
-      
-      function getCategoryName(category) {
-        const categories = {
-          workshop: 'Atölye',
-          seminar: 'Seminer',
-          meeting: 'Toplantı',
-          activity: 'Aktivite'
-        };
-        return categories[category] || category;
-      }
-      
-      // Event listeners
-      cityFilter.addEventListener('change', filterEvents);
-      categoryFilter.addEventListener('change', filterEvents);
-      
-      // Initial load
-      updateEventsList('all', 'all');
-    });
-  </script>
+
+            eventsList.appendChild(card);
+          });
+        }
+
+        function getCategoryName(category) {
+          const categories = {
+            workshop: "Atölye",
+            seminar: "Seminer",
+            meeting: "Toplantı",
+            activity: "Aktivite",
+          };
+          return categories[category] || category;
+        }
+
+        // Event listeners
+        cityFilter.addEventListener("change", filterEvents);
+        categoryFilter.addEventListener("change", filterEvents);
+
+        // Initial load
+        updateEventsList("all", "all");
+      });
+    </script>
   </body>
 </html>
